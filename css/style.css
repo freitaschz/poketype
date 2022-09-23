@@ -1,0 +1,268 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+* {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  user-select: none;
+}
+
+body {
+  background-color: #202124;
+}
+
+a {
+  color: #808080;
+  text-decoration: none;
+}
+
+p {
+  margin: 0.4rem;
+}
+
+.title {
+  font-weight: 700;
+  text-align: center;
+  color: #fff;
+}
+
+.aside {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.aside-div-title {
+  color: #fff;
+  text-align: center;
+  font-weight: 700;
+}
+.aside-div-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  width: 128px;
+  height: 96px;
+  padding: 1rem 0;
+  border-radius: 10px;
+  gap: 0.5rem;
+}
+.aside-div-content-number {
+  font-size: 2rem;
+  color: #202124;
+}
+.aside-div-content-label {
+  color: #202124;
+}
+.aside-div-content-input {
+  color: #202124;
+  width: 30px;
+}
+.aside-div-content-button {
+  background-color: #616161;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  width: 5rem;
+  color: #fff;
+}
+.aside-div-content-button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+  flex-wrap: wrap;
+}
+.aside-div-content-button:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  padding: 1rem;
+  background-color: #E74C3C;
+  color: #fff;
+}
+.main-section-figure {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main-section-figure img {
+  width: 50%;
+}
+.main-section-pokename {
+  font-weight: 700;
+}
+.main-section-types {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+}
+.main-section-types-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.main-section-types-container-button {
+  border: 1px solid #202124;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  padding: 0.2rem 0.5rem;
+  color: #fff;
+}
+.main-section-types-container-button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+.main-section-types-container-button:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+.main-section-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.main-section-buttons-button {
+  background-color: #616161;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  color: #fff;
+}
+.main-section-buttons-button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 1rem;
+}
+.footer-text {
+  color: #fff;
+  font-size: 1rem;
+}
+
+#normal {
+  background-color: #BAB2AB;
+}
+
+#fighting {
+  background-color: #7F331D;
+}
+
+#poison {
+  background-color: #944592;
+}
+
+#ground {
+  background-color: #C8A95F;
+}
+
+#rock {
+  background-color: #9E863C;
+}
+
+#bug {
+  background-color: #A9BA27;
+}
+
+#ghost {
+  background-color: #605FAA;
+}
+
+#steel {
+  background-color: #A7A8B3;
+}
+
+#fire {
+  background-color: #EE400E;
+}
+
+#water {
+  background-color: #3393F4;
+}
+
+#grass {
+  background-color: #78C53C;
+}
+
+#electric {
+  background-color: #F8B717;
+}
+
+#flying {
+  background-color: #99A8F3;
+}
+
+#psychic {
+  background-color: #E6477D;
+}
+
+#ice {
+  background-color: #6DD3F2;
+}
+
+#dragon {
+  background-color: #6958BE;
+}
+
+#dark {
+  background-color: #423429;
+}
+
+#fairy {
+  background-color: #F3ACF2;
+}
+
+@media (max-width: 700px) {
+  .main-section-types-container {
+    padding: 0 4rem;
+  }
+  .main-section-figure img {
+    width: 20vw;
+  }
+}
+@media (max-width: 600px) {
+  .main {
+    flex-direction: column;
+  }
+  .main-section-figure img {
+    width: 30vw;
+  }
+  .aside {
+    flex-direction: row;
+    gap: 4rem;
+    margin: 1rem 0;
+  }
+}
+@media (max-width: 300px) {
+  .aside-div-content {
+    width: 96px;
+    height: 96px;
+    padding: 1rem 0;
+    border-radius: 10px;
+    gap: 0.5rem;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
