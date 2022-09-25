@@ -25,10 +25,9 @@ const txtPokeName = document.getElementById("txt-pokename");
 const txtType = document.getElementById("txt-type");
 const figure = document.getElementById("figure");
 
-let trys, id, insertedType, pokemonName, pokemonType1, pokemonType2, elementInsertedType, auxElementInsertedType, fromGen, toGen;
+let trys, id, insertedType, pokemonName, pokemonType1, pokemonType2, typeLength, correctFirstType, elementInsertedType, auxElementInsertedType, fromGen, toGen;
 let score = 0;
 let hard = false;
-let correctFirstType = false;
 btnNormalDifficulty.disabled = true;
 
 const pokeGen = {
@@ -120,31 +119,33 @@ function verifyDifficulty() {
 
 function pokemonType() {
     if(trys > 0) {
-        if(insertedType === pokemonType1 || insertedType === pokemonType2) {
-            score++;
-            txtScore.innerHTML = score;
-            if(pokemonType2 !== "") {
-                txtType.innerHTML = `Acertou! O Pokémon era dos tipos: ${pokemonType1} e ${pokemonType2}`;
-            } else {
-                txtType.innerHTML = `Acertou! O Pokémon era do tipo: ${pokemonType1}`;
-            };
-            txtPokeName.innerHTML = pokemonName;
-            trys = 0;
-        } else if(insertedType === "") {
+        if(insertedType === null) {
             txtType.innerHTML = "Selecione um tipo!";
         } else {
-            trys--;
-            if(trys <= 0) {
-                txtTrys.innerHTML = trys;
-                if(pokemonType2 !== "") {
-                    txtType.innerHTML = `GAME OVER! O Pokémon era dos tipos: ${pokemonType1} e ${pokemonType2}`;
+            if(insertedType === pokemonType1 || insertedType === pokemonType2) {
+                score++;
+                txtScore.innerHTML = score;
+                if(pokemonType2 !== null) {
+                    txtType.innerHTML = `Acertou! O Pokémon era dos tipos: ${pokemonType1} e ${pokemonType2}`;
                 } else {
-                    txtType.innerHTML = `GAME OVER! O Pokémon era do tipo: ${pokemonType1}`;
+                    txtType.innerHTML = `Acertou! O Pokémon era do tipo: ${pokemonType1}`;
                 };
                 txtPokeName.innerHTML = pokemonName;
+                trys = 0;
             } else {
-                txtTrys.innerHTML = trys;
-                txtType.innerHTML = "Errou Miseravelmente! Selecione o tipo:";
+                trys--;
+                if(trys <= 0) {
+                    txtTrys.innerHTML = trys;
+                    if(pokemonType2 !== null) {
+                        txtType.innerHTML = `GAME OVER! O Pokémon era dos tipos: ${pokemonType1} e ${pokemonType2}`;
+                    } else {
+                        txtType.innerHTML = `GAME OVER! O Pokémon era do tipo: ${pokemonType1}`;
+                    };
+                    txtPokeName.innerHTML = pokemonName;
+                } else {
+                    txtTrys.innerHTML = trys;
+                    txtType.innerHTML = "Errou Miseravelmente! Selecione o tipo:";
+                };
             };
         };
     };
@@ -152,43 +153,52 @@ function pokemonType() {
 
 function pokemonTypeHard() {
     if(trys > 0) {
-        if((insertedType === pokemonType1 || insertedType === pokemonType2) && correctFirstType === false) {
-            correctFirstType = true;
-            auxElementInsertedType = elementInsertedType;
-            elementInsertedType.disabled = true;
-            txtType.innerHTML = "Acertou o primeiro tipo! Selecione o tipo:";
-        } else if((insertedType === pokemonType1 || insertedType === pokemonType2) && correctFirstType === true) {
-            correctFirstType = false;
-            auxElementInsertedType.disabled = false;
-            score++;
-            txtScore.innerHTML = score;
-            if(pokemonType2 !== "") {
-                txtType.innerHTML = `Acertou! O Pokémon era dos tipos: ${pokemonType1} e ${pokemonType2}`;
-            } else {
-                txtType.innerHTML = `Acertou! O Pokémon era do tipo: ${pokemonType1}`;
-            };
-            txtPokeName.innerHTML = pokemonName;
-            trys = 0;
-        } else if(insertedType === "") {
+        if(insertedType === null) {
             txtType.innerHTML = "Selecione um tipo!";
         } else {
-            trys--;
-            if(trys <= 0) {
-                correctFirstType = false;
-                auxElementInsertedType.disabled = false;
-                txtTrys.innerHTML = trys;
-                if(pokemonType2 !== "") {
-                    txtType.innerHTML = `GAME OVER! O Pokémon era dos tipos: ${pokemonType1} e ${pokemonType2}`;
+            if((insertedType === pokemonType1 || insertedType === pokemonType2) && correctFirstType === false) {
+                correctFirstType = true;
+                auxElementInsertedType = elementInsertedType;
+                elementInsertedType.disabled = true;
+                txtType.innerHTML = "Acertou o primeiro tipo! Selecione o tipo:";
+            } else if((insertedType === pokemonType1 || insertedType === pokemonType2) && correctFirstType === true) {
+                if(auxElementInsertedType !== undefined) {
+                    auxElementInsertedType.disabled = false;
+                };
+                score++;
+                txtScore.innerHTML = score;
+                if(pokemonType2 !== null) {
+                    txtType.innerHTML = `Acertou! O Pokémon era dos tipos: ${pokemonType1} e ${pokemonType2}`;
                 } else {
-                    txtType.innerHTML = `GAME OVER! O Pokémon era do tipo: ${pokemonType1}`;
+                    txtType.innerHTML = `Acertou! O Pokémon era do tipo: ${pokemonType1}`;
                 };
                 txtPokeName.innerHTML = pokemonName;
+                trys = 0;
             } else {
-                txtTrys.innerHTML = trys;
-                txtType.innerHTML = "Errou Miseravelmente! Selecione o tipo:";
+                trys--;
+                if(trys <= 0) {
+                    correctFirstType = false;
+                    if(auxElementInsertedType !== undefined) {
+                        auxElementInsertedType.disabled = false;
+                    };
+                    txtTrys.innerHTML = trys;
+                    if(pokemonType2 !== null) {
+                        txtType.innerHTML = `GAME OVER! O Pokémon era dos tipos: ${pokemonType1} e ${pokemonType2}`;
+                    } else {
+                        txtType.innerHTML = `GAME OVER! O Pokémon era do tipo: ${pokemonType1}`;
+                    };
+                    txtPokeName.innerHTML = pokemonName;
+                } else {
+                    txtTrys.innerHTML = trys;
+                    txtType.innerHTML = "Errou Miseravelmente! Selecione o tipo:";
+                };
             };
         };
     };
+};
+
+function includePokemonFigure(img) {
+    figure.innerHTML = `<img alt="${pokemonName}" src="${img}">`;
 };
 
 async function getPokemon() {
@@ -196,38 +206,36 @@ async function getPokemon() {
     return res;
 };
 
-function includePokemonFigure(img) {
-    figure.innerHTML = `<img alt="${pokemonName}" src="${img}">`;
-};
-
 async function assignValueToVariables() {
     const res = await getPokemon();
     const img = res.data.sprites.other["official-artwork"].front_default;
+    insertedType = null;
+    typeLength = res.data.types["length"];
     pokemonName = pokemonNameFormatted(res.data.name);
-    if(res.data.types["length"] === 2) {
+    if(typeLength === 2) {
+        correctFirstType = false;
         pokemonType1 = compareTypes(res.data.types[0].type.name);
         pokemonType2 = compareTypes(res.data.types[1].type.name);
     } else {
+        correctFirstType = true;
         pokemonType1 = compareTypes(res.data.types[0].type.name);
-        pokemonType2 = ""
+        pokemonType2 = null;
     };
     includePokemonFigure(img);
 };
 
 function reset() {
     trys = 3;
-    correctFirstType = false;
-    if(auxElementInsertedType != undefined) {
+    if(auxElementInsertedType !== undefined) {
         auxElementInsertedType.disabled = false;
     };
-    insertedType = "";
     txtTrys.innerHTML = trys;
     txtScore.innerHTML = score;
     txtType.innerHTML = "Selecione o tipo:";
     txtPokeName.innerHTML = "Qual o tipo?";
     insertPokemonGen();
     id = drawId();
-    assignValueToVariables()
+    assignValueToVariables();
 };
 
 reset();
