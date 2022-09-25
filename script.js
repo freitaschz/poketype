@@ -3,7 +3,6 @@ const btnNormalDifficulty = document.getElementById("normal-difficulty");
 const btnHardDifficulty = document.getElementById("hard-difficulty");
 btnNormalDifficulty.addEventListener("click", function(){insertDifficulty(this.value)}, false);
 btnHardDifficulty.addEventListener("click", function(){insertDifficulty(this.value)}, false);
-const timer = setTimeout(reset,3000);
 
 //New Game Button and Reset Button
 const btnPokemon = document.getElementById("btnPokemon");
@@ -15,7 +14,7 @@ btnReset.addEventListener("click", reset, false);
 const btnType = document.getElementsByClassName("main-section-types-container-button");
 for (const value of btnType) {
     value.addEventListener("click", function(){insertType(this)}, false);
-}
+};
 
 //----------------------------------------------------------------------------------------
 
@@ -26,7 +25,7 @@ const txtPokeName = document.getElementById("txt-pokename");
 const txtType = document.getElementById("txt-type");
 const figure = document.getElementById("figure");
 
-let trys, id, insertedType, elementInsertedType, auxElementInsertedType, fromGen, toGen;
+let trys, id, insertedType, pokemonName, pokemonType1, pokemonType2, elementInsertedType, auxElementInsertedType, fromGen, toGen;
 let score = 0;
 let hard = false;
 let correctFirstType = false;
@@ -60,11 +59,11 @@ function drawId() {
     return number;
 };
 
-function typeMask(type) {
+function typeNameMask(type) {
     return type.textContent;
 };
 
-function typeNameMask(name) {
+function compareTypes(name) {
     let typeName;
     for(const value of btnType) {
         typeName = value.value;
@@ -90,8 +89,8 @@ function insertPokemonGen() {
 function insertType(element) {
     if(trys > 0) {
         elementInsertedType = element;
-        insertedType = element.value.toLowerCase();
-        txtType.innerHTML = `Tipo selecionado: ${typeMask(element)}`;
+        insertedType = typeNameMask(element);
+        txtType.innerHTML = `Tipo selecionado: ${insertedType}`;
     };
 };
 
@@ -119,104 +118,74 @@ function verifyDifficulty() {
     };
 };
 
-async function pokemonType() {
-    const res = await getPokemon(id);
+function pokemonType() {
     if(trys > 0) {
-        if(res.data.types["length"] === 2) {
-            if(insertedType === res.data.types[0].type.name || insertedType === res.data.types[1].type.name) {
-                score++;
-                txtScore.innerHTML = score;
-                txtType.innerHTML = `Acertou! O Pokémon era dos tipos: ${typeNameMask(res.data.types[0].type.name)} e ${typeNameMask(res.data.types[1].type.name)}`;
-                txtPokeName.innerHTML = pokemonNameFormatted(res.data.species.name);
-                trys = 0;
-            } else if(insertedType === "") {
-                txtType.innerHTML = "Selecione um tipo!";
+        if(insertedType === pokemonType1 || insertedType === pokemonType2) {
+            score++;
+            txtScore.innerHTML = score;
+            if(pokemonType2 !== "") {
+                txtType.innerHTML = `Acertou! O Pokémon era dos tipos: ${pokemonType1} e ${pokemonType2}`;
             } else {
-                trys--;
-                if(trys <= 0) {
-                    txtTrys.innerHTML = trys;
-                    txtType.innerHTML = `GAME OVER! O Pokémon era dos tipos: ${typeNameMask(res.data.types[0].type.name)} e ${typeNameMask(res.data.types[1].type.name)}`;
-                    txtPokeName.innerHTML = pokemonNameFormatted(res.data.species.name);
-                } else {
-                    txtTrys.innerHTML = trys;
-                    txtType.innerHTML = "Errou Miseravelmente! Selecione o tipo:";
-                };
+                txtType.innerHTML = `Acertou! O Pokémon era do tipo: ${pokemonType1}`;
             };
+            txtPokeName.innerHTML = pokemonName;
+            trys = 0;
+        } else if(insertedType === "") {
+            txtType.innerHTML = "Selecione um tipo!";
         } else {
-            if(insertedType === res.data.types[0].type.name) {
-                score++;
-                txtScore.innerHTML = score;
-                txtType.innerHTML = `Acertou! O Pokémon era do tipo: ${typeNameMask(res.data.types[0].type.name)}`;
-                txtPokeName.innerHTML = pokemonNameFormatted(res.data.species.name);
-                trys = 0;
-            } else if(insertedType === "") {
-                txtType.innerHTML = "Selecione um tipo!";
-            } else {
-                trys--;
-                if(trys <= 0) {
-                    txtTrys.innerHTML = trys;
-                    txtType.innerHTML = `GAME OVER! O Pokémon era do tipo: ${typeNameMask(res.data.types[0].type.name)}`;
-                    txtPokeName.innerHTML = pokemonNameFormatted(res.data.species.name);
+            trys--;
+            if(trys <= 0) {
+                txtTrys.innerHTML = trys;
+                if(pokemonType2 !== "") {
+                    txtType.innerHTML = `GAME OVER! O Pokémon era dos tipos: ${pokemonType1} e ${pokemonType2}`;
                 } else {
-                    txtTrys.innerHTML = trys;
-                    txtType.innerHTML = "Errou Miseravelmente! Selecione o tipo:";
+                    txtType.innerHTML = `GAME OVER! O Pokémon era do tipo: ${pokemonType1}`;
                 };
+                txtPokeName.innerHTML = pokemonName;
+            } else {
+                txtTrys.innerHTML = trys;
+                txtType.innerHTML = "Errou Miseravelmente! Selecione o tipo:";
             };
         };
     };
 };
 
-async function pokemonTypeHard() {
-    const res = await getPokemon(id); 
+function pokemonTypeHard() {
     if(trys > 0) {
-        if(res.data.types["length"] === 2) {
-            if((insertedType === res.data.types[0].type.name || insertedType === res.data.types[1].type.name) && correctFirstType === false) {
-                correctFirstType = true;
-                auxElementInsertedType = elementInsertedType;
-                elementInsertedType.disabled = true;
-                txtType.innerHTML = "Acertou o primeiro tipo! Selecione o tipo:";
-            } else if((insertedType === res.data.types[0].type.name || insertedType === res.data.types[1].type.name) && correctFirstType === true) {
+        if((insertedType === pokemonType1 || insertedType === pokemonType2) && correctFirstType === false) {
+            correctFirstType = true;
+            auxElementInsertedType = elementInsertedType;
+            elementInsertedType.disabled = true;
+            txtType.innerHTML = "Acertou o primeiro tipo! Selecione o tipo:";
+        } else if((insertedType === pokemonType1 || insertedType === pokemonType2) && correctFirstType === true) {
+            correctFirstType = false;
+            auxElementInsertedType.disabled = false;
+            score++;
+            txtScore.innerHTML = score;
+            if(pokemonType2 !== "") {
+                txtType.innerHTML = `Acertou! O Pokémon era dos tipos: ${pokemonType1} e ${pokemonType2}`;
+            } else {
+                txtType.innerHTML = `Acertou! O Pokémon era do tipo: ${pokemonType1}`;
+            };
+            txtPokeName.innerHTML = pokemonName;
+            trys = 0;
+        } else if(insertedType === "") {
+            txtType.innerHTML = "Selecione um tipo!";
+        } else {
+            trys--;
+            if(trys <= 0) {
                 correctFirstType = false;
                 auxElementInsertedType.disabled = false;
-                score++;
-                txtScore.innerHTML = score;
-                txtType.innerHTML = `Acertou! O Pokémon era dos tipos: ${typeNameMask(res.data.types[0].type.name)} e ${typeNameMask(res.data.types[1].type.name)}`;
-                txtPokeName.innerHTML = pokemonNameFormatted(res.data.species.name);
-                trys = 0;
-            } else if(insertedType === "") {
-                txtType.innerHTML = "Selecione um tipo!";
-            } else {
-                trys--;
-                if(trys <= 0) {
-                    correctFirstType = false;
-                    auxElementInsertedType.disabled = false;
-                    txtTrys.innerHTML = trys;
-                    txtType.innerHTML = `GAME OVER! O Pokémon era dos tipos: ${typeNameMask(res.data.types[0].type.name)} e ${typeNameMask(res.data.types[1].type.name)}`;
-                    txtPokeName.innerHTML = pokemonNameFormatted(res.data.species.name);
+                txtTrys.innerHTML = trys;
+                if(pokemonType2 !== "") {
+                    txtType.innerHTML = `GAME OVER! O Pokémon era dos tipos: ${pokemonType1} e ${pokemonType2}`;
                 } else {
-                    txtTrys.innerHTML = trys;
-                    txtType.innerHTML = "Errou Miseravelmente! Selecione o tipo:";
-                }
-            }
-        } else {
-            if(insertedType === res.data.types[0].type.name) {
-                score++;
-                txtScore.innerHTML = score;
-                txtType.innerHTML = `Acertou! O Pokémon era do tipo: ${typeNameMask(res.data.types[0].type.name)}`;
-                txtPokeName.innerHTML = pokemonNameFormatted(res.data.species.name);
-                trys = 0;
-            } else if(insertedType === "") {
-                txtType.innerHTML = "Selecione um tipo!";
-            } else {
-                trys--;
-                if(trys <= 0) {
-                    txtTrys.innerHTML = trys;
-                    txtType.innerHTML = `GAME OVER! O Pokémon era do tipo: ${typeNameMask(res.data.types[0].type.name)}`;
-                    txtPokeName.innerHTML = pokemonNameFormatted(res.data.species.name);
-                } else {
-                    txtTrys.innerHTML = trys;
-                    txtType.innerHTML = "Errou Miseravelmente! Selecione o tipo:";
+                    txtType.innerHTML = `GAME OVER! O Pokémon era do tipo: ${pokemonType1}`;
                 };
+                txtPokeName.innerHTML = pokemonName;
+            } else {
+                txtTrys.innerHTML = trys;
+                txtType.innerHTML = "Errou Miseravelmente! Selecione o tipo:";
             };
         };
     };
@@ -227,10 +196,22 @@ async function getPokemon() {
     return res;
 };
 
-async function getPokemonFigure() {
+function includePokemonFigure(img) {
+    figure.innerHTML = `<img alt="${pokemonName}" src="${img}">`;
+};
+
+async function assignValueToVariables() {
     const res = await getPokemon();
     const img = res.data.sprites.other["official-artwork"].front_default;
-    figure.innerHTML = `<img alt="${res.data.name}" src="${img}">`;
+    pokemonName = pokemonNameFormatted(res.data.name);
+    if(res.data.types["length"] === 2) {
+        pokemonType1 = compareTypes(res.data.types[0].type.name);
+        pokemonType2 = compareTypes(res.data.types[1].type.name);
+    } else {
+        pokemonType1 = compareTypes(res.data.types[0].type.name);
+        pokemonType2 = ""
+    };
+    includePokemonFigure(img);
 };
 
 function reset() {
@@ -246,7 +227,7 @@ function reset() {
     txtPokeName.innerHTML = "Qual o tipo?";
     insertPokemonGen();
     id = drawId();
-    getPokemonFigure();
+    assignValueToVariables()
 };
 
 reset();
