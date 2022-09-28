@@ -23,11 +23,14 @@ const txtTrys = document.getElementById("txt-trys");
 const txtScore = document.getElementById("txt-score");
 const txtPokeName = document.getElementById("txt-pokename");
 const txtType = document.getElementById("txt-type");
+const txtMessage = document.getElementById("txt-message");
 const figure = document.getElementById("figure");
 
 let trys, id, insertedType, pokemonName, pokemonType1, pokemonType2, typeLength, correctFirstType, elementInsertedType, auxElementInsertedType, fromGen, toGen;
 let score = 0;
 let easy = false;
+let gameStarted = false;
+let timer = null;
 btnNormalDifficulty.disabled = true;
 
 const pokeGen = {
@@ -59,6 +62,20 @@ function drawId() {
         number = Math.floor(Math.random(fromGen) * toGen+1);
     } while(number === id)
     return number;
+};
+
+function assignCounter() {
+    let seconds = 4;
+    let counter = setInterval(() => txtMessage.innerHTML = `<p>Um novo Pokémon será sorteado em ${seconds--} segundo(s)</p>`, 800);
+    setTimeout(() => {clearInterval(counter)}, 4000);
+};
+
+function stopTimer() {
+    clearTimeout(timer);
+};
+
+function assignTimer() {
+    timer = setTimeout(reset, 3800);
 };
 
 function typeNameMask(type) {
@@ -97,7 +114,7 @@ function insertType(element) {
 };
 
 function insertDifficulty(difficulty) {
-    if(trys === 3) {
+    if(gameStarted === false) {
         if(difficulty === "0") {//easy
             easy = true;
             btnEasyDifficulty.disabled = true;
@@ -108,7 +125,7 @@ function insertDifficulty(difficulty) {
             btnNormalDifficulty.disabled = true;
         };
     } else {
-        alert("Você poderá alterar a dificuldade quando iniciar um novo jogo!");
+        txtMessage.innerHTML = "<p>Você poderá alterar a dificuldade quando iniciar um novo jogo!<p>";
     };
 };
 
@@ -125,6 +142,7 @@ function pokemonTypeEasy() {
         if(insertedType === null) {
             txtType.innerHTML = "Selecione um tipo!";
         } else {
+            gameStarted = true;
             if(insertedType === pokemonType1 || insertedType === pokemonType2) {
                 score++;
                 txtScore.innerHTML = score;
@@ -135,6 +153,7 @@ function pokemonTypeEasy() {
                 };
                 txtPokeName.innerHTML = pokemonName;
                 trys = 0;
+                assignCounter(assignTimer());
             } else {
                 trys--;
                 if(trys <= 0) {
@@ -145,6 +164,7 @@ function pokemonTypeEasy() {
                         txtType.innerHTML = `GAME OVER! O Pokémon era do tipo: ${pokemonType1}`;
                     };
                     txtPokeName.innerHTML = pokemonName;
+                    assignCounter(assignTimer());
                 } else {
                     txtTrys.innerHTML = trys;
                     txtType.innerHTML = "Errou Miseravelmente! Selecione o tipo:";
@@ -159,6 +179,7 @@ function pokemonType() {
         if(insertedType === null) {
             txtType.innerHTML = "Selecione um tipo!";
         } else {
+            gameStarted = true;
             if((insertedType === pokemonType1 || insertedType === pokemonType2) && correctFirstType === false) {
                 correctFirstType = true;
                 auxElementInsertedType = elementInsertedType;
@@ -177,6 +198,7 @@ function pokemonType() {
                 };
                 txtPokeName.innerHTML = pokemonName;
                 trys = 0;
+                assignCounter(assignTimer());
             } else {
                 trys--;
                 if(trys <= 0) {
@@ -191,6 +213,7 @@ function pokemonType() {
                         txtType.innerHTML = `GAME OVER! O Pokémon era do tipo: ${pokemonType1}`;
                     };
                     txtPokeName.innerHTML = pokemonName;
+                    assignCounter(assignTimer());
                 } else {
                     txtTrys.innerHTML = trys;
                     txtType.innerHTML = "Errou Miseravelmente! Selecione o tipo:";
@@ -212,6 +235,7 @@ async function getPokemon() {
 async function assignValueToVariables() {
     const res = await getPokemon();
     const img = res.data.sprites.other["official-artwork"].front_default;
+    gameStarted = false;
     insertedType = null;
     typeLength = res.data.types["length"];
     pokemonName = pokemonNameFormatted(res.data.name);
@@ -236,6 +260,7 @@ function reset() {
     txtScore.innerHTML = score;
     txtType.innerHTML = "Selecione o tipo:";
     txtPokeName.innerHTML = "Qual o tipo?";
+    txtMessage.innerHTML = "";
     insertPokemonGen();
     id = drawId();
     assignValueToVariables();

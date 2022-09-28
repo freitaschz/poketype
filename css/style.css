@@ -84,7 +84,7 @@ p {
   border-radius: 8px;
   font-size: 1rem;
   padding: 0.5rem 1rem;
-  width: 5rem;
+  width: 6rem;
   color: #fff;
 }
 .aside-div-content-button:hover {
@@ -110,7 +110,7 @@ p {
   border-radius: 10px;
   padding: 1rem;
   background-color: #E74C3C;
-  min-height: 467.1px;
+  min-height: 507px;
   min-width: 507px;
   color: #fff;
 }
@@ -172,6 +172,18 @@ p {
 .game-section-buttons-button:hover {
   cursor: pointer;
   opacity: 0.8;
+}
+.game-section-settings {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  width: 100%;
+  border-radius: 20px;
+  margin-top: 1rem;
+}
+.game-section-settings p {
+  color: #202124;
 }
 
 .footer {
@@ -285,6 +297,9 @@ p {
   .game {
     flex-direction: column;
   }
+  .game-section {
+    min-height: 467.1px;
+  }
   .game-section-types-container {
     padding: 0 4rem;
   }
@@ -302,7 +317,6 @@ p {
 }
 @media (max-width: 600px) {
   .game-section {
-    min-height: 467.1px;
     min-width: 253.5px;
   }
   .game-section-figure img {

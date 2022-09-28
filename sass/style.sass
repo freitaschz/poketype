@@ -76,7 +76,7 @@ p
                 border-radius: 8px
                 font-size: 1rem
                 padding: 0.5rem 1rem
-                width: 5rem
+                width: 6rem
                 color: variables.$aside-button-color
             &-button:hover
                 @include mixins.button-hover
@@ -96,7 +96,7 @@ p
         border-radius: 10px
         padding: 1rem
         background-color: variables.$secondary-background
-        min-height: 467.1px
+        min-height: 507px
         min-width: 507px
         color: variables.$text-color
         &-figure
@@ -144,6 +144,16 @@ p
                 color: variables.$text-color
             &-button:hover
                 @include mixins.button-hover
+        &-settings
+            display: flex
+            justify-content: center
+            align-items: center
+            background-color: variables.$thirdy-background
+            width: 100%
+            border-radius: 20px
+            margin-top: 1rem
+            p
+                color: variables.$text-color2
 
 .footer
     display: flex
@@ -212,6 +222,8 @@ p
 @media (max-width: 820px)
     .game
         flex-direction: column
+        &-section
+            min-height: 467.1px
         &-section-types-container
             padding: 0 4rem
         &-section-figure img
@@ -225,7 +237,6 @@ p
 
 @media (max-width: 600px)
     .game-section
-        min-height: 467.1px
         min-width: 253.5px
     .game-section-figure img
         width: 30vw
