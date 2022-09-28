@@ -9,78 +9,86 @@
     <title>PokéGuess</title>
 </head>
 <body>
-    <h1 class="title">PokéGuess</h1>
     <main class="main">
-        <aside class="aside">
-            <div class="aside-div">
-                <p class="aside-div-title">Geração</p>
-                <div class="aside-div-content">
-                    <label class="aside-div-content-label" for="from-gen">Da</label>
-                    <input class="aside-div-content-input" type="number" name="from-gen" id="from-gen" value="1" min="1" max="8" oninput="validity.valid||(value='')">
-                    <label class="aside-div-content-label" for="to-gen">até</label>
-                    <input class="aside-div-content-input" type="number" name="to-gen" id="to-gen" value="8" min="1" max="8" oninput="validity.valid||(value='')">
+        <h1 class="title">PokéGuess</h1>
+        <section class="game">
+            <aside class="aside">
+                <div class="aside-div">
+                    <p class="aside-div-title">Geração</p>
+                    <div class="aside-div-content-left">
+                        <label class="aside-div-content-label" for="from-gen">Da gen</label>
+                        <input class="aside-div-content-input" type="number" name="from-gen" id="from-gen" value="1" min="1" max="8" oninput="validity.valid||(value='')">
+                        <label class="aside-div-content-label" for="to-gen">até gen</label>
+                        <input class="aside-div-content-input" type="number" name="to-gen" id="to-gen" value="8" min="1" max="8" oninput="validity.valid||(value='')">
+                    </div>
                 </div>
-            </div>
-            <div class="aside-div">
-                <p class="aside-div-title">Dificuldade</p>
-                <div class="aside-div-content">
-                    <button class="aside-div-content-button" id="normal-difficulty" value="normal">Normal</button>
-                    <button class="aside-div-content-button" id="hard-difficulty" value="hard">Difícil</button>
+                <div class="aside-div">
+                    <p class="aside-div-title">Dificuldade</p>
+                    <div class="aside-div-content-left">
+                        <button class="aside-div-content-button" id="easy-difficulty" value="0">Fácil</button>
+                        <button class="aside-div-content-button" id="normal-difficulty" value="1">Normal</button>
+                    </div>
                 </div>
-            </div>
-        </aside>
-        <section class="main-section">
-            <figure class="main-section-figure" id="figure"></figure>
-            <p class="main-section-pokename" id="txt-pokename">Qual o tipo?</p>
-            <p class="main-section-textType" id="txt-type">Selecione o tipo:</p>
-            <div class="main-section-types">
-                <container class="main-section-types-container">
-                    <button class="main-section-types-container-button" id="normal" value="normal">Normal</button>
-                    <button class="main-section-types-container-button" id="fighting" value="fighting">Lutador</button>
-                    <button class="main-section-types-container-button" id="flying" value="flying">Voador</button>
-                    <button class="main-section-types-container-button" id="poison" value="poison">Venenoso</button>
-                    <button class="main-section-types-container-button" id="ground" value="ground">Terra</button>
-                    <button class="main-section-types-container-button" id="rock" value="rock">Pedra</button>
-                </container>
-                <container class="main-section-types-container">
-                    <button class="main-section-types-container-button" id="bug" value="bug">Inseto</button>
-                    <button class="main-section-types-container-button" id="ghost" value="ghost">Fantasma</button>
-                    <button class="main-section-types-container-button" id="steel" value="steel">Aço</button>
-                    <button class="main-section-types-container-button" id="fire" value="fire">Fogo</button>
-                    <button class="main-section-types-container-button" id="water" value="water">Água</button>
-                    <button class="main-section-types-container-button" id="grass" value="grass">Grama</button>
-                </container>
-                <container class="main-section-types-container">
-                    <button class="main-section-types-container-button" id="electric" value="electric">Elétrico</button>
-                    <button class="main-section-types-container-button" id="psychic" value="psychic">Psíquico</button>
-                    <button class="main-section-types-container-button" id="ice" value="ice">Gelo</button>
-                    <button class="main-section-types-container-button" id="dragon" value="dragon">Dragão</button>
-                    <button class="main-section-types-container-button" id="dark" value="dark">Sombrio</button>
-                    <button class="main-section-types-container-button" id="fairy" value="fairy">Fada</button>
-                </container>
-            </div>
-            <div class="main-section-buttons">
-                <button class="main-section-buttons-button" id="btnPokemon">Chutar</button>
-                <button class="main-section-buttons-button" id="btnReset">Novo Jogo</button>
-            </div>
+            </aside>
+            <section class="game-section">
+                <figure class="game-section-figure" id="figure"></figure>
+                <p class="game-section-pokename" id="txt-pokename">Qual o tipo?</p>
+                <p class="game-section-textType" id="txt-type">Selecione o tipo:</p>
+                <div class="game-section-types">
+                    <container class="game-section-types-container">
+                        <button class="game-section-types-container-button" id="normal" value="normal">Normal</button>
+                        <button class="game-section-types-container-button" id="fighting" value="fighting">Lutador</button>
+                        <button class="game-section-types-container-button" id="flying" value="flying">Voador</button>
+                        <button class="game-section-types-container-button" id="poison" value="poison">Venenoso</button>
+                        <button class="game-section-types-container-button" id="ground" value="ground">Terra</button>
+                        <button class="game-section-types-container-button" id="rock" value="rock">Pedra</button>
+                    </container>
+                    <container class="game-section-types-container">
+                        <button class="game-section-types-container-button" id="bug" value="bug">Inseto</button>
+                        <button class="game-section-types-container-button" id="ghost" value="ghost">Fantasma</button>
+                        <button class="game-section-types-container-button" id="steel" value="steel">Aço</button>
+                        <button class="game-section-types-container-button" id="fire" value="fire">Fogo</button>
+                        <button class="game-section-types-container-button" id="water" value="water">Água</button>
+                        <button class="game-section-types-container-button" id="grass" value="grass">Grama</button>
+                    </container>
+                    <container class="game-section-types-container">
+                        <button class="game-section-types-container-button" id="electric" value="electric">Elétrico</button>
+                        <button class="game-section-types-container-button" id="psychic" value="psychic">Psíquico</button>
+                        <button class="game-section-types-container-button" id="ice" value="ice">Gelo</button>
+                        <button class="game-section-types-container-button" id="dragon" value="dragon">Dragão</button>
+                        <button class="game-section-types-container-button" id="dark" value="dark">Sombrio</button>
+                        <button class="game-section-types-container-button" id="fairy" value="fairy">Fada</button>
+                    </container>
+                </div>
+                <div class="game-section-buttons">
+                    <button class="game-section-buttons-button" id="btnPokemon">Chutar</button>
+                    <button class="game-section-buttons-button" id="btnReset">Novo Jogo</button>
+                </div>
+            </section>
+            <aside class="aside">
+                <div class="aside-div">
+                    <p class="aside-div-title">Acertos</p>
+                    <div class="aside-div-content-right">
+                        <p class="aside-div-content-number" id="txt-score">0</p>
+                    </div>
+                </div>
+                <div class="aside-div-right">
+                    <p class="aside-div-title">Tentativas</p>
+                    <div class="aside-div-content-right">
+                        <p class="aside-div-content-number" id="txt-trys">0</p>
+                    </div>
+                </div>
+            </aside>
         </section>
-        <aside class="aside">
-            <div class="aside-div">
-                <p class="aside-div-title">Acertos</p>
-                <div class="aside-div-content">
-                    <p class="aside-div-content-number" id="txt-score">0</p>
-                </div>
-            </div>
-            <div class="aside-div">
-                <p class="aside-div-title">Tentativas</p>
-                <div class="aside-div-content">
-                    <p class="aside-div-content-number" id="txt-trys">0</p>
-                </div>
-            </div>
-        </aside>
     </main>
     <footer class="footer">
-        <p class="footer-text">Todas as imagens © Nintendo. Gen 1-8 artwork e data de <a href="https://pokeapi.co/" target="_blank">PokéAPI</a>.</p>
+        <p class="footer-copyright">Esse projeto é sem fins comerciais. Todos os direitos e atributos são reservados a Nintendo®.</p>
+        <select class="footer-lang">
+            <option class="footer-lang-option" value="pt-br">Português</option>
+        </select>
+        <p class="footer-version">v1.0.1</p>
+        <p class="footer-by">Feito com <span class="footer-by-heart">❤</span> por <span class="footer-bold">Thiago Freitas</span> e <span class="footer-bold">Matheus Armindo</span>.</p>
+        <p class="footer-by">Dê seu feedback pelo <a href="https://github.com/thiagofqs/pokeguess" target="_blank"><span class="footer-bold">GitHub</span></a>.</p>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="script.js" defer="true"></script>

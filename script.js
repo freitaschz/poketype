@@ -1,8 +1,8 @@
 //Difficulty Buttons
+const btnEasyDifficulty = document.getElementById("easy-difficulty");
 const btnNormalDifficulty = document.getElementById("normal-difficulty");
-const btnHardDifficulty = document.getElementById("hard-difficulty");
+btnEasyDifficulty.addEventListener("click", function(){insertDifficulty(this.value)}, false);
 btnNormalDifficulty.addEventListener("click", function(){insertDifficulty(this.value)}, false);
-btnHardDifficulty.addEventListener("click", function(){insertDifficulty(this.value)}, false);
 
 //New Game Button and Reset Button
 const btnPokemon = document.getElementById("btnPokemon");
@@ -11,7 +11,7 @@ btnPokemon.addEventListener("click", verifyDifficulty, false);
 btnReset.addEventListener("click", reset, false);
 
 //Type Buttons
-const btnType = document.getElementsByClassName("main-section-types-container-button");
+const btnType = document.getElementsByClassName("game-section-types-container-button");
 for (const value of btnType) {
     value.addEventListener("click", function(){insertType(this)}, false);
 };
@@ -27,34 +27,37 @@ const figure = document.getElementById("figure");
 
 let trys, id, insertedType, pokemonName, pokemonType1, pokemonType2, typeLength, correctFirstType, elementInsertedType, auxElementInsertedType, fromGen, toGen;
 let score = 0;
-let hard = false;
+let easy = false;
 btnNormalDifficulty.disabled = true;
 
 const pokeGen = {
-    from: [
+    start: [
             1, //gen1
-            151, //gen2
-            251, //gen3
-            386, //gen4
-            493, //gen5
-            649, //gen6
-            721, //gen7
-            809 //gen8
+            152, //gen2
+            252, //gen3
+            387, //gen4
+            494, //gen5
+            650, //gen6
+            722, //gen7
+            808 //gen8
     ],
-    to: [
+    end: [
         151, //gen1
         251, //gen2
         386, //gen3
         493, //gen4
         649, //gen5
         721, //gen6
-        809, //gen7
+        807, //gen7
         905 //gen8
     ]
 };
 
 function drawId() {
-    const number = Math.floor(Math.random(fromGen) * toGen+1);
+    let number
+    do {
+        number = Math.floor(Math.random(fromGen) * toGen+1);
+    } while(number === id)
     return number;
 };
 
@@ -81,8 +84,8 @@ function pokemonNameFormatted(name) {
 function insertPokemonGen() {
     const from = document.getElementById("from-gen").value;
     const to = document.getElementById("to-gen").value;
-    fromGen = pokeGen.from[from-1];
-    toGen = pokeGen.to[to-1];
+    fromGen = pokeGen.start[from-1];
+    toGen = pokeGen.end[to-1];
 };
 
 function insertType(element) {
@@ -95,14 +98,14 @@ function insertType(element) {
 
 function insertDifficulty(difficulty) {
     if(trys === 3) {
-        if(difficulty === "normal") {
-            hard = false;
-            btnNormalDifficulty.disabled = true;
-            btnHardDifficulty.disabled = false;
-        } else if(difficulty === "hard") {
-            hard = true;
+        if(difficulty === "0") {//easy
+            easy = true;
+            btnEasyDifficulty.disabled = true;
             btnNormalDifficulty.disabled = false;
-            btnHardDifficulty.disabled = true;
+        } else if(difficulty === "1") {//normal
+            easy = false;
+            btnEasyDifficulty.disabled = false;
+            btnNormalDifficulty.disabled = true;
         };
     } else {
         alert("Você poderá alterar a dificuldade quando iniciar um novo jogo!");
@@ -110,14 +113,14 @@ function insertDifficulty(difficulty) {
 };
 
 function verifyDifficulty() {
-    if(hard === false) {//normal
+    if(easy === true) {//easy
+        pokemonTypeEasy();
+    } else if(easy === false) {//normal
         pokemonType();
-    } else if(hard === true) {//hard
-        pokemonTypeHard();
     };
 };
 
-function pokemonType() {
+function pokemonTypeEasy() {
     if(trys > 0) {
         if(insertedType === null) {
             txtType.innerHTML = "Selecione um tipo!";
@@ -151,7 +154,7 @@ function pokemonType() {
     };
 };
 
-function pokemonTypeHard() {
+function pokemonType() {
     if(trys > 0) {
         if(insertedType === null) {
             txtType.innerHTML = "Selecione um tipo!";
