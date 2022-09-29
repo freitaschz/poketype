@@ -5,12 +5,12 @@
 
 > Acesse [https://pokeguess.xyz/](https://pokeguess.xyz/) para testar o jogo.
 
-Um jogo browser na qual você deve adivinhar os tipos dos Pokémon, a partir de suas imagens.
+Um jogo web com o objetivo adivinhar os tipos dos Pokémon, a partir de suas figuras.
 
 - As figuras dos Pokémon são mostradas dinamicamente;
 - Opção de selecionar os Pokémon de 1ª a 8ª geração;
-- Seleção de dificuldade: fácil, normal e díficil;
-- Sistema básico de quantidade de acertos.
+- Seleção de dificuldade: fácil, normal (padrão) e díficil;
+- Sistema com quantidade de acertos e de melhor pontuação para cada dificuldade.
 
 ## 🤝 Autores
 
@@ -46,7 +46,7 @@ Foi usado nesse projeto a [PokéAPI](https://pokeapi.co/).
 [⬆ Voltar ao topo](#)<br>
 
 <!-- BADGE - LINKS & IMAGES -->
-[status-shield]: https://img.shields.io/static/v1?label=VERSION&message=1.0.2&color=yellow&style=for-the-badge
+[status-shield]: https://img.shields.io/static/v1?label=VERSION&message=1.1&color=yellow&style=for-the-badge
 [status-url]: https://github.com/thiagofqs
 [license-shield]: https://img.shields.io/github/license/thiagofqs/pokeguess.svg?style=for-the-badge
 [license-url]: https://github.com/thiagofqs/pokeguess/blob/main/LICENSE
