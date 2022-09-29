@@ -2,7 +2,6 @@
 * {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
-  user-select: none;
   margin: 0;
   padding: 0;
 }
@@ -12,7 +11,7 @@ body {
 }
 
 a {
-  color: #808080;
+  color: #fff;
   text-decoration: underline;
 }
 
@@ -20,15 +19,141 @@ p {
   margin: 0.4rem;
 }
 
-.title {
+#fade {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 5;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#fade, #modal {
+  transition: 0.5s;
+  opacity: 1;
+  pointer-events: all;
+}
+
+#modal {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  background-color: #202124;
+  width: 500px;
+  max-width: 90%;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+#modal.hide, #fade.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#modal.hide {
+  top: 0;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #fff;
+  padding-bottom: 1rem;
+}
+.modal-header-title {
   font-weight: 700;
-  text-align: center;
   color: #fff;
-  margin-bottom: 2rem;
+}
+.modal-header-button {
+  padding: 0.4rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #202124;
+}
+.modal-header-button-icon {
+  font-size: 1rem;
+  color: #fff;
+}
+.modal-header-button:hover {
+  cursor: pointer;
+}
+.modal-header-button:hover .modal-header-button-icon {
+  color: #E74C3C;
+}
+.modal-body {
+  text-align: center;
+}
+.modal-body-div {
+  margin-top: 2rem;
+}
+.modal-body-img {
+  border-radius: 5px;
+  max-width: 90%;
+}
+.modal-body-lista {
+  margin-left: 1rem;
+}
+.modal-body-title {
+  font-weight: 700;
+  color: #fff;
+}
+.modal-body-text {
+  font-weight: 400;
+  color: #fff;
+}
+.modal-body-span {
+  font-weight: 700;
+}
+.modal-footer {
+  border-top: 1px solid #fff;
+  padding-top: 1rem;
+  margin-top: 2rem;
+}
+.modal-footer-text {
+  text-align: center;
+  font-weight: 700;
+  color: #fff;
 }
 
 .main {
   padding-top: 2rem;
+}
+.main-pokeguess {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+.main-pokeguess-title {
+  font-weight: 700;
+  text-align: center;
+  color: #fff;
+  margin-right: 1rem;
+}
+.main-pokeguess-button {
+  padding: 0.4rem;
+  border-radius: 5px;
+  border: 1px solid #E74C3C;
+  background-color: #fff;
+}
+.main-pokeguess-button-icon {
+  font-size: 1rem;
+  color: #202124;
+}
+.main-pokeguess-button:hover {
+  cursor: pointer;
+  border: 1px solid #fff;
+  background-color: #E74C3C;
+}
+.main-pokeguess-button:hover .main-pokeguess-button-icon {
+  color: #fff;
 }
 
 .aside {
@@ -67,6 +192,18 @@ p {
   gap: 0.5rem;
   border-radius: 0 10px 10px 0;
 }
+.aside-div-content-sound {
+  min-height: 64px;
+  padding: 0.5rem 0;
+  gap: 0;
+}
+.aside-div-content-title {
+  font-size: 1rem;
+  color: #202124;
+}
+.aside-div-content-score-current {
+  margin-bottom: 0.5rem;
+}
 .aside-div-content-number {
   font-size: 2rem;
   color: #202124;
@@ -86,6 +223,12 @@ p {
   padding: 0.5rem 0;
   width: 5rem;
   color: #fff;
+}
+.aside-div-content-button-sound-top {
+  border-radius: 8px 8px 0 0;
+}
+.aside-div-content-button-sound-bottom {
+  border-radius: 0 0 8px 8px;
 }
 .aside-div-content-button:hover {
   cursor: pointer;
@@ -110,7 +253,7 @@ p {
   border-radius: 10px;
   padding: 1rem;
   background-color: #E74C3C;
-  min-height: 507px;
+  min-height: 550px;
   min-width: 507px;
   color: #fff;
 }
@@ -298,7 +441,7 @@ p {
     flex-direction: column;
   }
   .game-section {
-    min-height: 467.1px;
+    min-height: 475px;
   }
   .game-section-types-container {
     padding: 0 4rem;
@@ -308,7 +451,8 @@ p {
   }
   .aside {
     flex-direction: row;
-    gap: 4rem;
+    flex-wrap: wrap;
+    gap: 1rem;
     margin: 1rem 0;
   }
   .aside-div-content-left, .aside-div-content-right {

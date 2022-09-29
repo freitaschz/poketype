@@ -5,7 +5,6 @@
 *
     font-family: 'Roboto', sans-serif
     font-weight: 400
-    user-select: none
     margin: 0
     padding: 0
 
@@ -19,14 +18,116 @@ a
 p
     margin: 0.4rem
 
-.title
-    font-weight: 700
-    text-align: center
-    color: variables.$text-color
-    margin-bottom: 2rem
+#fade
+    position: fixed
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background-color: rgba(0, 0, 0, 0.8)
+    z-index: 5
+    -webkit-user-select: none
+    -ms-user-select: none
+    user-select: none
+
+#fade, #modal
+    transition: .5s
+    opacity: 1
+    pointer-events: all
+
+#modal
+    position: fixed
+    left: 50%
+    top: 50%
+    transform: translate(-50%, -50%)
+    z-index: 10
+    background-color: variables.$primary-background
+    width: 500px
+    max-width: 90%
+    padding: 1rem
+    border-radius: 10px
+
+#modal.hide, #fade.hide
+    opacity: 0
+    pointer-events: none
+
+#modal.hide
+    top: 0
+
+.modal
+    &-header
+        display: flex
+        justify-content: space-between
+        align-items: center
+        border-bottom: 1px solid #fff
+        padding-bottom: 1rem
+        &-title
+            font-weight: 700
+            color: variables.$primary-text-color
+        &-button
+            padding: 0.4rem
+            border: none
+            border-radius: 5px
+            background-color: variables.$primary-background
+            &-icon
+                font-size: 1rem
+                color: variables.$primary-text-color
+        &-button:hover
+            cursor: pointer
+        &-button:hover .modal-header-button-icon
+            color: variables.$span-color
+    &-body
+        text-align: center
+        &-div
+            margin-top: 2rem
+        &-img
+            border-radius: 5px
+            max-width: 90%
+        &-lista
+            margin-left: 1rem
+        &-title
+            font-weight: 700
+            color: variables.$primary-text-color
+        &-text
+            font-weight: 400
+            color: variables.$primary-text-color
+        &-span
+            font-weight: 700
+    &-footer
+        border-top: 1px solid #fff
+        padding-top: 1rem
+        margin-top: 2rem
+        &-text
+            text-align: center
+            font-weight: 700
+            color: variables.$primary-text-color
 
 .main
     padding-top: 2rem
+    &-pokeguess
+        display: flex
+        justify-content: center
+        align-items: center
+        margin-bottom: 2rem
+        &-title
+            font-weight: 700
+            text-align: center
+            color: variables.$primary-text-color
+            margin-right: 1rem
+        &-button
+            padding: 0.4rem
+            border-radius: 5px
+            border: 1px solid variables.$secondary-background
+            background-color: variables.$thirdy-background
+            &-icon
+                font-size: 1rem
+                color: variables.$primary-background
+        &-button:hover
+            cursor: pointer
+            border: 1px solid variables.$thirdy-background
+            background-color: variables.$secondary-background
+        &-button:hover &-button-icon
+                color: variables.$primary-text-color
 
 .aside
     display: flex
@@ -36,7 +137,7 @@ p
     gap: 1rem
     &-div
         &-title
-            color: variables.$aside-title-color
+            color: variables.$primary-text-color
             text-align: center
             font-weight: 700
         &-content
@@ -45,7 +146,7 @@ p
                 flex-direction: column
                 justify-content: center
                 align-items: center
-                background-color: variables.$aside-background
+                background-color: variables.$thirdy-background
                 min-width: 128px
                 min-height: 96px
                 padding: 1rem 0
@@ -56,19 +157,28 @@ p
                 flex-direction: column
                 justify-content: center
                 align-items: center
-                background-color: variables.$aside-background
+                background-color: variables.$thirdy-background
                 min-width: 128px
                 min-height: 96px
                 padding: 1rem 0
                 gap: 0.5rem
                 border-radius: 0 10px 10px 0
+            &-sound
+                min-height: 64px
+                padding: 0.5rem 0
+                gap: 0
+            &-title
+                font-size: 1rem
+                color: variables.$secondary-text-color
+            &-score-current
+                margin-bottom: 0.5rem
             &-number
                 font-size: 2rem
-                color: variables.$aside-content-color
+                color: variables.$secondary-text-color
             &-label
-                color: variables.$aside-content-color
+                color: variables.$secondary-text-color
             &-input
-                color: variables.$aside-content-color
+                color: variables.$secondary-text-color
                 width: 30px
             &-button
                 background-color: variables.$button-background
@@ -77,7 +187,12 @@ p
                 font-size: 1rem
                 padding: 0.5rem 0
                 width: 5rem
-                color: variables.$aside-button-color
+                color: variables.$primary-text-color
+                &-sound
+                    &-top
+                        border-radius: 8px 8px 0 0
+                    &-bottom
+                        border-radius: 0 0 8px 8px
             &-button:hover
                 @include mixins.button-hover
                 flex-wrap: wrap
@@ -96,9 +211,9 @@ p
         border-radius: 10px
         padding: 1rem
         background-color: variables.$secondary-background
-        min-height: 507px
+        min-height: 550px
         min-width: 507px
-        color: variables.$text-color
+        color: variables.$primary-text-color
         &-figure
             display: flex
             justify-content: center
@@ -124,7 +239,7 @@ p
                     border-radius: 8px
                     font-size: 0.8rem
                     padding: 0.2rem 0.5rem
-                    color: variables.$text-color
+                    color: variables.$primary-text-color
                 &-button:hover
                     @include mixins.button-hover
                 &-button:disabled
@@ -141,7 +256,7 @@ p
                 border-radius: 8px
                 font-size: 1rem
                 padding: 0.5rem 1rem
-                color: variables.$text-color
+                color: variables.$primary-text-color
             &-button:hover
                 @include mixins.button-hover
         &-settings
@@ -153,7 +268,7 @@ p
             border-radius: 20px
             margin-top: 1rem
             p
-                color: variables.$text-color2
+                color: variables.$secondary-text-color
 
 .footer
     display: flex
@@ -163,22 +278,22 @@ p
     gap: 0.5rem
     padding: 1rem 0
     &-copyright
-        color: variables.$text-color
+        color: variables.$primary-text-color
         font-size: 0.8rem
     &-lang
         border: none
         border-radius: 3px
         padding: 0.2rem 0.2rem
         &-option
-            color: variables.$select-option-color
+            color: variables.$secondary-text-color
     &-version
-        color: variables.$text-color
+        color: variables.$primary-text-color
         font-size: 0.8rem
     &-by
-        color: variables.$text-color
+        color: variables.$primary-text-color
         font-size: 0.8rem
         &-heart
-            color: variables.$heart
+            color: variables.$span-color
     &-bold
         font-weight: 700
 
@@ -223,14 +338,15 @@ p
     .game
         flex-direction: column
         &-section
-            min-height: 467.1px
+            min-height: 475px
         &-section-types-container
             padding: 0 4rem
         &-section-figure img
             width: 20vw
     .aside
         flex-direction: row
-        gap: 4rem
+        flex-wrap: wrap
+        gap: 1rem
         margin: 1rem 0
     .aside-div-content-left, .aside-div-content-right
         border-radius: 10px

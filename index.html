@@ -4,21 +4,53 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="img/icon.ico" type="image/x-icon">
+    <meta description="Um jogo web com o objetivo adivinhar os tipos dos Pokémon, a partir de suas figuras.">
+    <link rel="shortcut icon" href="src/img/icon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://kit.fontawesome.com/a55f2d0c18.js" crossorigin="anonymous"></script>
     <title>PokéGuess</title>
 </head>
 <body>
     <main class="main">
-        <h1 class="title">PokéGuess</h1>
+        <div class="main-pokeguess">
+            <h1 class="main-pokeguess-title">PokéGuess</h1>
+            <button class="main-pokeguess-button" id="open-help" title="Ajuda"><i class="fa-solid fa-circle-question main-pokeguess-button-icon"></i></button>
+        </div>
+        <div class="hide" id="fade"></div>
+        <div class="hide modal" id="modal">
+            <div class="modal-header">
+                <h2 class="modal-header-title">Ajuda</h2>
+                <button class="modal-header-button" id="close-help" title="Fechar"><i class="fa-solid fa-xmark modal-header-button-icon"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body-div">
+                    <h3 class="modal-body-title">Como Funciona</h3>
+                    <p class="modal-body-text">Adivinhe o(s) tipo(s) de um Pokémon e veja qual será sua maior pontuação nas diferentes dificuldades! Por padrão, há 3 tentativas por jogo.</p>
+                    <img class="modal-body-img" src="src/img/modal-img-types.png" alt="Todos os 18 tipos">
+                </div>
+                <div class="modal-body-div">
+                    <h3 class="modal-body-title">Dificuldades</h3>
+                    <p class="modal-body-text">Há três diferentes dificuldades: <span class="modal-body-span">fácil</span>, <span class="modal-body-span">normal (padrão)</span> e <span class="modal-body-span">díficil</span>.</p>
+                    <ul class="modal-body-lista">
+                        <li class="modal-body-text"><span class="modal-body-span">Fácil:</span> Deve acertar pelo menos um tipo.</li>
+                        <li class="modal-body-text"><span class="modal-body-span">Normal:</span> Deve acertar ambos os tipos, quando houver.</li>
+                        <li class="modal-body-text"><span class="modal-body-span">Difícil:</span> Deve acertar ambos os tipos, quando houver. As tentativas não reiniciam a cada novo jogo, é somado +1 a cada acerto.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <p class="modal-footer-text">BOM JOGO!</p>
+            </div>
+        </div>
         <section class="game">
             <aside class="aside">
                 <div class="aside-div">
                     <p class="aside-div-title">Geração</p>
                     <div class="aside-div-content-left">
-                        <label class="aside-div-content-label" for="from-gen">Da gen</label>
+                        <label class="aside-div-content-label" for="from-gen">Da</label>
                         <input class="aside-div-content-input" type="number" name="from-gen" id="from-gen" value="1" min="1" max="8" oninput="validity.valid||(value='')">
-                        <label class="aside-div-content-label" for="to-gen">até gen</label>
+                        <label class="aside-div-content-label" for="to-gen">até a</label>
                         <input class="aside-div-content-input" type="number" name="to-gen" id="to-gen" value="8" min="1" max="8" oninput="validity.valid||(value='')">
                     </div>
                 </div>
@@ -28,6 +60,13 @@
                         <button class="aside-div-content-button" id="easy-difficulty" value="0">Fácil</button>
                         <button class="aside-div-content-button" id="normal-difficulty" value="1">Normal</button>
                         <button class="aside-div-content-button" id="hard-difficulty" value="2">Difícil</button>
+                    </div>
+                </div>
+                <div class="aside-div">
+                    <p class="aside-div-title">Som</p>
+                    <div class="aside-div-content-left aside-div-content-sound">
+                        <button class="aside-div-content-button aside-div-content-button-sound-top" id="sound-off" value="0">Desligado</button>
+                        <button class="aside-div-content-button aside-div-content-button-sound-bottom" id="sound-on" value="1">Ligado</button>
                     </div>
                 </div>
             </aside>
@@ -69,15 +108,20 @@
             </section>
             <aside class="aside">
                 <div class="aside-div">
-                    <p class="aside-div-title">Acertos</p>
-                    <div class="aside-div-content-right">
-                        <p class="aside-div-content-number" id="txt-score">0</p>
+                    <p class="aside-div-title">Pontuação</p>
+                    <div class="aside-div-content-right aside-div-content-score-current">
+                        <p class="aside-div-content-title">Atual</p>
+                        <p class="aside-div-content-number" id="txt-score" translate="no">0</p>
+                    </div>
+                    <div class="aside-div-content-right aside-div-content-score-best">
+                        <p class="aside-div-content-title">Melhor</p>
+                        <p class="aside-div-content-number" id="txt-best" translate="no">0</p>
                     </div>
                 </div>
-                <div class="aside-div-right">
+                <div class="aside-div">
                     <p class="aside-div-title">Tentativas</p>
                     <div class="aside-div-content-right">
-                        <p class="aside-div-content-number" id="txt-trys">0</p>
+                        <p class="aside-div-content-number" id="txt-trys" translate="no">0</p>
                     </div>
                 </div>
             </aside>
@@ -88,11 +132,10 @@
         <select class="footer-lang">
             <option class="footer-lang-option" value="pt-br">Português</option>
         </select>
-        <p class="footer-version">v1.0.2</p>
+        <p class="footer-version">v1.1</p>
         <p class="footer-by">Feito com <span class="footer-by-heart">❤</span> por <span class="footer-bold">Thiago Freitas</span> e <span class="footer-bold">Matheus Armindo</span>.</p>
-        <p class="footer-by">Dê seu feedback pelo <a href="https://github.com/thiagofqs/pokeguess" target="_blank"><span class="footer-bold">GitHub</span></a>.</p>
+        <p class="footer-by">Dê seu feedback pelo <a href="https://github.com/thiagofqs/pokeguess/issues" target="_blank"><span class="footer-bold">GitHub</span></a>.</p>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="script.js" defer="true"></script>
 </body>
 </html>
