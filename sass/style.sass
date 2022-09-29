@@ -46,8 +46,8 @@ p
                 justify-content: center
                 align-items: center
                 background-color: variables.$aside-background
-                width: 128px
-                height: 96px
+                min-width: 128px
+                min-height: 96px
                 padding: 1rem 0
                 gap: 0.5rem
                 border-radius: 10px 0 0 10px
@@ -57,8 +57,8 @@ p
                 justify-content: center
                 align-items: center
                 background-color: variables.$aside-background
-                width: 128px
-                height: 96px
+                min-width: 128px
+                min-height: 96px
                 padding: 1rem 0
                 gap: 0.5rem
                 border-radius: 0 10px 10px 0
@@ -75,8 +75,8 @@ p
                 border: none
                 border-radius: 8px
                 font-size: 1rem
-                padding: 0.5rem 1rem
-                width: 6rem
+                padding: 0.5rem 0
+                width: 5rem
                 color: variables.$aside-button-color
             &-button:hover
                 @include mixins.button-hover

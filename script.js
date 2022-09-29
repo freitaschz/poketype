@@ -1,8 +1,10 @@
 //Difficulty Buttons
 const btnEasyDifficulty = document.getElementById("easy-difficulty");
 const btnNormalDifficulty = document.getElementById("normal-difficulty");
+const btnHardDifficulty = document.getElementById("hard-difficulty");
 btnEasyDifficulty.addEventListener("click", function(){insertDifficulty(this.value)}, false);
 btnNormalDifficulty.addEventListener("click", function(){insertDifficulty(this.value)}, false);
+btnHardDifficulty.addEventListener("click", function(){insertDifficulty(this.value)}, false);
 
 //New Game Button and Reset Button
 const btnPokemon = document.getElementById("btnPokemon");
@@ -26,11 +28,11 @@ const txtType = document.getElementById("txt-type");
 const txtMessage = document.getElementById("txt-message");
 const figure = document.getElementById("figure");
 
-let trys, id, insertedType, pokemonName, pokemonType1, pokemonType2, typeLength, correctFirstType, elementInsertedType, auxElementInsertedType, fromGen, toGen;
+let trys, id, insertedType, pokemonName, pokemonType1, pokemonType2, typeLength, correctFirstType, elementInsertedType, auxElementInsertedType, fromGen, toGen, timer, counter;
 let score = 0;
-let easy = false;
+let difficulty = 1;
 let gameStarted = false;
-let timer = null;
+let gameEnded = false;
 btnNormalDifficulty.disabled = true;
 
 const pokeGen = {
@@ -66,7 +68,7 @@ function drawId() {
 
 function assignCounter() {
     let seconds = 4;
-    let counter = setInterval(() => txtMessage.innerHTML = `<p>Um novo Pokémon será sorteado em ${seconds--} segundo(s)</p>`, 800);
+    counter = setInterval(() => txtMessage.innerHTML = `<p>Um novo Pokémon será sorteado em ${seconds--} segundo(s)</p>`, 800);
     setTimeout(() => {clearInterval(counter)}, 4000);
 };
 
@@ -113,32 +115,42 @@ function insertType(element) {
     };
 };
 
-function insertDifficulty(difficulty) {
+function insertDifficulty(value) {
     if(gameStarted === false) {
-        if(difficulty === "0") {//easy
-            easy = true;
+        if(value === "0") {//easy
+            difficulty = 0;
             btnEasyDifficulty.disabled = true;
             btnNormalDifficulty.disabled = false;
-        } else if(difficulty === "1") {//normal
-            easy = false;
+            btnHardDifficulty.disabled = false;
+            trys = 3;
+        } else if(value === "1") {//normal
+            difficulty = 1;
             btnEasyDifficulty.disabled = false;
             btnNormalDifficulty.disabled = true;
+            btnHardDifficulty.disabled = false;
+            trys = 3;
+        } else if(value === "2") {//hard
+            difficulty = 2;
+            btnEasyDifficulty.disabled = false;
+            btnNormalDifficulty.disabled = false;
+            btnHardDifficulty.disabled = true;
         };
+        txtTrys.innerHTML = trys;
     } else {
         txtMessage.innerHTML = "<p>Você poderá alterar a dificuldade quando iniciar um novo jogo!<p>";
     };
 };
 
 function verifyDifficulty() {
-    if(easy === true) {//easy
+    if(difficulty === 0) {//easy
         pokemonTypeEasy();
-    } else if(easy === false) {//normal
+    } else if(difficulty >= 1 && difficulty <= 2) {//normal, hard
         pokemonType();
     };
 };
 
 function pokemonTypeEasy() {
-    if(trys > 0) {
+    if(trys > 0  || gameEnded === false) {
         if(insertedType === null) {
             txtType.innerHTML = "Selecione um tipo!";
         } else {
@@ -151,6 +163,7 @@ function pokemonTypeEasy() {
                 } else {
                     txtType.innerHTML = `Acertou! O Pokémon era do tipo: ${pokemonType1}`;
                 };
+                gameEnded = true;
                 txtPokeName.innerHTML = pokemonName;
                 trys = 0;
                 assignCounter(assignTimer());
@@ -163,6 +176,7 @@ function pokemonTypeEasy() {
                     } else {
                         txtType.innerHTML = `GAME OVER! O Pokémon era do tipo: ${pokemonType1}`;
                     };
+                    gameEnded = true;
                     txtPokeName.innerHTML = pokemonName;
                     assignCounter(assignTimer());
                 } else {
@@ -175,7 +189,7 @@ function pokemonTypeEasy() {
 };
 
 function pokemonType() {
-    if(trys > 0) {
+    if(trys > 0 || gameEnded === false) {
         if(insertedType === null) {
             txtType.innerHTML = "Selecione um tipo!";
         } else {
@@ -196,8 +210,13 @@ function pokemonType() {
                 } else {
                     txtType.innerHTML = `Acertou! O Pokémon era do tipo: ${pokemonType1}`;
                 };
+                gameEnded = true;
                 txtPokeName.innerHTML = pokemonName;
-                trys = 0;
+                if(difficulty === 2) {
+                    trys++;
+                } else {
+                    trys = 0;
+                }
                 assignCounter(assignTimer());
             } else {
                 trys--;
@@ -212,7 +231,11 @@ function pokemonType() {
                     } else {
                         txtType.innerHTML = `GAME OVER! O Pokémon era do tipo: ${pokemonType1}`;
                     };
+                    gameEnded = true;
                     txtPokeName.innerHTML = pokemonName;
+                    if(difficulty === 2) {
+                        trys = 3;
+                    }
                     assignCounter(assignTimer());
                 } else {
                     txtTrys.innerHTML = trys;
@@ -248,15 +271,16 @@ async function assignValueToVariables() {
         pokemonType1 = compareTypes(res.data.types[0].type.name);
         pokemonType2 = null;
     };
+    insertDifficulty(difficulty.toString());
     includePokemonFigure(img);
 };
 
 function reset() {
-    trys = 3;
+    clearTimeout(timer);
+    clearInterval(counter);
     if(auxElementInsertedType !== undefined) {
         auxElementInsertedType.disabled = false;
     };
-    txtTrys.innerHTML = trys;
     txtScore.innerHTML = score;
     txtType.innerHTML = "Selecione o tipo:";
     txtPokeName.innerHTML = "Qual o tipo?";

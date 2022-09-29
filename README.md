@@ -9,7 +9,7 @@ Um jogo browser na qual você deve adivinhar os tipos dos Pokémon, a partir de 
 
 - As figuras dos Pokémon são mostradas dinamicamente;
 - Opção de selecionar os Pokémon de 1ª a 8ª geração;
-- Seleção de dificuldade, acertar um dos tipos ou ambos: normal e díficil;
+- Seleção de dificuldade: fácil, normal e díficil;
 - Sistema básico de quantidade de acertos.
 
 ## 🤝 Autores
@@ -46,7 +46,7 @@ Foi usado nesse projeto a [PokéAPI](https://pokeapi.co/).
 [⬆ Voltar ao topo](#)<br>
 
 <!-- BADGE - LINKS & IMAGES -->
-[status-shield]: https://img.shields.io/static/v1?label=VERSION&message=1.0.1&color=yellow&style=for-the-badge
+[status-shield]: https://img.shields.io/static/v1?label=VERSION&message=1.0.2&color=yellow&style=for-the-badge
 [status-url]: https://github.com/thiagofqs
 [license-shield]: https://img.shields.io/github/license/thiagofqs/pokeguess.svg?style=for-the-badge
 [license-url]: https://github.com/thiagofqs/pokeguess/blob/main/LICENSE
