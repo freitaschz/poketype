@@ -47,6 +47,9 @@ p
     max-width: 90%
     padding: 1rem
     border-radius: 10px
+    max-height: 100%
+    overflow-y: scroll
+    scrollbar-width: none
 
 #modal.hide, #fade.hide
     opacity: 0
@@ -85,6 +88,7 @@ p
             border-radius: 5px
             max-width: 90%
         &-lista
+            text-align: start
             margin-left: 1rem
         &-title
             font-weight: 700
@@ -164,10 +168,6 @@ p
                 padding: 1rem 0
                 gap: 0.5rem
                 border-radius: 0 10px 10px 0
-            &-sound
-                min-height: 64px
-                padding: 0.5rem 0
-                gap: 0
             &-title
                 font-size: 1rem
                 color: variables.$secondary-text-color
@@ -189,11 +189,6 @@ p
                 padding: 0.5rem 0
                 width: 5rem
                 color: variables.$primary-text-color
-                &-sound
-                    &-top
-                        border-radius: 8px 8px 0 0
-                    &-bottom
-                        border-radius: 0 0 8px 8px
             &-button:hover
                 @include mixins.button-hover
                 flex-wrap: wrap

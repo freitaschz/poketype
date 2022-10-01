@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta description="Um jogo web com o objetivo adivinhar os tipos dos Pokémon, a partir de suas figuras.">
-    <link rel="shortcut icon" href="src/img/icon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="src/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://kit.fontawesome.com/a55f2d0c18.js" crossorigin="anonymous"></script>
@@ -26,7 +26,7 @@
             <div class="modal-body">
                 <div class="modal-body-div">
                     <h3 class="modal-body-title">Como Funciona</h3>
-                    <p class="modal-body-text">Adivinhe o(s) tipo(s) de um Pokémon e veja qual será sua maior pontuação nas diferentes dificuldades! Por padrão, há 3 tentativas por jogo.</p>
+                    <p class="modal-body-text">Adivinhe o(s) tipo(s) de um, dos 905 Pokémon, e veja qual será sua maior pontuação nas diferentes dificuldades! Por padrão, há 3 tentativas por jogo.</p>
                     <img class="modal-body-img" src="src/img/modal-img-types.png" alt="Todos os 18 tipos">
                 </div>
                 <div class="modal-body-div">
@@ -35,15 +35,24 @@
                     <ul class="modal-body-lista">
                         <li class="modal-body-text"><span class="modal-body-span">Fácil:</span> Deve acertar pelo menos um tipo.</li>
                         <li class="modal-body-text"><span class="modal-body-span">Normal:</span> Deve acertar ambos os tipos, quando houver.</li>
-                        <li class="modal-body-text"><span class="modal-body-span">Difícil:</span> Deve acertar ambos os tipos, quando houver. As tentativas não reiniciam a cada novo jogo, é somado +1 a cada acerto.</li>
+                        <li class="modal-body-text"><span class="modal-body-span">Difícil:</span> Deve acertar ambos os tipos, quando houver. Com excessão do Game Over, as tentativas não reiniciam a cada novo jogo, é somado +1 a cada acerto.</li>
                     </ul>
+                </div>
+                <div class="modal-body-div">
+                    <h3 class="modal-body-title">Pontuação</h3>
+                    <p class="modal-body-text">Cada dificuldade possui sua pontuação.</p>
+                    <ul class="modal-body-lista">
+                        <li class="modal-body-text"><span class="modal-body-span">Acertos:</span> É contabilizado a cada acerto.</li>
+                        <li class="modal-body-text"><span class="modal-body-span">Melhor:</span> No Game Over, se a quantidade de acertos for melhor que a sua anterior, seus acertos serão atribuídos a ele.</li>
+                    </ul>
+                    <p class="modal-body-text"><span class="modal-body-span">Atenção!</span> Se você mudar a dificuldade com uma quantidade de acertos maior que 0, antes de um Game Over, elas serão zeradas.</p>
                 </div>
             </div>
             <div class="modal-footer">
                 <p class="modal-footer-text">BOM JOGO!</p>
             </div>
         </div>
-        <section class="game">
+        <div class="game">
             <aside class="aside">
                 <div class="aside-div">
                     <p class="aside-div-title">Geração</p>
@@ -60,13 +69,6 @@
                         <button class="aside-div-content-button" id="easy-difficulty" value="0">Fácil</button>
                         <button class="aside-div-content-button" id="normal-difficulty" value="1">Normal</button>
                         <button class="aside-div-content-button" id="hard-difficulty" value="2">Difícil</button>
-                    </div>
-                </div>
-                <div class="aside-div">
-                    <p class="aside-div-title">Som</p>
-                    <div class="aside-div-content-left aside-div-content-sound">
-                        <button class="aside-div-content-button aside-div-content-button-sound-top" id="sound-off" value="0">Desligado</button>
-                        <button class="aside-div-content-button aside-div-content-button-sound-bottom" id="sound-on" value="1">Ligado</button>
                     </div>
                 </div>
             </aside>
@@ -125,7 +127,7 @@
                     </div>
                 </div>
             </aside>
-        </section>
+        </div>
     </main>
     <footer class="footer">
         <p class="footer-copyright">Esse projeto é sem fins comerciais. Todos os direitos e atributos são reservados a Nintendo®.</p>

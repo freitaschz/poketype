@@ -22,12 +22,6 @@ btnEasyDifficulty.addEventListener("click", function(){insertDifficulty(this.val
 btnNormalDifficulty.addEventListener("click", function(){insertDifficulty(this.value)}, false);
 btnHardDifficulty.addEventListener("click", function(){insertDifficulty(this.value)}, false);
 
-//Get Sound Buttons
-const btnSoundOff = document.querySelector("#sound-off");
-const btnSoundOn = document.querySelector("#sound-on");
-btnSoundOff.addEventListener("click", function(){toggleSound(this.value)}, false);
-btnSoundOn.addEventListener("click", function(){toggleSound(this.value)}, false);
-
 //Get New Game Button and Reset Button
 const btnPokemon = document.querySelector("#btnPokemon");
 const btnReset = document.querySelector("#btnReset");
@@ -55,12 +49,10 @@ let trys, id, insertedType, pokemonName, typeLength, correctFirstType, elementIn
 let score = 0;
 let best = [0, 0, 0];
 let pokemonTypes = [];
-let playSound = false;
 let difficulty = 1;
 let gameStarted = false;
 let gameEnded = false;
 btnNormalDifficulty.disabled = true;
-btnSoundOff.disabled = true;
 
 const pokeGen = {
     start: [
@@ -102,25 +94,6 @@ function typeNameMask(type) {
 function pokemonNameFormatted(name) {
     const formatedName = (name.substring(0,1).toUpperCase())+name.substring(1, name.length);
     return formatedName;
-};
-
-function toggleSound(value) {
-    if(value.toString() === "0") {
-        playSound = false;
-        btnSoundOff.disabled = true;
-        btnSoundOn.disabled = false;
-    } else if(value.toString() === "1") {
-        playSound = true;
-        btnSoundOff.disabled = false;
-        btnSoundOn.disabled = true;
-    };
-};
-
-function playCrySound() {
-    if(playSound === true) {
-        const audio = new Audio(`src/sound/cries/${(id).toString()}.mp3`);
-        audio.play();
-    };
 };
 
 function assignCounter() {
@@ -190,12 +163,24 @@ function insertDifficulty(value) {
             btnEasyDifficulty.disabled = false;
             btnNormalDifficulty.disabled = false;
             btnHardDifficulty.disabled = true;
+            trys = 3;
         };
+        score = 0;
+        txtScore.innerHTML = score;
         txtTrys.innerHTML = trys;
         compareBestScore();
     } else {
         txtMessage.innerHTML = "<p>Você poderá alterar a dificuldade quando iniciar um novo jogo!<p>";
     };
+};
+
+function assignTrys(value) {
+    if(value === "0") {//easy
+        trys = 3;
+    } else if(value === "1") {//normal
+        trys = 3;
+    };
+    txtTrys.innerHTML = trys;
 };
 
 function compareBestScore() {
@@ -238,7 +223,6 @@ function pokemonTypeEasy() {
                 gameEnded = true;
                 txtPokeName.innerHTML = pokemonName;
                 trys = 0;
-                playCrySound();
                 assignCounter(assignTimer());
             } else {
                 trys--;
@@ -251,7 +235,6 @@ function pokemonTypeEasy() {
                     };
                     gameEnded = true;
                     txtPokeName.innerHTML = pokemonName;
-                    playCrySound();
                     assignBestScore();
                     score = 0;
                     assignCounter(assignTimer());
@@ -294,7 +277,6 @@ function pokemonType() {
                 } else {
                     trys = 0;
                 }
-                playCrySound();
                 assignCounter(assignTimer());
             } else {
                 trys--;
@@ -314,7 +296,6 @@ function pokemonType() {
                     if(difficulty === 2) {
                         trys = 3;
                     };
-                    playCrySound();
                     assignBestScore();
                     score = 0;
                     assignCounter(assignTimer());
@@ -348,7 +329,7 @@ async function assignValueToVariables() {
         pokemonTypes[0] = compareTypes(res.data.types[0].type.name);
         pokemonTypes[1] = null;
     };
-    insertDifficulty(difficulty.toString());
+    assignTrys(difficulty.toString());
     includePokemonFigure(img);
 };
 
