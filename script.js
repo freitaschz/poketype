@@ -97,9 +97,9 @@ function pokemonNameFormatted(name) {
 };
 
 function assignCounter() {
-    let seconds = 4;
+    let seconds = 3;
     counter = setInterval(() => txtMessage.innerHTML = `<p>Um novo Pokémon será sorteado em ${seconds--} segundo(s)</p>`, 800);
-    setTimeout(() => {clearInterval(counter)}, 4000);
+    setTimeout(() => {clearInterval(counter)}, 3000);
 };
 
 function stopTimer() {
@@ -107,14 +107,22 @@ function stopTimer() {
 };
 
 function assignTimer() {
-    timer = setTimeout(reset, 3800);
+    timer = setTimeout(reset, 2800);
 };
 
 function insertPokemonGen() {
-    const from = document.getElementById("from-gen").value;
-    const to = document.getElementById("to-gen").value;
-    fromGen = pokeGen.start[from-1];
-    toGen = pokeGen.end[to-1];
+    const from = document.getElementById("from-gen");
+    const to = document.getElementById("to-gen");
+    if(from.value > to.value) {
+        const aux = from.value;
+        from.value = to.value;
+        to.value = aux;
+        fromGen = pokeGen.start[from.value-1];
+        toGen = pokeGen.end[to.value-1];
+    } else {
+        fromGen = pokeGen.start[from.value-1];
+        toGen = pokeGen.end[to.value-1];
+    };
 };
 
 function compareTypes(name) {
