@@ -154,6 +154,7 @@ p {
 }
 .main-pokeguess-button:hover {
   cursor: pointer;
+  opacity: 0.7;
   background-color: #E74C3C;
 }
 
@@ -227,12 +228,13 @@ p {
 }
 .aside-div-content-button:hover {
   cursor: pointer;
+  opacity: 0.7;
   background-color: #E74C3C;
   flex-wrap: wrap;
 }
 .aside-div-content-button:disabled {
   cursor: default;
-  opacity: 0.5;
+  opacity: 0.4;
   background-color: #616161;
 }
 
@@ -287,11 +289,11 @@ p {
 }
 .game-section-types-container-button:hover {
   cursor: pointer;
-  opacity: 0.8;
+  opacity: 0.7;
 }
 .game-section-types-container-button:disabled {
   cursor: default;
-  opacity: 0.5;
+  opacity: 0.4;
   background-color: #616161;
 }
 .game-section-buttons {
@@ -311,7 +313,7 @@ p {
 }
 .game-section-buttons-button:hover {
   cursor: pointer;
-  opacity: 0.8;
+  opacity: 0.7;
 }
 .game-section-settings {
   display: flex;
@@ -443,10 +445,16 @@ p {
     flex-direction: column;
   }
   .game-section {
-    min-height: 475px;
+    min-height: 600px;
+  }
+  .game-section-buttons-button {
+    padding: 0.7rem 1.2rem;
   }
   .game-section-types-container {
     padding: 0 4rem;
+  }
+  .game-section-types-container-button {
+    padding: 0.4rem 1rem;
   }
   .game-section-figure img {
     width: 20vw;
