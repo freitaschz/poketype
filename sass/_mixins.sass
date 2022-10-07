@@ -1,9 +1,14 @@
 @use 'variables'
 
-@mixin button-hover
+@mixin primary-button-hover
+    cursor: pointer
+    background-color: variables.$hover-button-background
+
+@mixin secondary-button-hover
     cursor: pointer
     opacity: 0.8
 
 @mixin button-disabled
     cursor: default
     opacity: 0.5
+    background-color: variables.$button-background 

@@ -63,13 +63,13 @@ p
         display: flex
         justify-content: space-between
         align-items: center
-        border-bottom: 1px solid #fff
+        border-bottom: 1px solid variables.$primary-text-color
         padding-bottom: 1rem
         &-title
             font-weight: 700
             color: variables.$primary-text-color
         &-button
-            padding: 0.4rem
+            padding: 0.4rem 0.6rem
             border: none
             border-radius: 5px
             background-color: variables.$primary-background
@@ -122,17 +122,13 @@ p
         &-button
             padding: 0.4rem
             border-radius: 5px
-            border: 1px solid variables.$secondary-background
-            background-color: variables.$thirdy-background
+            border: none
+            background-color: variables.$button-background
             &-icon
                 font-size: 1rem
-                color: variables.$primary-background
-        &-button:hover
-            cursor: pointer
-            border: 1px solid variables.$thirdy-background
-            background-color: variables.$secondary-background
-        &-button:hover &-button-icon
                 color: variables.$primary-text-color
+        &-button:hover
+            @include mixins.primary-button-hover
 
 .aside
     display: flex
@@ -181,6 +177,10 @@ p
             &-input
                 color: variables.$secondary-text-color
                 width: 30px
+                border-radius: 3px
+                border: 1px solid variables.$primary-background
+            &-input:focus
+                outline-color: variables.$secondary-background
             &-button
                 background-color: variables.$button-background
                 border: none
@@ -190,7 +190,7 @@ p
                 width: 5rem
                 color: variables.$primary-text-color
             &-button:hover
-                @include mixins.button-hover
+                @include mixins.primary-button-hover
                 flex-wrap: wrap
             &-button:disabled
                 @include mixins.button-disabled
@@ -237,7 +237,7 @@ p
                     padding: 0.2rem 0.5rem
                     color: variables.$primary-text-color
                 &-button:hover
-                    @include mixins.button-hover
+                    @include mixins.secondary-button-hover
                 &-button:disabled
                     @include mixins.button-disabled
         &-buttons
@@ -254,7 +254,7 @@ p
                 padding: 0.5rem 1rem
                 color: variables.$primary-text-color
             &-button:hover
-                @include mixins.button-hover
+                @include mixins.secondary-button-hover
         &-settings
             display: flex
             justify-content: center
@@ -280,8 +280,12 @@ p
         border: none
         border-radius: 3px
         padding: 0.2rem 0.2rem
+        color: variables.$secondary-text-color
+        background-color: variables.$thirdy-background
         &-option
-            color: variables.$secondary-text-color
+            color: variables.$primary-text-color
+    &-lang:focus
+        outline-color: variables.$secondary-background
     &-version
         color: variables.$primary-text-color
         font-size: 0.8rem

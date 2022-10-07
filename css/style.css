@@ -76,7 +76,7 @@ p {
   color: #fff;
 }
 .modal-header-button {
-  padding: 0.4rem;
+  padding: 0.4rem 0.6rem;
   border: none;
   border-radius: 5px;
   background-color: #202124;
@@ -145,20 +145,16 @@ p {
 .main-pokeguess-button {
   padding: 0.4rem;
   border-radius: 5px;
-  border: 1px solid #E74C3C;
-  background-color: #fff;
+  border: none;
+  background-color: #616161;
 }
 .main-pokeguess-button-icon {
   font-size: 1rem;
-  color: #202124;
+  color: #fff;
 }
 .main-pokeguess-button:hover {
   cursor: pointer;
-  border: 1px solid #fff;
   background-color: #E74C3C;
-}
-.main-pokeguess-button:hover .main-pokeguess-button-icon {
-  color: #fff;
 }
 
 .aside {
@@ -214,6 +210,11 @@ p {
 .aside-div-content-input {
   color: #202124;
   width: 30px;
+  border-radius: 3px;
+  border: 1px solid #202124;
+}
+.aside-div-content-input:focus {
+  outline-color: #E74C3C;
 }
 .aside-div-content-button {
   background-color: #616161;
@@ -226,12 +227,13 @@ p {
 }
 .aside-div-content-button:hover {
   cursor: pointer;
-  opacity: 0.8;
+  background-color: #E74C3C;
   flex-wrap: wrap;
 }
 .aside-div-content-button:disabled {
   cursor: default;
   opacity: 0.5;
+  background-color: #616161;
 }
 
 .game {
@@ -290,6 +292,7 @@ p {
 .game-section-types-container-button:disabled {
   cursor: default;
   opacity: 0.5;
+  background-color: #616161;
 }
 .game-section-buttons {
   display: flex;
@@ -339,9 +342,14 @@ p {
   border: none;
   border-radius: 3px;
   padding: 0.2rem 0.2rem;
+  color: #202124;
+  background-color: #fff;
 }
 .footer-lang-option {
-  color: #202124;
+  color: #fff;
+}
+.footer-lang:focus {
+  outline-color: #E74C3C;
 }
 .footer-version {
   color: #fff;
