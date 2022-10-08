@@ -83,6 +83,7 @@ p {
 }
 .modal-header-button-icon {
   font-size: 1rem;
+  font-weight: 700;
   color: #fff;
 }
 .modal-header-button:hover {
@@ -130,32 +131,140 @@ p {
 .main {
   padding-top: 2rem;
 }
-.main-pokeguess {
+.main-header {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 2rem;
 }
-.main-pokeguess-title {
+.main-header-title {
   font-weight: 700;
   text-align: center;
   color: #fff;
   margin-right: 1rem;
 }
-.main-pokeguess-button {
-  padding: 0.4rem;
+.main-header-button {
   border-radius: 5px;
   border: none;
   background-color: #616161;
 }
-.main-pokeguess-button-icon {
-  font-size: 1rem;
-  color: #fff;
+.main-header-button-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  background-color: #fff;
+  min-width: 1rem;
+  min-height: 1rem;
+  border-radius: 100%;
+  color: #616161;
 }
-.main-pokeguess-button:hover {
+.main-header-button:hover {
   cursor: pointer;
   opacity: 0.7;
   background-color: #E74C3C;
+}
+.main-header-button:hover .main-header-button-icon {
+  color: #E74C3C;
+}
+.main-pokeguess {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main-pokeguess-game {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  padding: 1rem;
+  background-color: #E74C3C;
+  min-height: 550px;
+  min-width: 507px;
+  color: #fff;
+}
+.main-pokeguess-game-figure {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main-pokeguess-game-figure img {
+  width: 50%;
+}
+.main-pokeguess-game-pokename {
+  font-weight: 700;
+}
+.main-pokeguess-game-types {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+}
+.main-pokeguess-game-types-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.main-pokeguess-game-types-container-button {
+  border: 1px solid #202124;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  padding: 0.2rem 0.5rem;
+  color: #fff;
+}
+.main-pokeguess-game-types-container-button:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+.main-pokeguess-game-types-container-button:disabled {
+  cursor: default;
+  opacity: 0.4;
+  background-color: #616161;
+}
+.main-pokeguess-game-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.main-pokeguess-game-buttons-button {
+  background-color: #616161;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  color: #fff;
+}
+.main-pokeguess-game-buttons-button:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+.main-pokeguess-game-settings {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  width: 100%;
+  border-radius: 20px;
+  margin-top: 1rem;
+}
+.main-pokeguess-game-settings p {
+  text-align: center;
+  color: #202124;
+}
+
+#gen1 {
+  border-radius: 10px 0 0 0;
+}
+
+#gen8 {
+  border-radius: 0 0 0 10px;
 }
 
 .aside {
@@ -181,6 +290,28 @@ p {
   padding: 1rem 0;
   gap: 0.5rem;
   border-radius: 10px 0 0 10px;
+}
+.aside-div-content-left-gen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  min-width: 128px;
+  min-height: 96px;
+  border-radius: 10px 0 0 10px;
+}
+.aside-div-content-left-gen-button {
+  background-color: #616161;
+  border: none;
+  font-size: 1rem;
+  padding: 0.5rem 0;
+  width: 100%;
+  color: #fff;
+}
+.aside-div-content-left-gen-button:hover {
+  cursor: pointer;
+  opacity: 0.7;
 }
 .aside-div-content-right {
   display: flex;
@@ -230,102 +361,11 @@ p {
   cursor: pointer;
   opacity: 0.7;
   background-color: #E74C3C;
-  flex-wrap: wrap;
 }
 .aside-div-content-button:disabled {
   cursor: default;
   opacity: 0.4;
   background-color: #616161;
-}
-
-.game {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.game-section {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
-  padding: 1rem;
-  background-color: #E74C3C;
-  min-height: 550px;
-  min-width: 507px;
-  color: #fff;
-}
-.game-section-figure {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.game-section-figure img {
-  width: 50%;
-}
-.game-section-pokename {
-  font-weight: 700;
-}
-.game-section-types {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 0.4rem;
-}
-.game-section-types-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-.game-section-types-container-button {
-  border: 1px solid #202124;
-  border-radius: 8px;
-  font-size: 0.8rem;
-  padding: 0.2rem 0.5rem;
-  color: #fff;
-}
-.game-section-types-container-button:hover {
-  cursor: pointer;
-  opacity: 0.7;
-}
-.game-section-types-container-button:disabled {
-  cursor: default;
-  opacity: 0.4;
-  background-color: #616161;
-}
-.game-section-buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-.game-section-buttons-button {
-  background-color: #616161;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
-  color: #fff;
-}
-.game-section-buttons-button:hover {
-  cursor: pointer;
-  opacity: 0.7;
-}
-.game-section-settings {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #fff;
-  width: 100%;
-  border-radius: 20px;
-  margin-top: 1rem;
-}
-.game-section-settings p {
-  color: #202124;
 }
 
 .footer {
@@ -334,7 +374,8 @@ p {
   align-items: center;
   flex-wrap: wrap;
   gap: 0.5rem;
-  padding: 1rem 0;
+  padding: 1rem 0 2rem 0;
+  text-align: center;
 }
 .footer-copyright {
   color: #fff;
@@ -441,24 +482,6 @@ p {
 }
 
 @media (max-width: 820px) {
-  .game {
-    flex-direction: column;
-  }
-  .game-section {
-    min-height: 600px;
-  }
-  .game-section-buttons-button {
-    padding: 0.7rem 1.2rem;
-  }
-  .game-section-types-container {
-    padding: 0 4rem;
-  }
-  .game-section-types-container-button {
-    padding: 0.4rem 1rem;
-  }
-  .game-section-figure img {
-    width: 20vw;
-  }
   .aside {
     flex-direction: row;
     flex-wrap: wrap;
@@ -468,21 +491,55 @@ p {
   .aside-div-content-left, .aside-div-content-right {
     border-radius: 10px;
   }
+  .aside-div-content-left-gen {
+    border-radius: 10px;
+  }
+  #gen1 {
+    border-radius: 10px 10px 0 0;
+  }
+  #gen8 {
+    border-radius: 0 0 10px 10px;
+  }
+  .main-pokeguess {
+    flex-direction: column;
+  }
+  .main-pokeguess-game {
+    min-height: 600px;
+  }
+  .main-pokeguess-game-buttons-button {
+    padding: 0.7rem 1.2rem;
+  }
+  .main-pokeguess-game-types-container {
+    padding: 0 4rem;
+  }
+  .main-pokeguess-game-types-container-button {
+    padding: 0.4rem 1rem;
+  }
+  .main-pokeguess-game-figure img {
+    width: 20vw;
+  }
 }
 @media (max-width: 600px) {
-  .game-section {
+  .main-pokeguess-game {
     min-width: 253.5px;
   }
-  .game-section-figure img {
+  .main-pokeguess-game-figure img {
     width: 30vw;
   }
 }
 @media (max-width: 300px) {
   .aside-div-content-left, .aside-div-content-right {
     width: 96px;
-    height: 96px;
+    min-height: 96px;
     padding: 1rem 0;
     gap: 0.5rem;
+  }
+  .aside-div-content-left-gen {
+    width: 96px;
+    min-height: 96px;
+  }
+  .main-pokeguess-game {
+    padding: 1rem 0;
   }
 }
 

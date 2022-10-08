@@ -14,6 +14,12 @@ const toggleModal = () => {
 
 //----------------------------------------------------------------------------------------
 
+//Get Gen Buttons
+for(let i = 1; i <= 8; i++) {
+    const el = document.querySelector(`#gen${i}`);
+    el.addEventListener("click", function(){insertGen(this)}, false);
+};
+
 //Get Difficulty Buttons
 const btnEasyDifficulty = document.querySelector("#easy-difficulty");
 const btnNormalDifficulty = document.querySelector("#normal-difficulty");
@@ -29,7 +35,7 @@ btnPokemon.addEventListener("click", verifyDifficulty, false);
 btnReset.addEventListener("click", reset, false);
 
 //Get Type Buttons
-const btnType = document.getElementsByClassName("game-section-types-container-button");
+const btnType = document.getElementsByClassName("main-pokeguess-game-types-container-button");
 for (const value of btnType) {
     value.addEventListener("click", function(){insertType(this)}, false);
 };
@@ -48,6 +54,7 @@ const figure = document.querySelector("#figure");
 let trys, id, insertedType, pokemonName, typeLength, correctFirstType, elementInsertedType, auxElementInsertedType, fromGen, toGen, timer, counter;
 let score = 0;
 let best = [0, 0, 0];
+let numTrueGenButtons = 8;
 let pokemonTypes = [];
 let difficulty = 1;
 let gameStarted = false;
@@ -79,12 +86,47 @@ const pokeGen = {
 
 //----------------------------------------------------------------------------------------
 
-function drawId() {
-    let number
-    do {
-        number = Math.floor(Math.random(fromGen) * toGen+1);
-    } while(number === id)
-    return number;
+function insertGen(el) {
+    const text = el.textContent;
+    txtMessage.innerHTML = "<p>A nova configuração será aplicada quando iniciar um novo jogo!</p>";
+    if(el.value === "true" && numTrueGenButtons > 1) {
+        el.value = "false";
+        el.innerHTML = "&#9744; " + text.substring(2, text.length);
+        numTrueGenButtons--;
+    } else if(el.value === "false") {
+        el.value = "true";
+        el.innerHTML = "&#9745; " + text.substring(2, text.length);
+        numTrueGenButtons++;
+    };
+};
+
+function drawPokemons() {
+    let pokeDraws = [];
+    for(let i = 0; i < 8; i++) {
+        pokeDraws[i] = Math.floor(Math.random() * (pokeGen.end[i] - pokeGen.start[i]+1)+pokeGen.start[i]);
+    };
+    return pokeDraws;
+};
+
+function drawPokemonId(pokemons) {
+    const pokeDraws = drawPokemons();
+    if(pokemons.length === 1) {
+        id = pokeDraws[pokemons[0]];
+    } else {
+        const index = Math.floor(Math.random() * pokemons.length);
+        id = pokeDraws[pokemons[index]];
+    };
+};
+
+function assignPokemonGens() {
+    let pokemons = [];
+    for (let i=0; i<8; i++) {
+        const gen = document.querySelector(`#gen${i+1}`).value;
+        if(gen === "true") {
+            pokemons.push(i);
+        };
+    };
+    drawPokemonId(pokemons);
 };
 
 function typeNameMask(type) {
@@ -108,21 +150,6 @@ function stopTimer() {
 
 function assignTimer() {
     timer = setTimeout(reset, 2800);
-};
-
-function insertPokemonGen() {
-    const from = document.getElementById("from-gen");
-    const to = document.getElementById("to-gen");
-    if(from.value > to.value) {
-        const aux = from.value;
-        from.value = to.value;
-        to.value = aux;
-        fromGen = pokeGen.start[from.value-1];
-        toGen = pokeGen.end[to.value-1];
-    } else {
-        fromGen = pokeGen.start[from.value-1];
-        toGen = pokeGen.end[to.value-1];
-    };
 };
 
 function compareTypes(name) {
@@ -178,7 +205,7 @@ function insertDifficulty(value) {
         txtTrys.innerHTML = trys;
         compareBestScore();
     } else {
-        txtMessage.innerHTML = "<p>Você poderá alterar a dificuldade quando iniciar um novo jogo!<p>";
+        txtMessage.innerHTML = "<p>Você poderá alterar a dificuldade quando iniciar um novo jogo!</p>";
     };
 };
 
@@ -356,8 +383,7 @@ function reset() {
     txtType.innerHTML = "Selecione o tipo:";
     txtPokeName.innerHTML = "Qual o tipo?";
     txtMessage.innerHTML = "";
-    insertPokemonGen();
-    id = drawId();
+    assignPokemonGens();
     assignValueToVariables();
 };
 

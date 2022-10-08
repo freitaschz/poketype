@@ -8,26 +8,25 @@
     <link rel="shortcut icon" href="src/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://kit.fontawesome.com/a55f2d0c18.js" crossorigin="anonymous"></script>
     <title>PokéGuess</title>
 </head>
 <body>
     <main class="main">
-        <div class="main-pokeguess">
-            <h1 class="main-pokeguess-title">PokéGuess</h1>
-            <button class="main-pokeguess-button" id="open-help" title="Ajuda"><i class="fa-solid fa-circle-question main-pokeguess-button-icon"></i></button>
+        <div class="main-header">
+            <h1 class="main-header-title">PokéGuess</h1>
+            <button class="main-header-button" id="open-help" title="Ajuda"><p class="main-header-button-icon">?</p></button>
         </div>
         <div class="hide" id="fade"></div>
         <div class="hide" id="modal">
             <div class="modal-header">
                 <h2 class="modal-header-title">Ajuda</h2>
-                <button class="modal-header-button" id="close-help" title="Fechar"><i class="fa-solid fa-xmark modal-header-button-icon"></i></button>
+                <button class="modal-header-button" id="close-help" title="Fechar"><p class="modal-header-button-icon">&#9747;</p></button>
             </div>
             <div class="modal-body">
                 <div class="modal-body-div">
                     <h3 class="modal-body-title">Como Funciona</h3>
                     <p class="modal-body-text">Adivinhe o(s) tipo(s) de um, dos 905 Pokémon, e veja qual será sua maior pontuação nas diferentes dificuldades! Por padrão, há 3 tentativas por jogo.</p>
-                    <img class="modal-body-img" src="src/img/modal-img-types.png" alt="Todos os 18 tipos">
+                    <img class="modal-body-img" src="src/img/modal-types.png" alt="Todos os 18 tipos">
                 </div>
                 <div class="modal-body-div">
                     <h3 class="modal-body-title">Dificuldades</h3>
@@ -35,15 +34,15 @@
                     <ul class="modal-body-lista">
                         <li class="modal-body-text"><span class="modal-body-span">Fácil:</span> Deve acertar pelo menos um tipo.</li>
                         <li class="modal-body-text"><span class="modal-body-span">Normal:</span> Deve acertar ambos os tipos, quando houver.</li>
-                        <li class="modal-body-text"><span class="modal-body-span">Difícil:</span> Deve acertar ambos os tipos, quando houver. Com excessão do Game Over, as tentativas não reiniciam a cada novo jogo, é somado +1 a cada acerto.</li>
+                        <li class="modal-body-text"><span class="modal-body-span">Difícil:</span> Deve acertar ambos os tipos, quando houver. Com excessão do Game Over, as tentativas não reiniciam a cada novo jogo, é contabilizado +1 a cada acerto.</li>
                     </ul>
                 </div>
                 <div class="modal-body-div">
                     <h3 class="modal-body-title">Pontuação</h3>
                     <p class="modal-body-text">Cada dificuldade possui sua pontuação.</p>
                     <ul class="modal-body-lista">
-                        <li class="modal-body-text"><span class="modal-body-span">Acertos:</span> É contabilizado a cada acerto.</li>
-                        <li class="modal-body-text"><span class="modal-body-span">Melhor:</span> No Game Over, se a quantidade de acertos for melhor que a sua anterior, seus acertos serão atribuídos a ele.</li>
+                        <li class="modal-body-text"><span class="modal-body-span">Acertos:</span> A cada acerto, é somado 1.</li>
+                        <li class="modal-body-text"><span class="modal-body-span">Melhor:</span> No Game Over, se a quantidade de acertos for maior que a sua anterior, seus acertos serão atribuídos a ele.</li>
                     </ul>
                     <p class="modal-body-text"><span class="modal-body-span">Atenção!</span> Se você mudar a dificuldade com uma quantidade de acertos maior que 0, antes de um Game Over, elas serão zeradas.</p>
                 </div>
@@ -52,15 +51,19 @@
                 <p class="modal-footer-text">BOM JOGO!</p>
             </div>
         </div>
-        <div class="game">
+        <div class="main-pokeguess">
             <aside class="aside">
                 <div class="aside-div">
                     <p class="aside-div-title">Geração</p>
-                    <div class="aside-div-content-left">
-                        <label class="aside-div-content-label" for="from-gen">Da</label>
-                        <input class="aside-div-content-input" type="number" name="from-gen" id="from-gen" value="1" min="1" max="8" oninput="validity.valid||(value='')">
-                        <label class="aside-div-content-label" for="to-gen">até a</label>
-                        <input class="aside-div-content-input" type="number" name="to-gen" id="to-gen" value="8" min="1" max="8" oninput="validity.valid||(value='')">
+                    <div class="aside-div-content-left-gen">
+                        <button class="aside-div-content-left-gen-button" id="gen1" value="true" translate="no">&#9745; Gen 1</button>
+                        <button class="aside-div-content-left-gen-button" id="gen2" value="true" translate="no">&#9745; Gen 2</button>
+                        <button class="aside-div-content-left-gen-button" id="gen3" value="true" translate="no">&#9745; Gen 3</button>
+                        <button class="aside-div-content-left-gen-button" id="gen4" value="true" translate="no">&#9745; Gen 4</button>
+                        <button class="aside-div-content-left-gen-button" id="gen5" value="true" translate="no">&#9745; Gen 5</button>
+                        <button class="aside-div-content-left-gen-button" id="gen6" value="true" translate="no">&#9745; Gen 6</button>
+                        <button class="aside-div-content-left-gen-button" id="gen7" value="true" translate="no">&#9745; Gen 7</button>
+                        <button class="aside-div-content-left-gen-button" id="gen8" value="true" translate="no">&#9745; Gen 8</button>
                     </div>
                 </div>
                 <div class="aside-div">
@@ -72,42 +75,42 @@
                     </div>
                 </div>
             </aside>
-            <section class="game-section">
-                <figure class="game-section-figure" id="figure"></figure>
-                <p class="game-section-pokename" id="txt-pokename">Qual o tipo?</p>
-                <p class="game-section-textType" id="txt-type">Selecione o tipo:</p>
-                <div class="game-section-types">
-                    <container class="game-section-types-container">
-                        <button class="game-section-types-container-button" id="normal" value="normal">Normal</button>
-                        <button class="game-section-types-container-button" id="fighting" value="fighting">Lutador</button>
-                        <button class="game-section-types-container-button" id="flying" value="flying">Voador</button>
-                        <button class="game-section-types-container-button" id="poison" value="poison">Venenoso</button>
-                        <button class="game-section-types-container-button" id="ground" value="ground">Terra</button>
-                        <button class="game-section-types-container-button" id="rock" value="rock">Pedra</button>
+            <div class="main-pokeguess-game">
+                <figure class="main-pokeguess-game-figure" id="figure"></figure>
+                <p class="main-pokeguess-game-pokename" id="txt-pokename">Qual o tipo?</p>
+                <p class="main-pokeguess-game-textType" id="txt-type">Selecione o tipo:</p>
+                <div class="main-pokeguess-game-types">
+                    <container class="main-pokeguess-game-types-container">
+                        <button class="main-pokeguess-game-types-container-button" id="normal" value="normal">Normal</button>
+                        <button class="main-pokeguess-game-types-container-button" id="fighting" value="fighting">Lutador</button>
+                        <button class="main-pokeguess-game-types-container-button" id="flying" value="flying">Voador</button>
+                        <button class="main-pokeguess-game-types-container-button" id="poison" value="poison">Venenoso</button>
+                        <button class="main-pokeguess-game-types-container-button" id="ground" value="ground">Terra</button>
+                        <button class="main-pokeguess-game-types-container-button" id="rock" value="rock">Pedra</button>
                     </container>
-                    <container class="game-section-types-container">
-                        <button class="game-section-types-container-button" id="bug" value="bug">Inseto</button>
-                        <button class="game-section-types-container-button" id="ghost" value="ghost">Fantasma</button>
-                        <button class="game-section-types-container-button" id="steel" value="steel">Aço</button>
-                        <button class="game-section-types-container-button" id="fire" value="fire">Fogo</button>
-                        <button class="game-section-types-container-button" id="water" value="water">Água</button>
-                        <button class="game-section-types-container-button" id="grass" value="grass">Grama</button>
+                    <container class="main-pokeguess-game-types-container">
+                        <button class="main-pokeguess-game-types-container-button" id="bug" value="bug">Inseto</button>
+                        <button class="main-pokeguess-game-types-container-button" id="ghost" value="ghost">Fantasma</button>
+                        <button class="main-pokeguess-game-types-container-button" id="steel" value="steel">Aço</button>
+                        <button class="main-pokeguess-game-types-container-button" id="fire" value="fire">Fogo</button>
+                        <button class="main-pokeguess-game-types-container-button" id="water" value="water">Água</button>
+                        <button class="main-pokeguess-game-types-container-button" id="grass" value="grass">Grama</button>
                     </container>
-                    <container class="game-section-types-container">
-                        <button class="game-section-types-container-button" id="electric" value="electric">Elétrico</button>
-                        <button class="game-section-types-container-button" id="psychic" value="psychic">Psíquico</button>
-                        <button class="game-section-types-container-button" id="ice" value="ice">Gelo</button>
-                        <button class="game-section-types-container-button" id="dragon" value="dragon">Dragão</button>
-                        <button class="game-section-types-container-button" id="dark" value="dark">Sombrio</button>
-                        <button class="game-section-types-container-button" id="fairy" value="fairy">Fada</button>
+                    <container class="main-pokeguess-game-types-container">
+                        <button class="main-pokeguess-game-types-container-button" id="electric" value="electric">Elétrico</button>
+                        <button class="main-pokeguess-game-types-container-button" id="psychic" value="psychic">Psíquico</button>
+                        <button class="main-pokeguess-game-types-container-button" id="ice" value="ice">Gelo</button>
+                        <button class="main-pokeguess-game-types-container-button" id="dragon" value="dragon">Dragão</button>
+                        <button class="main-pokeguess-game-types-container-button" id="dark" value="dark">Sombrio</button>
+                        <button class="main-pokeguess-game-types-container-button" id="fairy" value="fairy">Fada</button>
                     </container>
                 </div>
-                <div class="game-section-buttons">
-                    <button class="game-section-buttons-button" id="btnPokemon">Chutar</button>
-                    <button class="game-section-buttons-button" id="btnReset">Novo Jogo</button>
+                <div class="main-pokeguess-game-buttons">
+                    <button class="main-pokeguess-game-buttons-button" id="btnPokemon">Chutar</button>
+                    <button class="main-pokeguess-game-buttons-button" id="btnReset">Novo Jogo</button>
                 </div>
-                <div class="game-section-settings" id="txt-message"></div>
-            </section>
+                <div class="main-pokeguess-game-settings" id="txt-message"></div>
+            </div>
             <aside class="aside">
                 <div class="aside-div">
                     <p class="aside-div-title">Pontuação</p>
@@ -134,7 +137,7 @@
         <select class="footer-lang">
             <option class="footer-lang-option" value="pt-br">Português</option>
         </select>
-        <p class="footer-version" translate="no">v1.1</p>
+        <p class="footer-version" translate="no">v1.2</p>
         <p class="footer-by">Feito com <span class="footer-by-heart">&#10084;</span> por <span class="footer-bold">Thiago Freitas</span> e <span class="footer-bold">Matheus Armindo</span>.</p>
         <p class="footer-by">Dê seu feedback pelo <a href="https://github.com/thiagofqs/pokeguess/issues" target="_blank"><span class="footer-bold">GitHub</span></a>.</p>
     </footer>
