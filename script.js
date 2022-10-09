@@ -1,46 +1,37 @@
-//Modal - Help
 const openModalButton = document.querySelector("#open-help");
 const closeModalButton = document.querySelector("#close-help");
 const modal = document.querySelector("#modal");
 const fade = document.querySelector("#fade");
-
 const toggleModal = () => {
-    [modal, fade].forEach((el) => el.classList.toggle("hide"));
+    [modal, fade].forEach((element) => element.classList.toggle("hide"));
 };
-
-[openModalButton, closeModalButton, fade].forEach((el) => {
-    el.addEventListener("click", () => toggleModal());
+[openModalButton, closeModalButton, fade].forEach((element) => {
+    element.addEventListener("click", () => toggleModal());
 });
 
-//----------------------------------------------------------------------------------------
-
-//Get Gen Buttons
 for(let i = 1; i <= 8; i++) {
     const el = document.querySelector(`#gen${i}`);
     el.addEventListener("click", function(){insertGen(this)}, false);
 };
 
-//Get Difficulty Buttons
 const btnEasyDifficulty = document.querySelector("#easy-difficulty");
 const btnNormalDifficulty = document.querySelector("#normal-difficulty");
 const btnHardDifficulty = document.querySelector("#hard-difficulty");
 btnEasyDifficulty.addEventListener("click", function(){insertDifficulty(this.value)}, false);
 btnNormalDifficulty.addEventListener("click", function(){insertDifficulty(this.value)}, false);
 btnHardDifficulty.addEventListener("click", function(){insertDifficulty(this.value)}, false);
+btnNormalDifficulty.disabled = true;
 
-//Get New Game Button and Reset Button
 const btnPokemon = document.querySelector("#btnPokemon");
 const btnReset = document.querySelector("#btnReset");
-btnPokemon.addEventListener("click", verifyDifficulty, false);
+btnPokemon.addEventListener("click", pokemonType, false);
 btnReset.addEventListener("click", reset, false);
 
-//Get Type Buttons
 const btnType = document.getElementsByClassName("main-pokeguess-game-types-container-button");
 for (const value of btnType) {
     value.addEventListener("click", function(){insertType(this)}, false);
 };
 
-//Get Other Elements
 const txtScore = document.querySelector("#txt-score");
 const txtBest = document.querySelector("#txt-best");
 const txtTrys = document.querySelector("#txt-trys");
@@ -49,53 +40,48 @@ const txtType = document.querySelector("#txt-type");
 const txtMessage = document.querySelector("#txt-message");
 const figure = document.querySelector("#figure");
 
-//----------------------------------------------------------------------------------------
+const pokedexGenNumbers = {//gen 1 to 8
+    start: [
+            1,
+            152,
+            252,
+            387,
+            494,
+            650,
+            722,
+            808
+    ],
+    end: [
+        151,
+        251,
+        386,
+        493,
+        649,
+        721,
+        807,
+        905
+    ]
+};
 
 let trys, id, insertedType, pokemonName, typeLength, correctFirstType, elementInsertedType, auxElementInsertedType, fromGen, toGen, timer, counter;
 let score = 0;
-let best = [0, 0, 0];
+let bestScore = [0, 0, 0];
 let numTrueGenButtons = 8;
 let pokemonTypes = [];
 let difficulty = 1;
 let gameStarted = false;
 let gameEnded = false;
-btnNormalDifficulty.disabled = true;
 
-const pokeGen = {
-    start: [
-            1, //gen1
-            152, //gen2
-            252, //gen3
-            387, //gen4
-            494, //gen5
-            650, //gen6
-            722, //gen7
-            808 //gen8
-    ],
-    end: [
-        151, //gen1
-        251, //gen2
-        386, //gen3
-        493, //gen4
-        649, //gen5
-        721, //gen6
-        807, //gen7
-        905 //gen8
-    ]
-};
-
-//----------------------------------------------------------------------------------------
-
-function insertGen(el) {
-    const text = el.textContent;
+function insertGen(element) {
+    const text = element.textContent;
     txtMessage.innerHTML = "<p>A nova configuração será aplicada quando iniciar um novo jogo!</p>";
-    if(el.value === "true" && numTrueGenButtons > 1) {
-        el.value = "false";
-        el.innerHTML = "&#9744; " + text.substring(2, text.length);
+    if(element.value === "true" && numTrueGenButtons > 1) {
+        element.value = "false";
+        element.innerHTML = "<i class='bx bx-checkbox'></i> " + text.substring(1, text.length);
         numTrueGenButtons--;
-    } else if(el.value === "false") {
-        el.value = "true";
-        el.innerHTML = "&#9745; " + text.substring(2, text.length);
+    } else if(element.value === "false") {
+        element.value = "true";
+        element.innerHTML = "<i class='bx bx-checkbox-checked'></i> " + text.substring(1, text.length);
         numTrueGenButtons++;
     };
 };
@@ -103,7 +89,7 @@ function insertGen(el) {
 function drawPokemons() {
     let pokeDraws = [];
     for(let i = 0; i < 8; i++) {
-        pokeDraws[i] = Math.floor(Math.random() * (pokeGen.end[i] - pokeGen.start[i]+1)+pokeGen.start[i]);
+        pokeDraws[i] = Math.floor(Math.random() * (pokedexGenNumbers.end[i] - pokedexGenNumbers.start[i]+1)+pokedexGenNumbers.start[i]);
     };
     return pokeDraws;
 };
@@ -171,35 +157,26 @@ function insertType(element) {
     };
 };
 
-function verifyDifficulty() {
-    if(difficulty === 0) {//easy
-        pokemonTypeEasy();
-    } else if(difficulty >= 1 && difficulty <= 2) {//normal, hard
-        pokemonType();
-    };
-};
-
 function insertDifficulty(value) {
+    value = parseInt(value);
     if(gameStarted === false) {
-        if(value === "0") {//easy
+        if(value === 0) {//easy
             difficulty = 0;
             btnEasyDifficulty.disabled = true;
             btnNormalDifficulty.disabled = false;
             btnHardDifficulty.disabled = false;
-            trys = 3;
-        } else if(value === "1") {//normal
+        } else if(value === 1) {//normal
             difficulty = 1;
             btnEasyDifficulty.disabled = false;
             btnNormalDifficulty.disabled = true;
             btnHardDifficulty.disabled = false;
-            trys = 3;
-        } else if(value === "2") {//hard
+        } else if(value === 2) {//hard
             difficulty = 2;
             btnEasyDifficulty.disabled = false;
             btnNormalDifficulty.disabled = false;
             btnHardDifficulty.disabled = true;
-            trys = 3;
         };
+        trys = 3;
         score = 0;
         txtScore.innerHTML = score;
         txtTrys.innerHTML = trys;
@@ -210,9 +187,8 @@ function insertDifficulty(value) {
 };
 
 function assignTrys(value) {
-    if(value === "0") {//easy
-        trys = 3;
-    } else if(value === "1") {//normal
+    value = parseInt(value);
+    if(value !== 2) {
         trys = 3;
     };
     txtTrys.innerHTML = trys;
@@ -220,124 +196,117 @@ function assignTrys(value) {
 
 function compareBestScore() {
     if(difficulty === 0) {
-        txtBest.innerHTML = best[0];
+        txtBest.innerHTML = bestScore[0];
     } else if(difficulty === 1) {
-        txtBest.innerHTML = best[1];
+        txtBest.innerHTML = bestScore[1];
     } else if(difficulty === 2) {
-        txtBest.innerHTML = best[2];
+        txtBest.innerHTML = bestScore[2];
     };
 };
 
 function assignBestScore() {
-    if(difficulty === 0 && score > best[0]) {
-        best[0] = score;
-        txtBest.innerHTML = best[0];
-    } else if(difficulty === 1 && score > best[1]) {
-        best[1] = score;
-        txtBest.innerHTML = best[1];
-    } else if(difficulty === 2 && score > best[2]) {
-        best[2] = score;
-        txtBest.innerHTML = best[2];
+    if(difficulty === 0 && score > bestScore[0]) {
+        bestScore[0] = score;
+        txtBest.innerHTML = bestScore[0];
+    } else if(difficulty === 1 && score > bestScore[1]) {
+        bestScore[1] = score;
+        txtBest.innerHTML = bestScore[1];
+    } else if(difficulty === 2 && score > bestScore[2]) {
+        bestScore[2] = score;
+        txtBest.innerHTML = bestScore[2];
     };
 };
 
-function pokemonTypeEasy() {
-    if(trys > 0  || gameEnded === false) {
-        if(insertedType === null) {
-            txtType.innerHTML = "Selecione um tipo!";
+function printWinOrGameOver(win) {
+    if(win === true) {
+        if(pokemonTypes[1] !== null) {
+            txtType.innerHTML = `Acertou! O Pokémon era dos tipos: ${pokemonTypes[0]} e ${pokemonTypes[1]}`;
         } else {
-            gameStarted = true;
-            if(insertedType === pokemonTypes[0] || insertedType === pokemonTypes[1]) {
-                score++;
-                txtScore.innerHTML = score;
-                if(pokemonTypes[1] !== null) {
-                    txtType.innerHTML = `Acertou! O Pokémon era dos tipos: ${pokemonTypes[0]} e ${pokemonTypes[1]}`;
-                } else {
-                    txtType.innerHTML = `Acertou! O Pokémon era do tipo: ${pokemonTypes[0]}`;
-                };
-                gameEnded = true;
-                txtPokeName.innerHTML = pokemonName;
-                trys = 0;
-                assignCounter(assignTimer());
-            } else {
-                trys--;
-                if(trys <= 0) {
-                    txtTrys.innerHTML = trys;
-                    if(pokemonTypes[1] !== null) {
-                        txtType.innerHTML = `GAME OVER! O Pokémon era dos tipos: ${pokemonTypes[0]} e ${pokemonTypes[1]}`;
-                    } else {
-                        txtType.innerHTML = `GAME OVER! O Pokémon era do tipo: ${pokemonTypes[0]}`;
-                    };
-                    gameEnded = true;
-                    txtPokeName.innerHTML = pokemonName;
-                    assignBestScore();
-                    score = 0;
-                    assignCounter(assignTimer());
-                } else {
-                    txtTrys.innerHTML = trys;
-                    txtType.innerHTML = "Errou Miseravelmente! Selecione o tipo:";
-                    insertedType = null;
-                };
-            };
+            txtType.innerHTML = `Acertou! O Pokémon era do tipo: ${pokemonTypes[0]}`;
+        };
+    } else if(win === false) {
+        if(pokemonTypes[1] !== null) {
+            txtType.innerHTML = `GAME OVER! O Pokémon era dos tipos: ${pokemonTypes[0]} e ${pokemonTypes[1]}`;
+        } else {
+            txtType.innerHTML = `GAME OVER! O Pokémon era do tipo: ${pokemonTypes[0]}`;
         };
     };
 };
 
 function pokemonType() {
-    if(trys > 0 || gameEnded === false) {
+    if(trys > 0  && gameEnded === false) {
         if(insertedType === null) {
             txtType.innerHTML = "Selecione um tipo!";
         } else {
             gameStarted = true;
-            if((insertedType === pokemonTypes[0] || insertedType === pokemonTypes[1]) && correctFirstType === false) {
-                correctFirstType = true;
-                auxElementInsertedType = elementInsertedType;
-                elementInsertedType.disabled = true;
-                txtType.innerHTML = "Acertou o primeiro tipo! Selecione o tipo:";
-            } else if((insertedType === pokemonTypes[0] || insertedType === pokemonTypes[1]) && correctFirstType === true) {
-                if(auxElementInsertedType !== undefined) {
-                    auxElementInsertedType.disabled = false;
-                };
-                score++;
-                txtScore.innerHTML = score;
-                if(pokemonTypes[1] !== null) {
-                    txtType.innerHTML = `Acertou! O Pokémon era dos tipos: ${pokemonTypes[0]} e ${pokemonTypes[1]}`;
-                } else {
-                    txtType.innerHTML = `Acertou! O Pokémon era do tipo: ${pokemonTypes[0]}`;
-                };
-                gameEnded = true;
-                txtPokeName.innerHTML = pokemonName;
-                if(difficulty === 2) {
-                    trys++;
-                } else {
+            if(difficulty === 0) {
+                if(insertedType === pokemonTypes[0] || insertedType === pokemonTypes[1]) {
+                    score++;
+                    txtScore.innerHTML = score;
+                    printWinOrGameOver(true);
+                    gameEnded = true;
+                    txtPokeName.innerHTML = pokemonName;
                     trys = 0;
-                }
-                assignCounter(assignTimer());
-            } else {
-                trys--;
-                if(trys <= 0) {
-                    correctFirstType = false;
+                    assignCounter(assignTimer());
+                } else {
+                    trys--;
+                    if(trys <= 0) {
+                        txtTrys.innerHTML = trys;
+                        printWinOrGameOver(false);
+                        gameEnded = true;
+                        txtPokeName.innerHTML = pokemonName;
+                        assignBestScore();
+                        score = 0;
+                        assignCounter(assignTimer());
+                    } else {
+                        txtTrys.innerHTML = trys;
+                        txtType.innerHTML = "Errou Miseravelmente! Selecione o tipo:";
+                        insertedType = null;
+                    };
+                };
+            } else if(difficulty === 1 || difficulty === 2) {
+                if((insertedType === pokemonTypes[0] || insertedType === pokemonTypes[1]) && correctFirstType === false) {
+                    correctFirstType = true;
+                    auxElementInsertedType = elementInsertedType;
+                    elementInsertedType.disabled = true;
+                    txtType.innerHTML = "Acertou o primeiro tipo! Selecione o tipo:";
+                } else if((insertedType === pokemonTypes[0] || insertedType === pokemonTypes[1]) && correctFirstType === true) {
                     if(auxElementInsertedType !== undefined) {
                         auxElementInsertedType.disabled = false;
                     };
-                    txtTrys.innerHTML = trys;
-                    if(pokemonTypes[1] !== null) {
-                        txtType.innerHTML = `GAME OVER! O Pokémon era dos tipos: ${pokemonTypes[0]} e ${pokemonTypes[1]}`;
-                    } else {
-                        txtType.innerHTML = `GAME OVER! O Pokémon era do tipo: ${pokemonTypes[0]}`;
-                    };
+                    score++;
+                    txtScore.innerHTML = score;
+                    printWinOrGameOver(true);
                     gameEnded = true;
                     txtPokeName.innerHTML = pokemonName;
                     if(difficulty === 2) {
-                        trys = 3;
-                    };
-                    assignBestScore();
-                    score = 0;
+                        trys++;
+                    } else {
+                        trys = 0;
+                    }
                     assignCounter(assignTimer());
                 } else {
-                    txtTrys.innerHTML = trys;
-                    txtType.innerHTML = "Errou Miseravelmente! Selecione o tipo:";
-                    insertedType = null;
+                    trys--;
+                    if(trys <= 0) {
+                        correctFirstType = false;
+                        if(auxElementInsertedType !== undefined) {
+                            auxElementInsertedType.disabled = false;
+                        };
+                        txtTrys.innerHTML = trys;
+                        printWinOrGameOver(false);
+                        gameEnded = true;
+                        txtPokeName.innerHTML = pokemonName;
+                        if(difficulty === 2) {
+                            trys = 3;
+                        };
+                        assignBestScore();
+                        score = 0;
+                        assignCounter(assignTimer());
+                    } else {
+                        txtTrys.innerHTML = trys;
+                        txtType.innerHTML = "Errou Miseravelmente! Selecione o tipo:";
+                        insertedType = null;
+                    };
                 };
             };
         };
@@ -350,18 +319,18 @@ function includePokemonFigure(img) {
 
 async function assignValueToVariables() {
     const res = await getPokemon();
-    const img = res.data.sprites.other["official-artwork"].front_default;
+    const img = res.sprites.other["official-artwork"].front_default;
     gameStarted = false;
     insertedType = null;
-    typeLength = res.data.types["length"];
-    pokemonName = pokemonNameFormatted(res.data.name);
+    typeLength = res.types["length"];
+    pokemonName = pokemonNameFormatted(res.name);
     if(typeLength === 2) {
         correctFirstType = false;
-        pokemonTypes[0] = compareTypes(res.data.types[0].type.name);
-        pokemonTypes[1] = compareTypes(res.data.types[1].type.name);
+        pokemonTypes[0] = compareTypes(res.types[0].type.name);
+        pokemonTypes[1] = compareTypes(res.types[1].type.name);
     } else {
         correctFirstType = true;
-        pokemonTypes[0] = compareTypes(res.data.types[0].type.name);
+        pokemonTypes[0] = compareTypes(res.types[0].type.name);
         pokemonTypes[1] = null;
     };
     assignTrys(difficulty.toString());
@@ -369,8 +338,13 @@ async function assignValueToVariables() {
 };
 
 async function getPokemon() {
-    const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
-    return res;
+    try {
+        const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
+        return res.data;
+    } catch(error) {
+        txtMessage.innerHTML = "<p>Erro ao carregar! Tente novamente.</p>";
+        console.error(error);
+    };
 };
 
 function reset() {
