@@ -321,6 +321,7 @@ async function assignValueToVariables() {
     const res = await getPokemon();
     const img = res.sprites.other["official-artwork"].front_default;
     gameStarted = false;
+    gameEnded = false;
     insertedType = null;
     typeLength = res.types["length"];
     pokemonName = pokemonNameFormatted(res.name);
