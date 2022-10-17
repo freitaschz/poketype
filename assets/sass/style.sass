@@ -49,7 +49,6 @@ p
     border-radius: 10px
     max-height: 100%
     overflow-y: scroll
-    scrollbar-width: none
 
 #modal.hide, #fade.hide
     opacity: 0
@@ -125,20 +124,11 @@ p
             border: none
             background-color: variables.$primary-button-background
             &-icon
-                display: flex
-                justify-content: center
-                align-items: center
-                font-size: 0.8rem
-                font-weight: 700
-                background-color: variables.$thirdy-background
-                min-width: 1rem
-                min-height: 1rem
-                border-radius: 100%
-                color: variables.$primary-button-background
+                font-size: 1rem
+                padding: .4rem
+                color: variables.$primary-text-color
         &-button:hover
             @include mixins.primary-button-hover
-        &-button:hover .main-header-button-icon
-            color: variables.$hover-button-background
     &-pokeguess
         display: flex
         justify-content: center
@@ -162,6 +152,8 @@ p
                     width: 50%
             &-pokename
                 font-weight: 700
+            &-textType
+                text-align: center
             &-types
                 display: flex
                 flex-direction: column
@@ -203,6 +195,7 @@ p
                 display: flex
                 justify-content: center
                 align-items: center
+                text-align: center
                 background-color: variables.$thirdy-background
                 width: 100%
                 border-radius: 20px
@@ -256,7 +249,7 @@ p
                         width: 100%
                         color: variables.$primary-text-color
                     &-button:hover
-                        @include mixins.secondary-button-hover
+                        @include mixins.primary-button-hover
             &-right
                 display: flex
                 flex-direction: column
@@ -303,7 +296,7 @@ p
     justify-content: center
     align-items: center
     flex-wrap: wrap
-    gap: 0.5rem
+    gap: .2rem
     padding: 1rem 0 2rem 0
     text-align: center
     &-copyright

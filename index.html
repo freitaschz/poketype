@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta description="Um jogo web com o objetivo adivinhar os tipos dos Pokémon, a partir de suas figuras.">
+    <meta description='Um jogo web com o objetivo adivinhar os tipos dos Pokémon, a partir de suas figuras. Todos os direitos de "Pokémon" e atributos são reservados a Nintendo&reg;/Game Freak Inc.&reg;.'>
     <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
+
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>PokéGuess</title>
@@ -15,13 +18,13 @@
     <main class="main">
         <div class="main-header">
             <h1 class="main-header-title">PokéGuess</h1>
-            <button class="main-header-button" id="open-help" title="Ajuda"><p class="main-header-button-icon">?</p></button>
+            <button class="main-header-button" id="open-help" title="Ajuda"><i class='bx bxs-help-circle main-header-button-icon'></i></button>
         </div>
         <div class="hide" id="fade"></div>
-        <div class="hide" id="modal">
+        <div class="hide" id="modal" tabindex="-1">
             <div class="modal-header">
                 <h2 class="modal-header-title">Ajuda</h2>
-                <button class="modal-header-button" id="close-help" title="Fechar"><p class="modal-header-button-icon">&#9747;</p></button>
+                <button class="modal-header-button" id="close-help" title="Fechar" tabindex="-1"><p class="modal-header-button-icon">&#9747;</p></button>
             </div>
             <div class="modal-body">
                 <div class="modal-body-div">
@@ -35,7 +38,7 @@
                     <ul class="modal-body-lista">
                         <li class="modal-body-text"><span class="modal-body-span">Fácil:</span> Deve acertar pelo menos um tipo.</li>
                         <li class="modal-body-text"><span class="modal-body-span">Normal:</span> Deve acertar ambos os tipos, quando houver.</li>
-                        <li class="modal-body-text"><span class="modal-body-span">Difícil:</span> Deve acertar ambos os tipos, quando houver. Com excessão do Game Over, as tentativas não reiniciam a cada novo jogo, é contabilizado +1 a cada acerto.</li>
+                        <li class="modal-body-text"><span class="modal-body-span">Difícil:</span> Deve acertar ambos os tipos, quando houver. Com excessão do Game Over, as tentativas não reiniciam a cada novo jogo. É contabilizado +1 a cada acerto, com limite de 10.</li>
                     </ul>
                 </div>
                 <div class="modal-body-div">
@@ -43,9 +46,9 @@
                     <p class="modal-body-text">Cada dificuldade possui sua pontuação.</p>
                     <ul class="modal-body-lista">
                         <li class="modal-body-text"><span class="modal-body-span">Acertos:</span> A cada acerto, é somado 1.</li>
-                        <li class="modal-body-text"><span class="modal-body-span">Melhor:</span> No Game Over, se a quantidade de acertos for maior que a sua anterior, seus acertos serão atribuídos a ele.</li>
+                        <li class="modal-body-text"><span class="modal-body-span">Melhor:</span> No Game Over, se a quantidade de acertos for maior que a sua anterior, seus acertos serão atribuídos.</li>
                     </ul>
-                    <p class="modal-body-text"><span class="modal-body-span">Atenção!</span> Se você mudar a dificuldade com uma quantidade de acertos maior que 0, antes de um Game Over, elas serão zeradas.</p>
+                    <p class="modal-body-text"><span class="modal-body-span">Atenção!</span> Antes de um fim de jogo, se você mudar a dificuldade ou as gerações, os acertos serão zerados, com excessão da melhor pontuação.</p>
                 </div>
             </div>
             <div class="modal-footer">
@@ -57,14 +60,14 @@
                 <div class="aside-div">
                     <p class="aside-div-title">Geração</p>
                     <div class="aside-div-content-left-gen">
-                        <button class="aside-div-content-left-gen-button" id="gen1" value="true" translate="no"><i class='bx bx-checkbox-checked'></i> Gen 1</button>
-                        <button class="aside-div-content-left-gen-button" id="gen2" value="true" translate="no"><i class='bx bx-checkbox-checked'></i> Gen 2</button>
-                        <button class="aside-div-content-left-gen-button" id="gen3" value="true" translate="no"><i class='bx bx-checkbox-checked'></i> Gen 3</button>
-                        <button class="aside-div-content-left-gen-button" id="gen4" value="true" translate="no"><i class='bx bx-checkbox-checked'></i> Gen 4</button>
-                        <button class="aside-div-content-left-gen-button" id="gen5" value="true" translate="no"><i class='bx bx-checkbox-checked'></i> Gen 5</button>
-                        <button class="aside-div-content-left-gen-button" id="gen6" value="true" translate="no"><i class='bx bx-checkbox-checked'></i> Gen 6</button>
-                        <button class="aside-div-content-left-gen-button" id="gen7" value="true" translate="no"><i class='bx bx-checkbox-checked'></i> Gen 7</button>
-                        <button class="aside-div-content-left-gen-button" id="gen8" value="true" translate="no"><i class='bx bx-checkbox-checked'></i> Gen 8</button>
+                        <button class="aside-div-content-left-gen-button" id="gen1" value="false" translate="no"><i class='bx bx-checkbox'></i> Gen 1</button>
+                        <button class="aside-div-content-left-gen-button" id="gen2" value="false" translate="no"><i class='bx bx-checkbox'></i> Gen 2</button>
+                        <button class="aside-div-content-left-gen-button" id="gen3" value="false" translate="no"><i class='bx bx-checkbox'></i> Gen 3</button>
+                        <button class="aside-div-content-left-gen-button" id="gen4" value="false" translate="no"><i class='bx bx-checkbox'></i> Gen 4</button>
+                        <button class="aside-div-content-left-gen-button" id="gen5" value="false" translate="no"><i class='bx bx-checkbox'></i> Gen 5</button>
+                        <button class="aside-div-content-left-gen-button" id="gen6" value="false" translate="no"><i class='bx bx-checkbox'></i> Gen 6</button>
+                        <button class="aside-div-content-left-gen-button" id="gen7" value="false" translate="no"><i class='bx bx-checkbox'></i> Gen 7</button>
+                        <button class="aside-div-content-left-gen-button" id="gen8" value="false" translate="no"><i class='bx bx-checkbox'></i> Gen 8</button>
                     </div>
                 </div>
                 <div class="aside-div">
@@ -134,14 +137,15 @@
         </div>
     </main>
     <footer class="footer">
-        <p class="footer-copyright">Esse projeto é sem fins comerciais. Todos os direitos e atributos são reservados a Nintendo®.</p>
+        <p class="footer-copyright">Esse projeto é sem fins comerciais. Todos os direitos de "Pokémon" e atributos são reservados a Nintendo&reg;/Game Freak Inc.&reg;.</p>
         <select class="footer-lang">
             <option class="footer-lang-option" value="pt-br">Português</option>
         </select>
-        <p class="footer-version" translate="no">v1.2.1</p>
+        <p class="footer-version" translate="no">v1.2.2</p>
         <p class="footer-by">Feito com <span class="footer-by-heart">&#10084;</span> por <span class="footer-bold">Thiago Freitas</span> e <span class="footer-bold">Matheus Armindo</span>.</p>
         <p class="footer-by">Dê seu feedback pelo <a href="https://github.com/thiagofqs/pokeguess/issues" target="_blank"><span class="footer-bold">GitHub</span></a>.</p>
     </footer>
-    <script src="assets/javascript/script.js" defer="true"></script>
+    <noscript>É necessário o JavaScript para o funcionamento da página.</noscript>
+    <script src="assets/javascript/script.js"></script>
 </body>
 </html>

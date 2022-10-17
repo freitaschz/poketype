@@ -42,14 +42,14 @@ Um jogo web com o objetivo adivinhar os tipos dos Pokémon, a partir de suas fig
 
 Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE) para mais detalhes.
 
-Todos os nomes de Pokémon e imagens estão sob direitos autorais: Nintendo/Creatures Inc./GAME FREAK inc. TM, ®Nintendo.
+Todos os direitos de "Pokémon" e atributos são reservados a Nintendo®/Game Freak Inc.®.
 
 Foi usado nesse projeto a [PokéAPI](https://pokeapi.co/).
 
 [⬆ Voltar ao topo](#)<br>
 
 <!-- BADGE - LINKS & IMAGES -->
-[status-shield]: https://img.shields.io/static/v1?label=VERSION&message=1.2.1&color=yellow&style=for-the-badge
+[status-shield]: https://img.shields.io/static/v1?label=VERSION&message=1.2.2&color=yellow&style=for-the-badge
 [status-url]: https://github.com/thiagofqs
 [forks-shield]: https://img.shields.io/github/forks/thiagofqs/pokeguess.svg?style=for-the-badge
 [forks-url]: https://github.com/thiagofqs/pokeguess/network/members
