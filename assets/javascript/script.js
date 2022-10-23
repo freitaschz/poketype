@@ -392,7 +392,7 @@ async function assignValueToVariables() {
 };
 
 function requestLocalStorage() {
-    if(localStorage.length > 0) {
+    if(localStorage.getItem("settings") && localStorage.getItem("bestScore")) {
         settings = JSON.parse(localStorage.getItem("settings"));
         bestScore = JSON.parse(localStorage.getItem("bestScore"));
     } else {
