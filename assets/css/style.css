@@ -2,6 +2,7 @@
 * {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
+  font-display: swap;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -127,8 +128,36 @@ p {
   color: #fff;
 }
 
+.github-corner svg {
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+}
+
+.github-corner:hover .octo-arm {
+  animation: octocat-wave 560ms ease-in-out;
+}
+
 .main {
   padding-top: 2rem;
+}
+@keyframes octocat-wave {
+  0% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(-25deg);
+  }
+  40% {
+    transform: rotate(10deg);
+  }
+  60% {
+    transform: rotate(-25deg);
+  }
+  80% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 .main-header {
   display: flex;
@@ -145,7 +174,7 @@ p {
 .main-header-button {
   border-radius: 5px;
   border: none;
-  background-color: #616161;
+  background-color: #595959;
 }
 .main-header-button-icon {
   font-size: 1rem;
@@ -216,7 +245,7 @@ p {
 .main-pokeguess-game-types-container-button:disabled {
   cursor: default;
   opacity: 0.4;
-  background-color: #616161;
+  background-color: #595959;
 }
 .main-pokeguess-game-buttons {
   display: flex;
@@ -226,7 +255,7 @@ p {
   margin-top: 1rem;
 }
 .main-pokeguess-game-buttons-button {
-  background-color: #616161;
+  background-color: #595959;
   border: none;
   border-radius: 8px;
   font-size: 1rem;
@@ -295,7 +324,7 @@ p {
   border-radius: 10px 0 0 10px;
 }
 .aside-div-content-left-gen-button {
-  background-color: #616161;
+  background-color: #595959;
   border: none;
   font-size: 1rem;
   padding: 0.5rem 0;
@@ -343,7 +372,7 @@ p {
   outline-color: #E74C3C;
 }
 .aside-div-content-button {
-  background-color: #616161;
+  background-color: #595959;
   border: none;
   border-radius: 8px;
   font-size: 1rem;
@@ -359,7 +388,7 @@ p {
 .aside-div-content-button:disabled {
   cursor: default;
   opacity: 0.4;
-  background-color: #616161;
+  background-color: #595959;
 }
 
 .footer {
@@ -519,6 +548,14 @@ p {
   }
   .main-pokeguess-game-figure img {
     width: 30vw;
+  }
+}
+@media (max-width: 500px) {
+  .github-corner:hover .octo-arm {
+    animation: none;
+  }
+  .github-corner .octo-arm {
+    animation: octocat-wave 560ms ease-in-out;
   }
 }
 @media (max-width: 300px) {

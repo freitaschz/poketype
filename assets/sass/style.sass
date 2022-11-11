@@ -5,6 +5,7 @@
 *
     font-family: 'Roboto', sans-serif
     font-weight: 400
+    font-display: swap
     margin: 0
     padding: 0
     box-sizing: border-box
@@ -107,8 +108,27 @@ p
             font-weight: 700
             color: variables.$primary-text-color
 
+.github-corner svg
+    clip-path: polygon(0 0, 100% 0, 100% 100%)
+
+.github-corner:hover .octo-arm
+    animation: octocat-wave 560ms ease-in-out
+
 .main
     padding-top: 2rem
+    @keyframes octocat-wave
+        0%
+            transform: rotate(0deg)
+        20%
+            transform: rotate(-25deg)
+        40%
+            transform: rotate(10deg)
+        60%
+            transform: rotate(-25deg)
+        80%
+            transform: rotate(10deg)
+        100% 
+            transform: rotate(0deg)
     &-header
         display: flex
         justify-content: center
@@ -392,6 +412,13 @@ p
         min-width: 253.5px
     .main-pokeguess-game-figure img
         width: 30vw
+
+@media (max-width: 500px)
+    .github-corner:hover .octo-arm
+        animation: none
+
+    .github-corner .octo-arm
+        animation: octocat-wave 560ms ease-in-out
 
 @media (max-width: 300px)
     .aside-div-content-left, .aside-div-content-right
