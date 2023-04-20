@@ -15,13 +15,13 @@ Um jogo web com o objetivo adivinhar os tipos dos Pokémon, a partir de suas fig
 - Seleção de dificuldade: fácil, normal (padrão) e díficil;
 - Sistema com quantidade de acertos e de melhor pontuação para cada dificuldade.
 
-## 🤝 Autores
+## 👥 Autores
 
 <table>
   <tr>
     <td align="center">
       <a href="https://github.com/thiagofqs">
-        <img src="https://github.com/thiagofqs.png" width="100px;" alt="Foto do Thiago Freitas no GitHub"/><br>
+        <img src="https://github.com/thiagofqs.png" width="100px;"/><br>
         <sub>
           <b>Thiago Freitas</b>
         </sub>
@@ -29,7 +29,7 @@ Um jogo web com o objetivo adivinhar os tipos dos Pokémon, a partir de suas fig
     </td>
     <td align="center">
       <a href="https://github.com/armindomatheus">
-        <img src="https://github.com/armindomatheus.png" width="100px" alt="Foto do Matheus Armindo no GitHub"/><br>
+        <img src="https://github.com/armindomatheus.png" width="100px"/><br>
         <sub>
           <b>Matheus Armindo</b>
         </sub>
@@ -37,6 +37,13 @@ Um jogo web com o objetivo adivinhar os tipos dos Pokémon, a partir de suas fig
     </td>
   </tr>
 </table>
+
+## 🤝 Como contribuir?
+
+1. Primeiro, faça um *fork* desse repositório. Isso irá adicionar a versão atual do repositório em seu GitHub.
+2. Agora, faça o *clone* na sua máquina do seu repositório e faça as modificações que desejas.
+3. Concluindo as modificações para sua contribuição, faça um *pull request* com a descrição do que você modificou e o que ela faz. Não deixe de dar detalhes e não esqueça de nada.
+4. Depois, só espere a análise do seu *PR*! Se tudo estiver certo e fizer sentido, será mergeado.
 
 ## 📝 Licença
 
