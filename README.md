@@ -11,7 +11,7 @@
 Um jogo web com o objetivo adivinhar os tipos dos Pokémon, a partir de suas figuras.
 
 - As figuras dos Pokémon são mostradas dinamicamente;
-- Opção de selecionar os Pokémon de 1ª a 8ª geração;
+- Opção de selecionar os Pokémon de 1ª a 9ª geração;
 - Seleção de dificuldade: fácil, normal (padrão) e díficil;
 - Sistema com quantidade de acertos e de melhor pontuação para cada dificuldade.
 
