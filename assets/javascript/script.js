@@ -1,18 +1,18 @@
 import { consentCookies } from "./cookies.js";
 import { texts, modals, buttons, figures, effects } from "./variables.js";
 
-consentCookies()
+consentCookies();
 
 const toggleModal = () => {
     [modals.modal, effects.fade].forEach((el) => el.classList.toggle("hide"));
-};
+}
 [modals.openModal, modals.closeModal, effects.fade].forEach((el) => {
     el.addEventListener("click", () => toggleModal());
-});
+})
 
 for(const generation of buttons.generations) {
     generation.addEventListener("click", function(){clickedGenerationButton(this)}, false);
-};
+}
 
 buttons.easyDifficulty.addEventListener("click", function(){insertDifficulty(this.value)}, false);
 buttons.normalDifficulty.addEventListener("click", function(){insertDifficulty(this.value)}, false);
@@ -23,9 +23,9 @@ buttons.reset.addEventListener("click", restartGame, false);
 
 for (const value of buttons.types) {
     value.addEventListener("click", function(){clickedTypeButton(this)}, false);
-};
+}
 
-const pokemonGenerations = 8;
+const pokemonGenerations = 9;
 const pokedexGenerationNumbers = {
     start: [
             1,
@@ -35,7 +35,8 @@ const pokedexGenerationNumbers = {
             494,
             650,
             722,
-            808
+            808,
+            906
     ],
     end: [
         151,
@@ -45,9 +46,10 @@ const pokedexGenerationNumbers = {
         649,
         721,
         807,
-        905
+        905,
+        1008
     ]
-};
+}
 
 let trys, pokemonId, insertedPokemonType, pokemonName, correctPokemonFirstType, insertedPokemonTypeElement, insertedPokemonTypeAuxElement, timer, counter, bestScore, settings;
 let numTrueGenButtons;
@@ -64,29 +66,29 @@ async function getPokemon() {
     } catch(error) {
         texts.message.innerHTML = "<p>Erro ao carregar! Tente novamente.</p>";
         console.error(error);
-    };
-};
+    }
+}
 
 function includePokemonFigure(img) {
     figures.pokemon.innerHTML = `<img alt="${pokemonName}" src="${img}">`;
-};
+}
 
 function typeNameMask(type) {
     return type.textContent;
-};
+}
 
 function pokemonNameFormatted(name) {
     const formatedName = (name.substring(0,1).toUpperCase())+name.substring(1, name.length);
     return formatedName;
-};
+}
 
 function drawPokemonsOfAllGenerations() {
     let pokemons = [];
     for(let i = 0; i < pokemonGenerations; i++) {
         pokemons[i] = Math.floor(Math.random() * (pokedexGenerationNumbers.end[i] - pokedexGenerationNumbers.start[i] + 1) + pokedexGenerationNumbers.start[i]);
-    };
+    }
     return pokemons;
-};
+}
 
 function drawPokemonId() {
     const pokeDraws = drawPokemonsOfAllGenerations();
@@ -95,9 +97,9 @@ function drawPokemonId() {
     } else {
         const index = Math.floor(Math.random() * (settings.generations).length);
         pokemonId = pokeDraws[settings.generations[index]-1];
-    };
+    }
     pokemonGenModified = false;
-};
+}
 
 function applyValuesOfGenerationElements() {
     for (const value of settings.generations) {
@@ -105,8 +107,8 @@ function applyValuesOfGenerationElements() {
         const text = el.textContent;
         el.value = "1";
         el.innerHTML = "<i class='bx bx-checkbox-checked'></i> " + text.substring(1, text.length);
-    };
-};
+    }
+}
 
 function assignPokemonGenerations() {
     settings.generations = [];
@@ -118,11 +120,11 @@ function assignPokemonGenerations() {
             const index = settings.generations.indexOf(i+1);
             if(index > -1) {
                 settings.generations.splice(index, 1);
-            };
-        };
-    };
+            }
+        }
+    }
     localStorage.setItem("settings", JSON.stringify(settings));
-};
+}
 
 function clickedGenerationButton(el) {
     const text = el.textContent;
@@ -138,26 +140,26 @@ function clickedGenerationButton(el) {
         el.innerHTML = "<i class='bx bx-checkbox-checked'></i> " + text.substring(1, text.length);
         numTrueGenButtons++;
         texts.message.innerHTML = "<p>A nova configuração será aplicada quando iniciar um novo jogo!</p>";
-    };
+    }
     assignPokemonGenerations();
-};
+}
 
 function assignGameTrys() {
     if(settings.difficulty !== "H") {
         trys = 3;
-    };
+    }
     texts.trys.innerHTML = trys;
-};
+}
 
 function assignCounterToRestartGame() {
     let seconds = 3;
     counter = setInterval(() => texts.message.innerHTML = `<p>Um novo Pokémon será sorteado em ${seconds--} segundo(s)</p>`, 800);
     setTimeout(() => {clearInterval(counter)}, 3000);
-};
+}
 
 function assignTimerToRestartGame() {
     timer = setTimeout(restartGame, 2800);
-};
+}
 
 function comparePokemonTypes(pokemonIdTypeName) {
     for(const value of buttons.types) {
@@ -165,17 +167,17 @@ function comparePokemonTypes(pokemonIdTypeName) {
         if(typeName === pokemonIdTypeName) {
             typeName = document.querySelector(`#${typeName}`).textContent;
             return typeName;
-        };
-    };
-};
+        }
+    }
+}
 
 function clickedTypeButton(el) {
     if(trys > 0) {
         insertedPokemonTypeElement = el;
         insertedPokemonType = typeNameMask(el);
         texts.type.innerHTML = `Tipo selecionado: ${insertedPokemonType}`;
-    };
-};
+    }
+}
 
 function disablingDifficultyElement(difficulty) {
     if(difficulty === "E") {
@@ -190,8 +192,8 @@ function disablingDifficultyElement(difficulty) {
         buttons.easyDifficulty.disabled = false;
         buttons.normalDifficulty.disabled = false;
         buttons.hardDifficulty.disabled = true;
-    };
-};
+    }
+}
 
 function assignDifficulty(difficulty) {
     if(difficulty === "E") {//easy
@@ -200,8 +202,8 @@ function assignDifficulty(difficulty) {
         settings.difficulty = "N";
     } else if(difficulty === "H") {//hard
         settings.difficulty = "H";
-    };
-};
+    }
+}
 
 function insertDifficulty(difficulty) {
     if(!gameStarted) {
@@ -215,8 +217,8 @@ function insertDifficulty(difficulty) {
         updateBestScoreText();
     } else {
         texts.message.innerHTML = "<p>Você poderá alterar a dificuldade quando iniciar um novo jogo!</p>";
-    };
-};
+    }
+}
 
 function updateBestScoreText() {
     if(settings.difficulty === "E") {
@@ -225,8 +227,8 @@ function updateBestScoreText() {
         texts.best.innerHTML = bestScore[1];
     } else if(settings.difficulty === "H") {
         texts.best.innerHTML = bestScore[2];
-    };
-};
+    }
+}
 
 function assignBestScore() {
     if(settings.difficulty === "E" && score > bestScore[0]) {
@@ -238,9 +240,9 @@ function assignBestScore() {
     } else if(settings.difficulty === "H" && score > bestScore[2]) {
         bestScore[2] = score;
         texts.best.innerHTML = bestScore[2];
-    };
+    }
     localStorage.setItem("bestScore", JSON.stringify(bestScore));
-};
+}
 
 function printWinOrGameOverMessage(win) {
     if(win) {
@@ -254,9 +256,9 @@ function printWinOrGameOverMessage(win) {
             texts.type.innerHTML = `GAME OVER! O Pokémon era dos tipos: ${pokemonIdTypes[0]} e ${pokemonIdTypes[1]}`;
         } else {
             texts.type.innerHTML = `GAME OVER! O Pokémon era do tipo: ${pokemonIdTypes[0]}`;
-        };
-    };
-};
+        }
+    }
+}
 
 function pokemonGame() {
     if(!gameEnded) {
@@ -286,8 +288,8 @@ function pokemonGame() {
                         texts.trys.innerHTML = trys;
                         texts.type.innerHTML = "Errou Miseravelmente! Selecione o tipo:";
                         insertedPokemonType = null;
-                    };
-                };
+                    }
+                }
             } else if(settings.difficulty === "N" || settings.difficulty === "H") {
                 if((insertedPokemonType === pokemonIdTypes[0] || insertedPokemonType === pokemonIdTypes[1]) && !correctPokemonFirstType) {
                     correctPokemonFirstType = true;
@@ -328,12 +330,12 @@ function pokemonGame() {
                         texts.trys.innerHTML = trys;
                         texts.type.innerHTML = "Errou Miseravelmente! Selecione o tipo:";
                         insertedPokemonType = null;
-                    };
-                };
-            };
-        };
-    };
-};
+                    }
+                }
+            }
+        }
+    }
+}
 
 async function assignValueToVariables() {
     const res = await getPokemon();
@@ -351,10 +353,10 @@ async function assignValueToVariables() {
         correctPokemonFirstType = true;
         pokemonIdTypes[0] = comparePokemonTypes(res.types[0].type.name);
         pokemonIdTypes[1] = null;
-    };
+    }
     assignGameTrys();
     includePokemonFigure(pokemonImage);
-};
+}
 
 function requestLocalStorage() {
     if(localStorage.getItem("settings") && localStorage.getItem("bestScore")) {
@@ -368,9 +370,9 @@ function requestLocalStorage() {
         bestScore = [0, 0, 0];
         localStorage.setItem("settings", JSON.stringify(settings));
         localStorage.setItem("bestScore", JSON.stringify(bestScore));
-    };
+    }
     applyLocalStorage();
-};
+}
 
 function applyLocalStorage() {
     disablingDifficultyElement(settings.difficulty);
@@ -379,7 +381,7 @@ function applyLocalStorage() {
     trys = 3;
     updateBestScoreText();
     texts.trys.innerHTML = trys;
-};
+}
 
 function restartGame() {
     clearTimeout(timer);
@@ -397,7 +399,7 @@ function restartGame() {
     assignPokemonGenerations();
     drawPokemonId();
     assignValueToVariables();
-};
+}
 
 requestLocalStorage();
 restartGame();
