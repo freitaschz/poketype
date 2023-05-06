@@ -11,10 +11,10 @@
     box-sizing: border-box
 
 body
-    background-color: variables.$black
+    background-color: variables.$primary-background
 
 a
-    color: variables.$white
+    color: variables.$link-color
     text-decoration: underline
 
 p
@@ -43,7 +43,7 @@ p
     top: 50%
     transform: translate(-50%, -50%)
     z-index: 10
-    background-color: variables.$black
+    background-color: variables.$primary-background
     width: 500px
     max-width: 90%
     padding: 1rem
@@ -63,24 +63,24 @@ p
         display: flex
         justify-content: space-between
         align-items: center
-        border-bottom: 1px solid variables.$white
+        border-bottom: 1px solid variables.$primary-text-color
         padding-bottom: 1rem
         &-title
             font-weight: 700
-            color: variables.$white
+            color: variables.$primary-text-color
         &-button
             padding: 0.4rem 0.6rem
             border: none
             border-radius: 5px
-            background-color: variables.$black
+            background-color: variables.$primary-background
             &-icon
                 font-size: 1rem
                 font-weight: 700
-                color: variables.$white
+                color: variables.$primary-text-color
         &-button:hover
             cursor: pointer
         &-button:hover .modal-header-button-icon
-            color: variables.$primary-500
+            color: variables.$span-color
     &-body
         text-align: center
         &-div
@@ -93,20 +93,20 @@ p
             margin-left: 1rem
         &-title
             font-weight: 700
-            color: variables.$white
+            color: variables.$primary-text-color
         &-text
             font-weight: 400
-            color: variables.$white
+            color: variables.$primary-text-color
         &-span
             font-weight: 700
     &-footer
-        border-top: 1px solid variables.$white
+        border-top: 1px solid #fff
         padding-top: 1rem
         margin-top: 2rem
         &-text
             text-align: center
             font-weight: 700
-            color: variables.$white
+            color: variables.$primary-text-color
 
 .github-corner svg
     clip-path: polygon(0 0, 100% 0, 100% 100%)
@@ -140,16 +140,16 @@ p
         &-title
             font-weight: 700
             text-align: center
-            color: variables.$white
+            color: variables.$primary-text-color
             margin-right: 1rem
         &-button
             border-radius: 5px
             border: none
-            background-color: variables.$secondary-500
+            background-color: variables.$primary-button-background
             &-icon
                 font-size: 1.2rem
                 padding: .4rem
-                color: variables.$white
+                color: variables.$primary-text-color
         &-button:hover
             @include mixins.primary-button-hover
     &-pokeguess
@@ -163,10 +163,10 @@ p
             align-items: center
             border-radius: 10px
             padding: 1rem
-            background-color: variables.$primary-500
+            background-color: variables.$secondary-background
             min-height: 570px
             min-width: 507px
-            color: variables.$white
+            color: variables.$primary-text-color
             &-figure
                 display: flex
                 justify-content: center
@@ -190,11 +190,11 @@ p
                     flex-wrap: wrap
                     gap: 0.4rem
                     &-button
-                        border: 1px solid variables.$black
+                        border: 1px solid variables.$primary-background
                         border-radius: 8px
                         font-size: 0.8rem
                         padding: 0.2rem 0.5rem
-                        color: variables.$white
+                        color: variables.$primary-text-color
                     &-button:hover
                         @include mixins.secondary-button-hover
                     &-button:disabled
@@ -206,12 +206,12 @@ p
                 gap: 1rem
                 margin-top: 1rem
                 &-button
-                    background-color: variables.$secondary-500
+                    background-color: variables.$primary-button-background
                     border: none
                     border-radius: 8px
                     font-size: 1rem
                     padding: 0.5rem 1rem
-                    color: variables.$white
+                    color: variables.$primary-text-color
                 &-button:hover
                     @include mixins.secondary-button-hover
             &-settings
@@ -219,13 +219,13 @@ p
                 justify-content: center
                 align-items: center
                 text-align: center
-                background-color: variables.$white
+                background-color: variables.$thirdy-background
                 width: 100%
                 border-radius: 20px
                 margin-top: 1rem
                 p
                     text-align: center
-                    color: variables.$black
+                    color: variables.$secondary-text-color
 
 #gen1
     border-radius: 10px 0 0 0
@@ -240,7 +240,7 @@ p
     gap: 1rem
     &-div
         &-title
-            color: variables.$white
+            color: variables.$primary-text-color
             text-align: center
             font-weight: 700
         &-content
@@ -249,7 +249,7 @@ p
                 flex-direction: column
                 justify-content: center
                 align-items: center
-                background-color: variables.$white
+                background-color: variables.$thirdy-background
                 min-width: 128px
                 min-height: 96px
                 padding: 1rem 0
@@ -260,17 +260,17 @@ p
                     flex-direction: column
                     justify-content: center
                     align-items: center
-                    background-color: variables.$white
+                    background-color: variables.$thirdy-background
                     min-width: 128px
                     min-height: 96px
                     border-radius: 10px 0 0 10px
                     &-button
-                        background-color: variables.$secondary-500
+                        background-color: variables.$primary-button-background
                         border: none
                         font-size: 1rem
                         padding: 0.5rem 0
                         width: 100%
-                        color: variables.$white
+                        color: variables.$primary-text-color
                     &-button:hover
                         @include mixins.primary-button-hover
             &-right
@@ -278,7 +278,7 @@ p
                 flex-direction: column
                 justify-content: center
                 align-items: center
-                background-color: variables.$white
+                background-color: variables.$thirdy-background
                 min-width: 128px
                 min-height: 96px
                 padding: 1rem 0
@@ -286,29 +286,29 @@ p
                 border-radius: 0 10px 10px 0
             &-title
                 font-size: 1rem
-                color: variables.$black
+                color: variables.$secondary-text-color
             &-score-current
                 margin-bottom: 0.5rem
             &-number
                 font-size: 2rem
-                color: variables.$black
+                color: variables.$secondary-text-color
             &-label
-                color: variables.$black
+                color: variables.$secondary-text-color
             &-input
-                color: variables.$black
+                color: variables.$secondary-text-color
                 width: 30px
                 border-radius: 3px
-                border: 1px solid variables.$black
+                border: 1px solid variables.$primary-background
             &-input:focus
-                outline-color: variables.$primary-500
+                outline-color: variables.$secondary-background
             &-button
-                background-color: variables.$secondary-500
+                background-color: variables.$primary-button-background
                 border: none
                 border-radius: 8px
                 font-size: 1rem
                 padding: 0.5rem 0
                 width: 5rem
-                color: variables.$white
+                color: variables.$primary-text-color
             &-button:hover
                 @include mixins.primary-button-hover
             &-button:disabled
@@ -323,26 +323,26 @@ p
     padding: 1rem 0 2rem 0
     text-align: center
     &-copyright
-        color: variables.$white
+        color: variables.$primary-text-color
         font-size: 0.8rem
     &-lang
         border: none
         border-radius: 3px
         padding: 0.2rem 0.2rem
-        color: variables.$black
-        background-color: variables.$white
+        color: variables.$secondary-text-color
+        background-color: variables.$thirdy-background
         &-option
-            color: variables.$white
+            color: variables.$primary-text-color
     &-lang:focus
-        outline-color: variables.$primary-500
+        outline-color: variables.$secondary-background
     &-version
-        color: variables.$white
+        color: variables.$primary-text-color
         font-size: 0.8rem
     &-by
-        color: variables.$white
+        color: variables.$primary-text-color
         font-size: 0.8rem
         &-heart
-            color: variables.$primary-500
+            color: variables.$span-color
     &-bold
         font-weight: 700
 
