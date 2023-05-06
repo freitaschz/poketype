@@ -136,6 +136,10 @@ p {
   animation: octocat-wave 560ms ease-in-out;
 }
 
+#share {
+  margin-left: 0.5rem;
+}
+
 .main {
   padding-top: 2rem;
 }
@@ -177,7 +181,7 @@ p {
   background-color: #595959;
 }
 .main-header-button-icon {
-  font-size: 1rem;
+  font-size: 1.2rem;
   padding: 0.4rem;
   color: #fff;
 }

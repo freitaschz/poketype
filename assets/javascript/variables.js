@@ -20,6 +20,7 @@ export const modals = {
 };
 
 export const buttons = {
+  share: queryId("share"),
   easyDifficulty: queryId("easy-difficulty"),
   normalDifficulty: queryId("normal-difficulty"),
   hardDifficulty: queryId("hard-difficulty"),

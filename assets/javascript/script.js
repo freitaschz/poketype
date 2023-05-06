@@ -7,22 +7,24 @@ const toggleModal = () => {
     [modals.modal, effects.fade].forEach((el) => el.classList.toggle("hide"));
 }
 [modals.openModal, modals.closeModal, effects.fade].forEach((el) => {
-    el.addEventListener("click", () => toggleModal());
+    el.addEventListener("click", toggleModal);
 })
 
 for(const generation of buttons.generations) {
-    generation.addEventListener("click", function(){clickedGenerationButton(this)}, false);
+    generation.addEventListener("click", function(){clickedGenerationButton(this)});
 }
 
-buttons.easyDifficulty.addEventListener("click", function(){insertDifficulty(this.value)}, false);
-buttons.normalDifficulty.addEventListener("click", function(){insertDifficulty(this.value)}, false);
-buttons.hardDifficulty.addEventListener("click", function(){insertDifficulty(this.value)}, false);
+buttons.share.addEventListener("click", shareScoreOnTwitter);
 
-buttons.pokemon.addEventListener("click", pokemonGame, false);
-buttons.reset.addEventListener("click", restartGame, false);
+buttons.easyDifficulty.addEventListener("click", function(){insertDifficulty(this.value)});
+buttons.normalDifficulty.addEventListener("click", function(){insertDifficulty(this.value)});
+buttons.hardDifficulty.addEventListener("click", function(){insertDifficulty(this.value)});
+
+buttons.pokemon.addEventListener("click", pokemonGame);
+buttons.reset.addEventListener("click", restartGame);
 
 for (const value of buttons.types) {
-    value.addEventListener("click", function(){clickedTypeButton(this)}, false);
+    value.addEventListener("click", function(){clickedTypeButton(this)});
 }
 
 const pokemonGenerations = 9;
@@ -67,6 +69,11 @@ async function getPokemon() {
         texts.message.innerHTML = "<p>Erro ao carregar! Tente novamente.</p>";
         console.error(error);
     }
+}
+
+function shareScoreOnTwitter() {
+    const msg = `Essa é a minha melhor pontuação no PokéGuess! 🚀%0A• Fácil: ${bestScore[0]}%0A• Normal: ${bestScore[1]}%0A• Difícil: ${bestScore[2]}%0A%0AJogue também:`; //%0A = Enter
+    window.open(`https://twitter.com/intent/tweet?text=${msg}&url=https://pokeguess.xyz`, "_blank");
 }
 
 function includePokemonFigure(img) {
