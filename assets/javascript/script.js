@@ -72,8 +72,8 @@ async function getPokemon() {
 }
 
 function shareScoreOnTwitter() {
-    const msg = `Essa é a minha melhor pontuação no PokéGuess! 🚀%0A• Fácil: ${bestScore[0]}%0A• Normal: ${bestScore[1]}%0A• Difícil: ${bestScore[2]}%0A%0AJogue também:`; //%0A = Enter
-    window.open(`https://twitter.com/intent/tweet?text=${msg}&url=https://pokeguess.xyz`, "_blank");
+    const msg = `Essa é a minha melhor pontuação no pokeguess.xyz:%0A• Fácil: ${bestScore[0]}%0A• Normal: ${bestScore[1]}%0A• Difícil: ${bestScore[2]}%0A%0AJogue também! ✨`; //%0A = Enter
+    window.open(`https://twitter.com/intent/tweet?text=${msg}`, "_blank");
 }
 
 function includePokemonFigure(img) {
