@@ -163,6 +163,7 @@ p
             color: variables.$white
             &-figure
                 @include mixins.flex-centralize
+                min-height: 237.5px
                 img
                     width: 50%
             &-pokename
@@ -406,13 +407,12 @@ p
             &-button
                 padding: 0.4rem 1rem
         &-game-figure img
-            width: 20vw
+            width: 40%
 
 @media (max-width: 600px)
     .main-pokeguess-game
         min-width: 253.5px
-    .main-pokeguess-game-figure img
-        width: 30vw
+
 
 @media (max-width: 500px)
     .github-corner:hover .octo-arm
@@ -421,7 +421,7 @@ p
     .github-corner .octo-arm
         animation: octocat-wave 560ms ease-in-out
 
-@media (max-width: 300px)
+@media (max-width: 400px)
     .aside-div-content-left, .aside-div-content-right
         width: 96px
         min-height: 96px
@@ -432,3 +432,5 @@ p
         min-height: 96px
     .main-pokeguess-game
         padding: 1rem 0
+    .main-pokeguess-game-figure img
+        width: 50%
