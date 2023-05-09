@@ -10,11 +10,7 @@ function acceptButton(modal) {
 
 export function consentCookies() {
   const cookieModal = document.getElementById("cookie-consent-modal");
-  if (document.cookie.split(';').some((item) => item.trim().startsWith('cookie_consent=true'))) {
-    const expirationDate = new Date();
-    expirationDate.setMonth(expirationDate.getMonth() + 6);
-    cookieModal.style.display = "none";
-  } else {
+  if (!document.cookie.split(';').some((item) => item.trim().startsWith('cookie_consent=true'))) {
     cookieModal.style.display = "flex";
     acceptButton(cookieModal);
   }

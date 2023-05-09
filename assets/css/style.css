@@ -397,9 +397,9 @@ p {
 }
 
 #cookie-consent-modal {
-  display: flex;
+  display: none;
   justify-content: center;
-  align-items: center;
+  align-content: center;
   flex-wrap: wrap;
   position: fixed;
   bottom: 0;
