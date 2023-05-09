@@ -12,8 +12,6 @@
     <meta name="twitter:image:alt" content="Imagem da tela do jogo PokéGuess. Na imagem o Pikachu é o pokémon escolhido para o seu tipo ser adivinhado.">
     <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>PokéGuess</title>
@@ -151,6 +149,10 @@
         <p class="footer-version" translate="no">v1.2.4</p>
         <p class="footer-by">Feito com <span class="footer-by-heart">&#10084;</span></p>
         <p class="footer-by">Dê seu feedback pelo <a href="https://github.com/thiagofqs/pokeguess/issues" target="_blank"><span class="footer-bold">GitHub</span></a>.</p>
+        <div id="cookie-consent-modal">
+            <p>Este site usa cookies para garantir que você obtenha a melhor experiência de navegação. Desativar os cookies do site pode prejudicar a funcionalidade de alguns recursos e ao continuar usando, você concorda com a nossa Política de Cookies. <a href="https://cookie-consent.app.forthe.top/why-websites-use-cookies/" id="cookie-consent-modal-link" target="_blank">Ler mais</a></p>
+            <button id="cookie-accept-btn">Concordar e fechar</button>
+        </div>
     </footer>
     <noscript>É necessário o JavaScript para o funcionamento da página.</noscript>
     <script src="assets/javascript/script.js" type="module"></script>

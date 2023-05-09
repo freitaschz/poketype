@@ -1,20 +1,21 @@
+function acceptButton(modal) {
+  const btn = document.getElementById("cookie-accept-btn");
+  btn.addEventListener("click", () => {
+    const expirationDate = new Date();
+    expirationDate.setMonth(expirationDate.getMonth() + 6);
+    document.cookie = `cookie_consent=true;expires=${expirationDate.toUTCString()}`;
+    modal.style.display = "none";
+  });
+}
+
 export function consentCookies() {
-  window.cookieconsent.initialise({
-    "palette": {
-      "popup": {
-        "background": "#fff",
-        "text": "#202124"
-      },
-      "button": {
-        "background": "#E74C3C",
-        "text": "#fff"
-      }
-    },
-    "content": {
-      "message": "Este site usa cookies para garantir que você obtenha a melhor experiência de navegação. Desativar os cookies do site pode prejudicar a funcionalidade de alguns recursos.",
-      "dismiss": "Concordar e fechar",
-      "link": "Ler mais",
-      "href": "https://cookie-consent.app.forthe.top/why-websites-use-cookies/"
-    }
-  })
+  const cookieModal = document.getElementById("cookie-consent-modal");
+  if (document.cookie.split(';').some((item) => item.trim().startsWith('cookie_consent=true'))) {
+    const expirationDate = new Date();
+    expirationDate.setMonth(expirationDate.getMonth() + 6);
+    cookieModal.style.display = "none";
+  } else {
+    cookieModal.style.display = "flex";
+    acceptButton(cookieModal);
+  }
 };

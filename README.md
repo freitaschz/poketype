@@ -1,6 +1,5 @@
 # PokéGuess
 
-[![Status][status-shield]][status-url]
 [![Forks][forks-shield]][forks-url]
 [![Stars][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
@@ -56,8 +55,6 @@ Foi usado nesse projeto a [PokéAPI](https://pokeapi.co/).
 [⬆ Voltar ao topo](#)<br>
 
 <!-- BADGE - LINKS & IMAGES -->
-[status-shield]: https://img.shields.io/static/v1?label=VERSION&message=1.2.2&color=yellow&style=for-the-badge
-[status-url]: https://github.com/thiagofqs
 [forks-shield]: https://img.shields.io/github/forks/thiagofqs/pokeguess.svg?style=for-the-badge
 [forks-url]: https://github.com/thiagofqs/pokeguess/network/members
 [stars-shield]: https://img.shields.io/github/stars/thiagofqs/pokeguess.svg?style=for-the-badge
