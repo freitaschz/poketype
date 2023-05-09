@@ -291,12 +291,13 @@ p
                 @include mixins.button-disabled
 
 #cookie-consent-modal
+    @include mixins.flex-centralize
+    flex-wrap: wrap
     position: fixed
     bottom: 0
     width: 100%
     background-color: variables.$white
     padding: 1rem 3rem
-    @include mixins.flex-centralize
     &-link
         color: variables.$secondary-500
 

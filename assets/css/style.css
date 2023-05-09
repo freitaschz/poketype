@@ -396,14 +396,15 @@ p {
 }
 
 #cookie-consent-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
   position: fixed;
   bottom: 0;
   width: 100%;
   background-color: #fff;
   padding: 1rem 3rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 #cookie-consent-modal-link {
   color: #595959;
