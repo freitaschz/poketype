@@ -1,4 +1,4 @@
-# PokéGuess
+# PokéType
 
 [![Forks][forks-shield]][forks-url]
 [![Stars][stars-shield]][stars-url]
@@ -14,28 +14,11 @@ Um jogo web com o objetivo adivinhar os tipos dos Pokémon, a partir de suas fig
 - Seleção de dificuldade: fácil, normal (padrão) e díficil;
 - Sistema com quantidade de acertos e de melhor pontuação para cada dificuldade.
 
-## 👥 Autores
+## 👥 Colaboradores
 
-<table>
-  <tr>
-    <td align="center">
-      <a href="https://github.com/thiagofqs">
-        <img src="https://github.com/thiagofqs.png" width="100px;"/><br>
-        <sub>
-          <b>Thiago Freitas</b>
-        </sub>
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://github.com/armindomatheus">
-        <img src="https://github.com/armindomatheus.png" width="100px"/><br>
-        <sub>
-          <b>Matheus Armindo</b>
-        </sub>
-      </a>
-    </td>
-  </tr>
-</table>
+<a href="https://github.com/thiagofqs/poketype/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=thiagofqs/poketype&anon=0&columns=20&max=100" alt="Lista de contribuidores"/>
+</a>
 
 ## 🤝 Como contribuir?
 
