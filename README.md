@@ -38,11 +38,11 @@ Foi usado nesse projeto a [PokéAPI](https://pokeapi.co/).
 [⬆ Voltar ao topo](#)<br>
 
 <!-- BADGE - LINKS & IMAGES -->
-[forks-shield]: https://img.shields.io/github/forks/thiagofqs/pokeguess.svg?style=for-the-badge
-[forks-url]: https://github.com/thiagofqs/pokeguess/network/members
-[stars-shield]: https://img.shields.io/github/stars/thiagofqs/pokeguess.svg?style=for-the-badge
-[stars-url]: https://github.com/thiagofqs/pokeguess/stargazers
-[issues-shield]: https://img.shields.io/github/issues/thiagofqs/pokeguess.svg?style=for-the-badge
-[issues-url]: https://github.com/thiagofqs/pokeguess/issues
-[license-shield]: https://img.shields.io/github/license/thiagofqs/pokeguess.svg?style=for-the-badge
-[license-url]: https://github.com/thiagofqs/pokeguess/blob/main/LICENSE
+[forks-shield]: https://img.shields.io/github/forks/thiagofqs/poketype.svg?style=for-the-badge
+[forks-url]: https://github.com/thiagofqs/poketype/network/members
+[stars-shield]: https://img.shields.io/github/stars/thiagofqs/poketype.svg?style=for-the-badge
+[stars-url]: https://github.com/thiagofqs/poketype/stargazers
+[issues-shield]: https://img.shields.io/github/issues/thiagofqs/poketype.svg?style=for-the-badge
+[issues-url]: https://github.com/thiagofqs/poketype/issues
+[license-shield]: https://img.shields.io/github/license/thiagofqs/poketype.svg?style=for-the-badge
+[license-url]: https://github.com/thiagofqs/poketype/blob/main/LICENSE
