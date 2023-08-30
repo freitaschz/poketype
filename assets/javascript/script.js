@@ -4,7 +4,12 @@ import { texts, modals, buttons, figures, effects } from "./variables.js";
 consentCookies();
 
 const toggleModal = () => {
-    [modals.modal, effects.fade].forEach((el) => el.classList.toggle("hide"));
+    [modals.modal, effects.fade].forEach((el) => {
+        el.classList.toggle("hide");
+        el.classList.contains("hide")
+            ? (document.body.style.overflowY = "auto")
+            : (document.body.style.overflowY = "hidden");
+    });
 };
 [modals.openModal, modals.closeModal, effects.fade].forEach((el) => {
     el.addEventListener("click", toggleModal);
