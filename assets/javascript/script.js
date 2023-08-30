@@ -40,7 +40,7 @@ for (const value of buttons.types) {
 const pokemonGenerations = 9;
 const pokedexGenerationNumbers = {
     start: [1, 152, 252, 387, 494, 650, 722, 808, 906],
-    end: [151, 251, 386, 493, 649, 721, 807, 905, 1008],
+    end: [151, 251, 386, 493, 649, 721, 807, 905, 1010],
 };
 
 let trys,
