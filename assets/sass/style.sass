@@ -69,13 +69,12 @@ p
             font-weight: 700
             color: variables.$white
         &-button
-            padding: 0.4rem 0.6rem
+            padding: 10px
             border: none
             border-radius: 5px
             background-color: variables.$black
             &-icon
-                font-size: 1rem
-                font-weight: 700
+                font-size: 1.2rem
                 color: variables.$white
         &-button:hover
             cursor: pointer
@@ -114,6 +113,9 @@ p
 .github-corner:hover .octo-arm
     animation: octocat-wave 560ms ease-in-out
 
+.bi-square, .bi-check-square
+    font-size: .7rem
+
 #share
     margin-left: .5rem
 
@@ -141,12 +143,12 @@ p
             color: variables.$white
             margin-right: 1rem
         &-button
+            padding: 10px
             border-radius: 5px
             border: none
             background-color: variables.$secondary-500
             &-icon
                 font-size: 1.2rem
-                padding: .4rem
                 color: variables.$white
         &-button:hover
             @include mixins.primary-button-hover

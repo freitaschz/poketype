@@ -76,14 +76,13 @@ p {
   color: #fff;
 }
 .modal-header-button {
-  padding: 0.4rem 0.6rem;
+  padding: 10px;
   border: none;
   border-radius: 5px;
   background-color: #202124;
 }
 .modal-header-button-icon {
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 1.2rem;
   color: #fff;
 }
 .modal-header-button:hover {
@@ -136,6 +135,10 @@ p {
   animation: octocat-wave 560ms ease-in-out;
 }
 
+.bi-square, .bi-check-square {
+  font-size: 0.7rem;
+}
+
 #share {
   margin-left: 0.5rem;
 }
@@ -176,13 +179,13 @@ p {
   margin-right: 1rem;
 }
 .main-header-button {
+  padding: 10px;
   border-radius: 5px;
   border: none;
   background-color: #595959;
 }
 .main-header-button-icon {
   font-size: 1.2rem;
-  padding: 0.4rem;
   color: #fff;
 }
 .main-header-button:hover {

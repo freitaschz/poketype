@@ -123,7 +123,7 @@ function applyValuesOfGenerationElements() {
         const text = el.textContent;
         el.value = "1";
         el.innerHTML =
-            "<i class='bx bx-checkbox-checked'></i> " +
+            '<i class="bi bi-check-square"></i> ' +
             text.substring(1, text.length);
     }
 }
@@ -151,14 +151,14 @@ function clickedGenerationButton(el) {
     if (genButtonEnabled === 1 && numTrueGenButtons > 1) {
         el.value = "0";
         el.innerHTML =
-            "<i class='bx bx-checkbox'></i> " + text.substring(1, text.length);
+            '<i class="bi bi-square"></i> ' + text.substring(1, text.length);
         numTrueGenButtons--;
         texts.message.innerHTML =
             "<p>A nova configuração será aplicada quando iniciar um novo jogo!</p>";
     } else if (genButtonEnabled === 0) {
         el.value = "1";
         el.innerHTML =
-            "<i class='bx bx-checkbox-checked'></i> " +
+            '<i class="bi bi-check-square"></i> ' +
             text.substring(1, text.length);
         numTrueGenButtons++;
         texts.message.innerHTML =
