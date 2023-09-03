@@ -1,8 +1,6 @@
 import { consentCookies } from "./cookies.js";
 import { texts, modals, buttons, figures, effects } from "./variables.js";
 
-consentCookies();
-
 const toggleModal = () => {
     [modals.modal, effects.fade].forEach((el) => {
         el.classList.toggle("hide");
@@ -36,8 +34,8 @@ buttons.hardDifficulty.addEventListener("click", function () {
 buttons.pokemon.addEventListener("click", pokemonGame);
 buttons.reset.addEventListener("click", restartGame);
 
-for (const value of buttons.types) {
-    value.addEventListener("click", function () {
+for (const type of buttons.types) {
+    type.addEventListener("click", function () {
         clickedTypeButton(this);
     });
 }
@@ -73,7 +71,7 @@ async function getPokemon() {
         );
         return res.data;
     } catch (error) {
-        texts.message.innerHTML = "<p>Erro ao carregar! Tente novamente.</p>";
+        texts.message.innerHTML = "<p>Erro ao carregar dados! Tente novamente.</p>";
         console.error(error);
     }
 }
@@ -152,14 +150,14 @@ function assignPokemonGenerations() {
 function clickedGenerationButton(el) {
     const text = el.textContent;
     pokemonGenModified = true;
-    const genButtonEnabled = parseInt(el.value, 10); //1 = true | 0 = false
+    const genButtonEnabled = parseInt(el.value); //1 = true | 0 = false
     if (genButtonEnabled === 1 && numTrueGenButtons > 1) {
         el.value = "0";
         el.innerHTML =
             '<i class="bi bi-square"></i> ' + text.substring(1, text.length);
         numTrueGenButtons--;
         texts.message.innerHTML =
-            "<p>A nova configuração será aplicada quando iniciar um novo jogo!</p>";
+            "<p>A nova configuração será aplicada após iniciar um novo jogo!</p>";
     } else if (genButtonEnabled === 0) {
         el.value = "1";
         el.innerHTML =
@@ -167,7 +165,7 @@ function clickedGenerationButton(el) {
             text.substring(1, text.length);
         numTrueGenButtons++;
         texts.message.innerHTML =
-            "<p>A nova configuração será aplicada quando iniciar um novo jogo!</p>";
+            "<p>A nova configuração será aplicada após iniciar um novo jogo!</p>";
     }
     assignPokemonGenerations();
 }
@@ -196,8 +194,8 @@ function assignTimerToRestartGame() {
 }
 
 function comparePokemonTypes(pokemonIdTypeName) {
-    for (const value of buttons.types) {
-        let typeName = value.value;
+    for (const type of buttons.types) {
+        let typeName = type.value;
         if (typeName === pokemonIdTypeName) {
             typeName = document.querySelector(`#${typeName}`).textContent;
             return typeName;
@@ -254,7 +252,7 @@ function insertDifficulty(difficulty) {
         updateBestScoreText();
     } else {
         texts.message.innerHTML =
-            "<p>Você poderá alterar a dificuldade quando iniciar um novo jogo!</p>";
+            "<p>Você poderá alterar a dificuldade após iniciar um novo jogo!</p>";
     }
 }
 
@@ -289,7 +287,7 @@ function printWinOrGameOverMessage(win) {
         } else {
             texts.type.innerHTML = `Acertou! O Pokémon era do tipo: ${pokemonIdTypes[0]}`;
         }
-    } else if (!win) {
+    } else {
         if (pokemonIdTypes[1] !== null) {
             texts.type.innerHTML = `GAME OVER! O Pokémon era dos tipos: ${pokemonIdTypes[0]} e ${pokemonIdTypes[1]}`;
         } else {
@@ -449,12 +447,13 @@ function restartGame() {
     }
     texts.score.innerHTML = score;
     texts.type.innerHTML = "Selecione o tipo:";
-    texts.pokeName.innerHTML = "Qual o tipo?";
+    texts.pokeName.innerHTML = "Qual o tipo do Pokémon?";
     texts.message.innerHTML = "";
     assignPokemonGenerations();
     drawPokemonId();
     assignValueToVariables();
 }
 
+consentCookies();
 requestLocalStorage();
 restartGame();
