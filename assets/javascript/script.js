@@ -359,7 +359,7 @@ function pokemonGame() {
                     printWinOrGameOverMessage(true);
                     gameEnded = true;
                     texts.pokeName.innerHTML = pokemonName;
-                    if (settings.difficulty === "H" && trys < 10) {
+                    if (settings.difficulty === "H" && trys < 5) {
                         trys++;
                     }
                     assignCounterToRestartGame(assignTimerToRestartGame());
