@@ -5,7 +5,7 @@
 [![Issues][issues-shield]][issues-url]
 [![License][license-shield]][license-url]
 
-> Acesse [https://pokeguess.xyz/](https://pokeguess.xyz/) para testar o jogo.
+> Acesse [https://poketype-thiagofqs.vercel.app/](https://poketype-thiagofqs.vercel.app/)para testar o jogo.
 
 Um jogo web com o objetivo adivinhar os tipos dos Pokémon, a partir de suas figuras.
 
