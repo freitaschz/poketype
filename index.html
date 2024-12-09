@@ -1,161 +1,592 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content='Um jogo web com o objetivo de adivinhar os tipos dos 1010 Pokémon, a partir de suas figuras. Todos os direitos de "Pokémon" e atributos são reservados a Nintendo&reg;/Game Freak Inc.&reg;.'>
-    <meta name="google-site-verification" content="RLZeKDIbLya23ZbI-s0lmW4HfWjoME8utvyPZeFRUPU" />
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="PokéType - Adivinhe os tipos dos Pokémons!">
-    <meta name="twitter:description" content='Um jogo web com o objetivo de adivinhar os tipos dos 1008 Pokémon, a partir de suas figuras. Todos os direitos de "Pokémon" e atributos são reservados a Nintendo&reg;/Game Freak Inc.&reg;.'>
-    <meta name="twitter:image" content="https://raw.githubusercontent.com/thiagofqs/pokeguess/main/assets/img/image.png">
-    <meta name="twitter:image:alt" content="Imagem da tela do jogo PokéType. Na imagem o Pikachu é o pokémon escolhido para o seu tipo ser adivinhado.">
-    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <title>PokéType</title>
-</head>
-<body>
-    <main class="main">
-        <a href="https://github.com/thiagofqs/poketype" class="github-corner" aria-label="Visualizar projeto no GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#fff; color:#202124; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
-        <div class="main-header">
-            <h1 class="main-header-title">PokéType</h1>
-            <button class="main-header-button" id="open-help" title="Ajuda"><i class="bi bi-question-circle-fill main-header-button-icon"></i></button>
-            <button class="main-header-button" id="share" title="Compartilhar pontuação no Twitter"><i class="bi bi-twitter main-header-button-icon"></i></button>
-        </div>
-        <div class="hide" id="fade"></div>
-        <div class="hide" id="modal" tabindex="-1">
-            <div class="modal-header">
-                <h2 class="modal-header-title">Ajuda</h2>
-                <button class="modal-header-button" id="close-help" title="Fechar" tabindex="-1"><i class="bi bi-x-lg modal-header-button-icon"></i></button>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content='Um jogo web com o objetivo de adivinhar os tipos dos 1010 Pokémon, a partir de suas figuras. Todos os direitos de "Pokémon" e atributos são reservados a Nintendo&reg;/Game Freak Inc.&reg;.'
+        />
+        <meta
+            name="google-site-verification"
+            content="RLZeKDIbLya23ZbI-s0lmW4HfWjoME8utvyPZeFRUPU"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+            name="twitter:title"
+            content="PokéType - Adivinhe os tipos dos Pokémons!"
+        />
+        <meta
+            name="twitter:description"
+            content='Um jogo web com o objetivo de adivinhar os tipos dos 1008 Pokémon, a partir de suas figuras. Todos os direitos de "Pokémon" e atributos são reservados a Nintendo&reg;/Game Freak Inc.&reg;.'
+        />
+        <meta
+            name="twitter:image"
+            content="https://raw.githubusercontent.com/thiagofqs/pokeguess/main/assets/img/image.png"
+        />
+        <meta
+            name="twitter:image:alt"
+            content="Imagem da tela do jogo PokéType. Na imagem o Pikachu é o pokémon escolhido para o seu tipo ser adivinhado."
+        />
+        <link
+            rel="shortcut icon"
+            href="assets/img/favicon.ico"
+            type="image/x-icon"
+        />
+        <link rel="stylesheet" href="assets/css/style.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+        />
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <title>PokéType</title>
+    </head>
+    <body>
+        <main class="main">
+            <a
+                href="https://github.com/thiagofqs/poketype"
+                class="github-corner"
+                aria-label="Visualizar projeto no GitHub"
+                ><svg
+                    width="80"
+                    height="80"
+                    viewBox="0 0 250 250"
+                    style="
+                        fill: #fff;
+                        color: #202124;
+                        position: absolute;
+                        top: 0;
+                        border: 0;
+                        right: 0;
+                    "
+                    aria-hidden="true"
+                >
+                    <path
+                        d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"
+                    ></path>
+                    <path
+                        d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+                        fill="currentColor"
+                        style="transform-origin: 130px 106px"
+                        class="octo-arm"
+                    ></path>
+                    <path
+                        d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+                        fill="currentColor"
+                        class="octo-body"
+                    ></path></svg
+            ></a>
+            <div class="main-header">
+                <h1 class="main-header-title">PokéType</h1>
+                <button class="main-header-button" id="open-help" title="Ajuda">
+                    <i
+                        class="bi bi-question-circle-fill main-header-button-icon"
+                    ></i>
+                </button>
+                <button
+                    class="main-header-button"
+                    id="share"
+                    title="Compartilhar pontuação no Twitter"
+                >
+                    <i class="bi bi-twitter main-header-button-icon"></i>
+                </button>
             </div>
-            <div class="modal-body">
-                <div class="modal-body-div">
-                    <h3 class="modal-body-title">Como Funciona</h3>
-                    <p class="modal-body-text">Adivinhe o(s) tipo(s) de um, dos 1010 Pokémon, e veja qual será sua maior pontuação nas diferentes dificuldades! Por padrão, há 3 tentativas por jogo.</p>
-                    <img class="modal-body-img" src="assets/img/types.webp" alt="Todos os 18 tipos">
+            <div class="hide" id="fade"></div>
+            <div class="hide" id="modal" tabindex="-1">
+                <div class="modal-header">
+                    <h2 class="modal-header-title">Ajuda</h2>
+                    <button
+                        class="modal-header-button"
+                        id="close-help"
+                        title="Fechar"
+                        tabindex="-1"
+                    >
+                        <i class="bi bi-x-lg modal-header-button-icon"></i>
+                    </button>
                 </div>
-                <div class="modal-body-div">
-                    <h3 class="modal-body-title">Dificuldades</h3>
-                    <p class="modal-body-text">Há três diferentes dificuldades: <span class="modal-body-span">fácil</span>, <span class="modal-body-span">normal (padrão)</span> e <span class="modal-body-span">díficil</span>.</p>
-                    <ul class="modal-body-lista">
-                        <li class="modal-body-text"><span class="modal-body-span">Fácil:</span> Deve acertar pelo menos um tipo.</li>
-                        <li class="modal-body-text"><span class="modal-body-span">Normal:</span> Deve acertar ambos os tipos, quando houver.</li>
-                        <li class="modal-body-text"><span class="modal-body-span">Difícil:</span> Deve acertar ambos os tipos, quando houver. Com excessão do Game Over, as tentativas não reiniciam a cada novo jogo. É contabilizado +1 a cada acerto, com limite de 5.</li>
-                    </ul>
+                <div class="modal-body">
+                    <div class="modal-body-div">
+                        <h3 class="modal-body-title">Como Funciona</h3>
+                        <p class="modal-body-text">
+                            Adivinhe o(s) tipo(s) de um, dos 1010 Pokémon, e
+                            veja qual será sua maior pontuação nas diferentes
+                            dificuldades! Por padrão, há 3 tentativas por jogo.
+                        </p>
+                        <img
+                            class="modal-body-img"
+                            src="assets/img/types.webp"
+                            alt="Todos os 18 tipos"
+                        />
+                    </div>
+                    <div class="modal-body-div">
+                        <h3 class="modal-body-title">Dificuldades</h3>
+                        <p class="modal-body-text">
+                            Há três diferentes dificuldades:
+                            <span class="modal-body-span">fácil</span>,
+                            <span class="modal-body-span">normal (padrão)</span>
+                            e <span class="modal-body-span">díficil</span>.
+                        </p>
+                        <ul class="modal-body-lista">
+                            <li class="modal-body-text">
+                                <span class="modal-body-span">Fácil:</span> Deve
+                                acertar pelo menos um tipo.
+                            </li>
+                            <li class="modal-body-text">
+                                <span class="modal-body-span">Normal:</span>
+                                Deve acertar ambos os tipos, quando houver.
+                            </li>
+                            <li class="modal-body-text">
+                                <span class="modal-body-span">Difícil:</span>
+                                Deve acertar ambos os tipos, quando houver. Com
+                                excessão do Game Over, as tentativas não
+                                reiniciam a cada novo jogo. É contabilizado +1 a
+                                cada acerto, com limite de 5.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="modal-body-div">
+                        <h3 class="modal-body-title">Pontuação</h3>
+                        <p class="modal-body-text">
+                            Cada dificuldade possui sua pontuação.
+                        </p>
+                        <ul class="modal-body-lista">
+                            <li class="modal-body-text">
+                                <span class="modal-body-span">Acertos:</span> A
+                                cada acerto, é somado 1.
+                            </li>
+                            <li class="modal-body-text">
+                                <span class="modal-body-span">Melhor:</span> No
+                                Game Over, se a quantidade de acertos for maior
+                                que a sua anterior, seus acertos serão
+                                atribuídos.
+                            </li>
+                        </ul>
+                    </div>
+                    <p class="modal-body-att">
+                        <span class="modal-body-span">Atenção!</span> Antes de
+                        um fim de jogo, se você mudar a dificuldade ou as
+                        gerações, os acertos serão zerados, com excessão da
+                        melhor pontuação.
+                    </p>
                 </div>
-                <div class="modal-body-div">
-                    <h3 class="modal-body-title">Pontuação</h3>
-                    <p class="modal-body-text">Cada dificuldade possui sua pontuação.</p>
-                    <ul class="modal-body-lista">
-                        <li class="modal-body-text"><span class="modal-body-span">Acertos:</span> A cada acerto, é somado 1.</li>
-                        <li class="modal-body-text"><span class="modal-body-span">Melhor:</span> No Game Over, se a quantidade de acertos for maior que a sua anterior, seus acertos serão atribuídos.</li>
-                    </ul>
+                <div class="modal-footer">
+                    <p class="modal-footer-text">BOM JOGO!</p>
                 </div>
-                <p class="modal-body-att"><span class="modal-body-span">Atenção!</span> Antes de um fim de jogo, se você mudar a dificuldade ou as gerações, os acertos serão zerados, com excessão da melhor pontuação.</p>
             </div>
-            <div class="modal-footer">
-                <p class="modal-footer-text">BOM JOGO!</p>
+            <div class="main-pokeguess">
+                <aside class="aside">
+                    <div class="aside-div">
+                        <p class="aside-div-title">Geração</p>
+                        <div class="aside-div-content-left-gen">
+                            <button
+                                class="aside-div-content-left-gen-button"
+                                id="gen1"
+                                value="0"
+                                translate="no"
+                            >
+                                <i class="bi bi-square"></i> Gen 1
+                            </button>
+                            <button
+                                class="aside-div-content-left-gen-button"
+                                id="gen2"
+                                value="0"
+                                translate="no"
+                            >
+                                <i class="bi bi-square"></i> Gen 2
+                            </button>
+                            <button
+                                class="aside-div-content-left-gen-button"
+                                id="gen3"
+                                value="0"
+                                translate="no"
+                            >
+                                <i class="bi bi-square"></i> Gen 3
+                            </button>
+                            <button
+                                class="aside-div-content-left-gen-button"
+                                id="gen4"
+                                value="0"
+                                translate="no"
+                            >
+                                <i class="bi bi-square"></i> Gen 4
+                            </button>
+                            <button
+                                class="aside-div-content-left-gen-button"
+                                id="gen5"
+                                value="0"
+                                translate="no"
+                            >
+                                <i class="bi bi-square"></i> Gen 5
+                            </button>
+                            <button
+                                class="aside-div-content-left-gen-button"
+                                id="gen6"
+                                value="0"
+                                translate="no"
+                            >
+                                <i class="bi bi-square"></i> Gen 6
+                            </button>
+                            <button
+                                class="aside-div-content-left-gen-button"
+                                id="gen7"
+                                value="0"
+                                translate="no"
+                            >
+                                <i class="bi bi-square"></i> Gen 7
+                            </button>
+                            <button
+                                class="aside-div-content-left-gen-button"
+                                id="gen8"
+                                value="0"
+                                translate="no"
+                            >
+                                <i class="bi bi-square"></i> Gen 8
+                            </button>
+                            <button
+                                class="aside-div-content-left-gen-button"
+                                id="gen9"
+                                value="0"
+                                translate="no"
+                            >
+                                <i class="bi bi-square"></i> Gen 9
+                            </button>
+                        </div>
+                    </div>
+                    <div class="aside-div">
+                        <p class="aside-div-title">Dificuldade</p>
+                        <div class="aside-div-content-left">
+                            <button
+                                class="aside-div-content-button"
+                                id="easy-difficulty"
+                                value="E"
+                            >
+                                Fácil
+                            </button>
+                            <button
+                                class="aside-div-content-button"
+                                id="normal-difficulty"
+                                value="N"
+                            >
+                                Normal
+                            </button>
+                            <button
+                                class="aside-div-content-button"
+                                id="hard-difficulty"
+                                value="H"
+                            >
+                                Difícil
+                            </button>
+                        </div>
+                    </div>
+                </aside>
+                <div class="main-pokeguess-game">
+                    <figure
+                        class="main-pokeguess-game-figure"
+                        id="figure"
+                    ></figure>
+                    <p class="main-pokeguess-game-pokename" id="txt-pokename">
+                        Qual o tipo?
+                    </p>
+                    <p class="main-pokeguess-game-textType" id="txt-type">
+                        Selecione o tipo:
+                    </p>
+                    <div class="main-pokeguess-game-types">
+                        <container class="main-pokeguess-game-types-container">
+                            <button
+                                class="main-pokeguess-game-types-container-button"
+                                id="normal"
+                                value="normal"
+                            >
+                                <img
+                                    src="assets/img/icons/normal.svg"
+                                    class="main-pokeguess-game-types-container-button-icon"
+                                />
+                                Normal
+                            </button>
+                            <button
+                                class="main-pokeguess-game-types-container-button"
+                                id="fighting"
+                                value="fighting"
+                            >
+                                <img
+                                    src="assets/img/icons/fighting.svg"
+                                    class="main-pokeguess-game-types-container-button-icon"
+                                />Lutador
+                            </button>
+                            <button
+                                class="main-pokeguess-game-types-container-button"
+                                id="flying"
+                                value="flying"
+                            >
+                                <img
+                                    src="assets/img/icons/flying.svg"
+                                    class="main-pokeguess-game-types-container-button-icon"
+                                />Voador
+                            </button>
+                            <button
+                                class="main-pokeguess-game-types-container-button"
+                                id="poison"
+                                value="poison"
+                            >
+                                <img
+                                    src="assets/img/icons/poison.svg"
+                                    class="main-pokeguess-game-types-container-button-icon"
+                                />
+                                Venenoso
+                            </button>
+                            <button
+                                class="main-pokeguess-game-types-container-button"
+                                id="ground"
+                                value="ground"
+                            >
+                                <img
+                                    src="assets/img/icons/ground.svg"
+                                    class="main-pokeguess-game-types-container-button-icon"
+                                />Terra
+                            </button>
+                            <button
+                                class="main-pokeguess-game-types-container-button"
+                                id="rock"
+                                value="rock"
+                            >
+                                <img
+                                    src="assets/img/icons/rock.svg"
+                                    class="main-pokeguess-game-types-container-button-icon"
+                                />Pedra
+                            </button>
+                        </container>
+                        <container class="main-pokeguess-game-types-container">
+                            <button
+                                class="main-pokeguess-game-types-container-button"
+                                id="bug"
+                                value="bug"
+                            >
+                                <img
+                                    src="assets/img/icons/bug.svg"
+                                    class="main-pokeguess-game-types-container-button-icon"
+                                />Inseto
+                            </button>
+                            <button
+                                class="main-pokeguess-game-types-container-button"
+                                id="ghost"
+                                value="ghost"
+                            >
+                                <img
+                                    src="assets/img/icons/ghost.svg"
+                                    class="main-pokeguess-game-types-container-button-icon"
+                                />Fantasma
+                            </button>
+                            <button
+                                class="main-pokeguess-game-types-container-button"
+                                id="steel"
+                                value="steel"
+                            >
+                                <img
+                                    src="assets/img/icons/steel.svg"
+                                    class="main-pokeguess-game-types-container-button-icon"
+                                />Aço
+                            </button>
+                            <button
+                                class="main-pokeguess-game-types-container-button"
+                                id="fire"
+                                value="fire"
+                            >
+                                <img
+                                    src="assets/img/icons/fire.svg"
+                                    class="main-pokeguess-game-types-container-button-icon"
+                                />Fogo
+                            </button>
+                            <button
+                                class="main-pokeguess-game-types-container-button"
+                                id="water"
+                                value="water"
+                            >
+                                <img
+                                    src="assets/img/icons/water.svg"
+                                    class="main-pokeguess-game-types-container-button-icon"
+                                />
+                                Água
+                            </button>
+                            <button
+                                class="main-pokeguess-game-types-container-button"
+                                id="grass"
+                                value="grass"
+                            >
+                                <img
+                                    src="assets/img/icons/grass.svg"
+                                    class="main-pokeguess-game-types-container-button-icon"
+                                />Grama
+                            </button>
+                        </container>
+                        <container class="main-pokeguess-game-types-container">
+                            <button
+                                class="main-pokeguess-game-types-container-button"
+                                id="electric"
+                                value="electric"
+                            >
+                                <img
+                                    src="assets/img/icons/electric.svg"
+                                    class="main-pokeguess-game-types-container-button-icon"
+                                />Elétrico
+                            </button>
+                            <button
+                                class="main-pokeguess-game-types-container-button"
+                                id="psychic"
+                                value="psychic"
+                            >
+                                <img
+                                    src="assets/img/icons/psychic.svg"
+                                    class="main-pokeguess-game-types-container-button-icon"
+                                />Psíquico
+                            </button>
+                            <button
+                                class="main-pokeguess-game-types-container-button"
+                                id="ice"
+                                value="ice"
+                            >
+                                <img
+                                    src="assets/img/icons/ice.svg"
+                                    class="main-pokeguess-game-types-container-button-icon"
+                                />Gelo
+                            </button>
+                            <button
+                                class="main-pokeguess-game-types-container-button"
+                                id="dragon"
+                                value="dragon"
+                            >
+                                <img
+                                    src="assets/img/icons/dragon.svg"
+                                    class="main-pokeguess-game-types-container-button-icon"
+                                />Dragão
+                            </button>
+                            <button
+                                class="main-pokeguess-game-types-container-button"
+                                id="dark"
+                                value="dark"
+                            >
+                                <img
+                                    src="assets/img/icons/dark.svg"
+                                    class="main-pokeguess-game-types-container-button-icon"
+                                />Sombrio
+                            </button>
+                            <button
+                                class="main-pokeguess-game-types-container-button"
+                                id="fairy"
+                                value="fairy"
+                            >
+                                <img
+                                    src="assets/img/icons/fairy.svg"
+                                    class="main-pokeguess-game-types-container-button-icon"
+                                />Fada
+                            </button>
+                        </container>
+                    </div>
+                    <div class="main-pokeguess-game-buttons">
+                        <button
+                            class="main-pokeguess-game-buttons-button"
+                            id="btnPokemon"
+                        >
+                            Chutar
+                        </button>
+                        <button
+                            class="main-pokeguess-game-buttons-button"
+                            id="btnReset"
+                        >
+                            Novo Jogo
+                        </button>
+                    </div>
+                    <div
+                        class="main-pokeguess-game-settings"
+                        id="txt-message"
+                    ></div>
+                </div>
+                <aside class="aside">
+                    <div class="aside-div">
+                        <p class="aside-div-title">Pontuação</p>
+                        <div
+                            class="aside-div-content-right aside-div-content-score-current"
+                        >
+                            <p class="aside-div-content-title">Acertos</p>
+                            <p
+                                class="aside-div-content-number"
+                                id="txt-score"
+                                translate="no"
+                            >
+                                0
+                            </p>
+                        </div>
+                        <div
+                            class="aside-div-content-right aside-div-content-score-best"
+                        >
+                            <p class="aside-div-content-title">Melhor</p>
+                            <p
+                                class="aside-div-content-number"
+                                id="txt-best"
+                                translate="no"
+                            >
+                                0
+                            </p>
+                        </div>
+                    </div>
+                    <div class="aside-div">
+                        <p class="aside-div-title">Tentativas</p>
+                        <div class="aside-div-content-right">
+                            <p
+                                class="aside-div-content-number"
+                                id="txt-trys"
+                                translate="no"
+                            >
+                                0
+                            </p>
+                        </div>
+                    </div>
+                </aside>
             </div>
-        </div>
-        <div class="main-pokeguess">
-            <aside class="aside">
-                <div class="aside-div">
-                    <p class="aside-div-title">Geração</p>
-                    <div class="aside-div-content-left-gen">
-                        <button class="aside-div-content-left-gen-button" id="gen1" value="0" translate="no"><i class="bi bi-square"></i> Gen 1</button>
-                        <button class="aside-div-content-left-gen-button" id="gen2" value="0" translate="no"><i class="bi bi-square"></i> Gen 2</button>
-                        <button class="aside-div-content-left-gen-button" id="gen3" value="0" translate="no"><i class="bi bi-square"></i> Gen 3</button>
-                        <button class="aside-div-content-left-gen-button" id="gen4" value="0" translate="no"><i class="bi bi-square"></i> Gen 4</button>
-                        <button class="aside-div-content-left-gen-button" id="gen5" value="0" translate="no"><i class="bi bi-square"></i> Gen 5</button>
-                        <button class="aside-div-content-left-gen-button" id="gen6" value="0" translate="no"><i class="bi bi-square"></i> Gen 6</button>
-                        <button class="aside-div-content-left-gen-button" id="gen7" value="0" translate="no"><i class="bi bi-square"></i> Gen 7</button>
-                        <button class="aside-div-content-left-gen-button" id="gen8" value="0" translate="no"><i class="bi bi-square"></i> Gen 8</button>
-                        <button class="aside-div-content-left-gen-button" id="gen9" value="0" translate="no"><i class="bi bi-square"></i> Gen 9</button>
-                    </div>
-                </div>
-                <div class="aside-div">
-                    <p class="aside-div-title">Dificuldade</p>
-                    <div class="aside-div-content-left">
-                        <button class="aside-div-content-button" id="easy-difficulty" value="E">Fácil</button>
-                        <button class="aside-div-content-button" id="normal-difficulty" value="N">Normal</button>
-                        <button class="aside-div-content-button" id="hard-difficulty" value="H">Difícil</button>
-                    </div>
-                </div>
-            </aside>
-            <div class="main-pokeguess-game">
-                <figure class="main-pokeguess-game-figure" id="figure"></figure>
-                <p class="main-pokeguess-game-pokename" id="txt-pokename">Qual o tipo?</p>
-                <p class="main-pokeguess-game-textType" id="txt-type">Selecione o tipo:</p>
-                <div class="main-pokeguess-game-types">
-                    <container class="main-pokeguess-game-types-container">
-                        <button class="main-pokeguess-game-types-container-button" id="normal" value="normal">Normal</button>
-                        <button class="main-pokeguess-game-types-container-button" id="fighting" value="fighting">Lutador</button>
-                        <button class="main-pokeguess-game-types-container-button" id="flying" value="flying">Voador</button>
-                        <button class="main-pokeguess-game-types-container-button" id="poison" value="poison">Venenoso</button>
-                        <button class="main-pokeguess-game-types-container-button" id="ground" value="ground">Terra</button>
-                        <button class="main-pokeguess-game-types-container-button" id="rock" value="rock">Pedra</button>
-                    </container>
-                    <container class="main-pokeguess-game-types-container">
-                        <button class="main-pokeguess-game-types-container-button" id="bug" value="bug">Inseto</button>
-                        <button class="main-pokeguess-game-types-container-button" id="ghost" value="ghost">Fantasma</button>
-                        <button class="main-pokeguess-game-types-container-button" id="steel" value="steel">Aço</button>
-                        <button class="main-pokeguess-game-types-container-button" id="fire" value="fire">Fogo</button>
-                        <button class="main-pokeguess-game-types-container-button" id="water" value="water">Água</button>
-                        <button class="main-pokeguess-game-types-container-button" id="grass" value="grass">Grama</button>
-                    </container>
-                    <container class="main-pokeguess-game-types-container">
-                        <button class="main-pokeguess-game-types-container-button" id="electric" value="electric">Elétrico</button>
-                        <button class="main-pokeguess-game-types-container-button" id="psychic" value="psychic">Psíquico</button>
-                        <button class="main-pokeguess-game-types-container-button" id="ice" value="ice">Gelo</button>
-                        <button class="main-pokeguess-game-types-container-button" id="dragon" value="dragon">Dragão</button>
-                        <button class="main-pokeguess-game-types-container-button" id="dark" value="dark">Sombrio</button>
-                        <button class="main-pokeguess-game-types-container-button" id="fairy" value="fairy">Fada</button>
-                    </container>
-                </div>
-                <div class="main-pokeguess-game-buttons">
-                    <button class="main-pokeguess-game-buttons-button" id="btnPokemon">Chutar</button>
-                    <button class="main-pokeguess-game-buttons-button" id="btnReset">Novo Jogo</button>
-                </div>
-                <div class="main-pokeguess-game-settings" id="txt-message"></div>
+        </main>
+        <footer class="footer">
+            <p class="footer-copyright">
+                Esse projeto é sem fins comerciais. Todos os direitos de
+                "Pokémon" e atributos são reservados a Nintendo&reg;/Game Freak
+                Inc.&reg;.
+            </p>
+            <select class="footer-lang">
+                <option class="footer-lang-option" value="pt-br">
+                    Português
+                </option>
+            </select>
+            <p class="footer-version" translate="no">v1.2.5</p>
+            <p class="footer-by">
+                Feito com <span class="footer-by-heart">&#10084;</span>
+            </p>
+            <p class="footer-by">
+                Dê seu feedback pelo
+                <a
+                    href="https://github.com/thiagofqs/poketype/issues"
+                    target="_blank"
+                    ><span class="footer-bold">GitHub</span></a
+                >.
+            </p>
+            <div id="cookie-consent-modal">
+                <p>
+                    Este site usa cookies para garantir que você obtenha a
+                    melhor experiência de navegação. Desativar os cookies do
+                    site pode prejudicar a funcionalidade de alguns recursos e
+                    ao continuar usando, você concorda com a nossa Política de
+                    Cookies.
+                    <a
+                        href="https://cookie-consent.app.forthe.top/why-websites-use-cookies/"
+                        id="cookie-consent-modal-link"
+                        target="_blank"
+                        >Ler mais</a
+                    >
+                </p>
+                <button id="cookie-accept-btn">Concordar e fechar</button>
             </div>
-            <aside class="aside">
-                <div class="aside-div">
-                    <p class="aside-div-title">Pontuação</p>
-                    <div class="aside-div-content-right aside-div-content-score-current">
-                        <p class="aside-div-content-title">Acertos</p>
-                        <p class="aside-div-content-number" id="txt-score" translate="no">0</p>
-                    </div>
-                    <div class="aside-div-content-right aside-div-content-score-best">
-                        <p class="aside-div-content-title">Melhor</p>
-                        <p class="aside-div-content-number" id="txt-best" translate="no">0</p>
-                    </div>
-                </div>
-                <div class="aside-div">
-                    <p class="aside-div-title">Tentativas</p>
-                    <div class="aside-div-content-right">
-                        <p class="aside-div-content-number" id="txt-trys" translate="no">0</p>
-                    </div>
-                </div>
-            </aside>
-        </div>
-    </main>
-    <footer class="footer">
-        <p class="footer-copyright">Esse projeto é sem fins comerciais. Todos os direitos de "Pokémon" e atributos são reservados a Nintendo&reg;/Game Freak Inc.&reg;.</p>
-        <select class="footer-lang">
-            <option class="footer-lang-option" value="pt-br">Português</option>
-        </select>
-        <p class="footer-version" translate="no">v1.2.5</p>
-        <p class="footer-by">Feito com <span class="footer-by-heart">&#10084;</span></p>
-        <p class="footer-by">Dê seu feedback pelo <a href="https://github.com/thiagofqs/poketype/issues" target="_blank"><span class="footer-bold">GitHub</span></a>.</p>
-        <div id="cookie-consent-modal">
-            <p>Este site usa cookies para garantir que você obtenha a melhor experiência de navegação. Desativar os cookies do site pode prejudicar a funcionalidade de alguns recursos e ao continuar usando, você concorda com a nossa Política de Cookies. <a href="https://cookie-consent.app.forthe.top/why-websites-use-cookies/" id="cookie-consent-modal-link" target="_blank">Ler mais</a></p>
-            <button id="cookie-accept-btn">Concordar e fechar</button>
-        </div>
-    </footer>
-    <noscript>É necessário o JavaScript para o funcionamento da página.</noscript>
-    <script src="assets/javascript/script.js" type="module"></script>
-</body>
+        </footer>
+        <noscript
+            >É necessário o JavaScript para o funcionamento da página.</noscript
+        >
+        <script src="assets/javascript/script.js" type="module"></script>
+    </body>
 </html>
